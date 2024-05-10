@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="40.0" layoutY="51.0" mnemonicParsing="false" text="Kembali">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Label alignment="CENTER" layoutX="253.0" layoutY="24.0" prefHeight="84.0" prefWidth="94.0" text="Plugin">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="35.0" layoutY="264.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="531.0" text="Upload">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="40.0" layoutY="154.0" mnemonicParsing="false" text="Choose File">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="157.0" layoutY="159.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

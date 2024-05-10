@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="40.0" layoutY="51.0" mnemonicParsing="false" text="Kembali">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Label alignment="CENTER" layoutX="253.0" layoutY="24.0" prefHeight="84.0" prefWidth="94.0" text="Save">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="52.0" layoutY="125.0" text="Format">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="200.0" text="Folder">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="109.0" layoutY="197.0" prefHeight="25.0" prefWidth="463.0" />
+      <TitledPane animated="false" layoutX="109.0" layoutY="125.0" prefHeight="78.0" prefWidth="463.0" text="untitled">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="111.0" prefWidth="462.0">
+               <children>
+                  <Button layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="463.0" text="TXT" />
+                  <Button layoutY="27.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="463.0" text="Format lain nanti aja" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <Button layoutX="35.0" layoutY="264.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="531.0" text="Save">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
