@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainPage extends Application {
+public class App extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -15,7 +15,8 @@ public class MainPage extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainPage.class.getResource("pages/main_page.fxml"));
+//        FXMLLoader fxmlLoader = new FXMLLoader(MainPage.class.getResource("pages/main_page_old.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Pages/main_page.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
         primaryStage.setScene(scene);
