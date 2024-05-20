@@ -1,0 +1,7 @@
+.curved-pane {
+    -fx-background-color: #ADD8E5;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+}
