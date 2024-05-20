@@ -1,7 +1,16 @@
 package com.tubes2_btc.Controllers;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 
@@ -16,19 +25,65 @@ public class MainPageController {
     public void initialize() {
         int i = 0;
         for (Node child : Ladang.getChildren()) {
+            Pane pane = (Pane) child;
+            ImageView imageView = null;
+            Label label = null;
+
+            for (javafx.scene.Node childPane : pane.getChildren()) {
+                if (childPane instanceof ImageView) {
+                    imageView = (ImageView) childPane;
+                } else if (childPane instanceof Label) {
+                    label = (Label) childPane;
+                }
+            }
+
+            if (imageView != null) {
+                Image image = new Image(getClass().getResource("/com/tubes2_btc/Pages/Images/Produk/corn.png").toExternalForm());
+                imageView.setImage(image);
+            }
+
+            if (label != null) {
+                label.setText("jagung");
+            }
+
             child.setId("Ladang_" + i);
-            child.setOnDragDetected(event -> {
-                System.out.println("Drag detected for: " + child.getId());
+            child.setOnDragDetected(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Dragboard db = child.startDragAndDrop(TransferMode.ANY);
+
+                    ClipboardContent content = new ClipboardContent();
+                    content.putString(child.getId());
+                    db.setContent(content);
+
+                    System.out.println("Drag detected for: " + child.getId());
+                    mouseEvent.consume();
+                }
             });
 
-            child.setOnDragOver(event -> {
-                event.acceptTransferModes(TransferMode.ANY);
-                event.consume();
-                System.out.println("Drag over for: " + child.getId());
+            child.setOnDragOver(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    if (dragEvent.getGestureSource() != child && dragEvent.getDragboard().hasString()) {
+                        dragEvent.acceptTransferModes(TransferMode.MOVE);
+                    }
+                    System.out.println("Drag over for: " + child.getId());
+                    dragEvent.consume();
+                }
             });
 
-            child.setOnDragDropped(event -> {
-                System.out.println("Drag dropped for: " + child.getId());
+            child.setOnDragDropped(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    Dragboard db = dragEvent.getDragboard();
+                    boolean success = false;
+                    if (db.hasString()) {
+                        System.out.println("Drag dropped for: " + child.getId());
+                        success = true;
+                    }
+                    dragEvent.setDropCompleted(success);
+                    dragEvent.consume();
+                }
             });
             i++;
         }
@@ -40,4 +95,3 @@ public class MainPageController {
         }
     }
 }
-
