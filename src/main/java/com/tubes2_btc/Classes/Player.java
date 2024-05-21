@@ -21,6 +21,7 @@ public class Player {
         this.farm = new HashMap<>();
 
         initializeFarm();
+        InitializeDeck();
     }
 
     public void initializeFarm() {
@@ -37,17 +38,35 @@ public class Player {
         }
     }
 
+    public void InitializeDeck() {
+        Random random = new Random();
+        
+        for (int i = 0; i < 6; i++) {
+            int rand = random.nextInt(50);
+            
+            if (rand < 25) rand = 0;
+            else rand -= 24;
+
+            Card randomCard = Card.createCard(rand);
+            activeDeck.put(i , randomCard);
+        }
+    }
+
     public Map<Integer, Card> getFarm() {
         return farm;
     }
 
-    public void swapFarm(int index1, int index2) {
-        Card temp = farm.get(index1);
-        
-        farm.put(index1, farm.get(index2));
-        farm.put(index2, temp);
+    public Map<Integer, Card> getActiveDeck() {
+        return activeDeck;
+    }
 
-        System.out.println("Index " + index1 + ": " + farm.get(index1).getCardName());
-        System.out.println("Index " + index2 + ": " + farm.get(index2).getCardName());
+    public void swapSlots(int index1, int index2, Map<Integer, Card> cont1, Map<Integer, Card> cont2) {
+        Card temp = cont1.get(index1);
+
+        cont1.put(index1, cont2.get(index2));
+        cont2.put(index2, temp);
+
+        System.out.println("Index " + index1 + ": " + cont1.get(index1).getCardName());
+        System.out.println("Index " + index2 + ": " + cont2.get(index2).getCardName());
     }
 }
