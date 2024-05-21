@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Base" prefHeight="604.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.MainPageController">
+<AnchorPane prefHeight="604.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.MainPageController">
    <children>
       <GridPane fx:id="Ladang" alignment="CENTER" layoutX="21.0" layoutY="8.0" prefHeight="461.0" prefWidth="518.0">
         <columnConstraints>
@@ -249,7 +249,7 @@
       <Circle fill="#0f5132" layoutX="585.0" layoutY="52.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
       <Label layoutX="573.0" layoutY="37.0" text="Turn" textFill="WHITE" />
       <Label layoutX="581.0" layoutY="52.0" text="X" textFill="WHITE" />
-      <Button layoutX="653.0" layoutY="40.0" mnemonicParsing="false" onAction="#nextButtonHandler" prefHeight="36.0" prefWidth="75.0" text="Next">
+      <Button layoutX="653.0" layoutY="40.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="75.0" text="Next" onAction="#nextButtonHandler">
          <font>
             <Font size="14.0" />
          </font>
@@ -355,10 +355,10 @@
          <children>
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Ladangku" />
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Ladang Lawan" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#loadPluginButtonHandler" prefHeight="26.0" prefWidth="140.0" text="Load Plugin" GridPane.rowIndex="5" />
-            <Button mnemonicParsing="false" onAction="#storeButtonHandler" prefHeight="26.0" prefWidth="140.0" text="Toko" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#loadStateButtonHandler" prefHeight="26.0" prefWidth="140.0" text="Load State" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#saveStateButtonHandler" prefHeight="26.0" prefWidth="140.0" text="Save State" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Load Plugin" GridPane.rowIndex="5" onAction="#loadPluginButtonHandler"/>
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Toko" GridPane.rowIndex="2" onAction="#storeButtonHandler"/>
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Load State" GridPane.rowIndex="3" onAction="#loadStateButtonHandler"/>
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Save State" GridPane.rowIndex="4" onAction="#saveStateButtonHandler"/>
          </children>
       </GridPane>
       <Label layoutX="677.0" layoutY="118.0" text="0 Gold">
