@@ -16,7 +16,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 //        FXMLLoader fxmlLoader = new FXMLLoader(MainPage.class.getResource("pages/main_page_old.fxml"));
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Pages/gamestate-reader.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Pages/random-card.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
         primaryStage.setScene(scene);
