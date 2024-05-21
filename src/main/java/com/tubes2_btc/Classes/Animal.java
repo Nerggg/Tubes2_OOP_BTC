@@ -18,4 +18,12 @@ public class Animal extends Card {
         this.animalType = animalType;
         this.resultProduct = resultProduct;
     }
+
+    public int getWeight() {
+        return this.weight;
+    }
+    public int getHarvestWeight() {
+        return this.harvestWeight;
+    }
+
 }

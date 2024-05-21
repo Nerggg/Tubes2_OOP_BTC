@@ -31,4 +31,21 @@ public class Card extends CardConstants {
     public String getCardPath() {
         return this.CardPath;
     }
+
+    public String getCardActive() {
+        String temp = "";
+        if (this.isAccelerated){
+            temp = temp + "Accelerated";
+        }
+        if(this.isDelayed){
+            temp = temp + " Delayed";
+        }
+        if(this.isProtected){
+            temp = temp + " Protected";
+        }
+        if(this.isTrapped){
+            temp = temp + " Trapped";
+        }
+        return temp;
+    }
 }

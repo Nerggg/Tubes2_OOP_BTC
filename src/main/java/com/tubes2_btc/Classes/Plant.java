@@ -12,4 +12,11 @@ public class Plant extends Card {
         this.harvestAge = harvestAge;
         this.resultProduct = resultProduct;
     }
+
+    public int getAge() {
+        return this.age;
+    }
+    public int getHarvestAge() {
+        return this.harvestAge;
+    }
 }
