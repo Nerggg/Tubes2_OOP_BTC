@@ -15,25 +15,27 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-
-import java.util.Random;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import com.tubes2_btc.Classes.Card;
+import com.tubes2_btc.Classes.Player;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.Random;
 
 public class MainPageController {
     // Misc. variables
     private int draggedCard;
     private boolean draggedIsFarm;
-    private List<Node> farmSlots_1 = new ArrayList<>();
-    private List<Node> farmSlots_2 = new ArrayList<>();
+    private List<Node> farmSlots = new ArrayList<>();
 
     private List<Node> activeDeckSlots_1 = new ArrayList<>();
     private List<Node> activeDeckSlots_2 = new ArrayList<>();
@@ -186,6 +188,9 @@ public class MainPageController {
             }
         });
     }
+
+    @FXML
+    private AnchorPane Base;
     
     @FXML
     private GridPane Ladang;
@@ -199,19 +204,145 @@ public class MainPageController {
 
         int i = 0;
         for (Node child : Ladang.getChildren()) {
+            Pane pane = (Pane) child;
+            ImageView imageView = null;
+            Label label = null;
+
+            // Initialize variables
+            for (javafx.scene.Node childPane : pane.getChildren()) {
+                if (childPane instanceof ImageView) {
+                    imageView = (ImageView) childPane;
+                } else if (childPane instanceof Label) {
+                    label = (Label) childPane;
+                }
+            }
+
+            // Push to farm slots
+            farmSlots.add(child);
+
+            // Set image and name for farm slot
+            Card card = player1.getFarm().get(i);
+            if (card != null) {
+                if (imageView != null) {
+                    Image image = new Image(getClass().getResource(player1.getFarm().get(i).getCardPath()).toExternalForm());
+                    imageView.setImage(image);
+                }
+    
+                if (label != null) {
+                    label.setText(player1.getFarm().get(i).getCardName());
+                }
+            }
+
+            // Set farm slot event handlers
             child.setId("Ladang_" + i);
-            initializeSlot(child, i, true, farmSlots_1, activeDeckSlots_1, player1);
+            child.setOnDragDetected(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    // Set currently dragged card
+                    int underscoreIndex = child.getId().indexOf("_");
+                    draggedCard = Integer.parseInt(child.getId().substring(underscoreIndex + 1));
+
+                    // Event handler
+                    Dragboard db = child.startDragAndDrop(TransferMode.ANY);
+
+                    ClipboardContent content = new ClipboardContent();
+                    content.putString(child.getId());
+                    db.setContent(content);
+
+                    // System.out.println("Drag detected for: " + child.getId());
+                    mouseEvent.consume();
+                }
+            });
+
+            child.setOnDragOver(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    if (dragEvent.getGestureSource() != child && dragEvent.getDragboard().hasString()) {
+                        dragEvent.acceptTransferModes(TransferMode.MOVE);
+                    }
+                    // System.out.println("Drag over for: " + child.getId());
+                    dragEvent.consume();
+                }
+            });
+
+            child.setOnDragDropped(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    // Get dropped card number
+                    int underscoreIndex = child.getId().indexOf("_");
+                    int droppedCard = Integer.parseInt(child.getId().substring(underscoreIndex + 1));
+
+                    // Swap farm slots
+                    player1.swapFarm(draggedCard, droppedCard);
+
+                    // Swap images and names
+                    Node slot_dragged = farmSlots.get(draggedCard);
+                    swapNodes(child, slot_dragged);
+
+                    // Event handler 
+                    Dragboard db = dragEvent.getDragboard();
+                    boolean success = false;
+                    if (db.hasString()) {
+                        // System.out.println("Drag dropped for: " + child.getId());
+                        success = true;
+                    }
+                    dragEvent.setDropCompleted(success);
+                    dragEvent.consume();
+                }
+            });
             i++;
         }
 
         int j = 0;
         for (Node child : Deck.getChildren()) {
             child.setId("Deck_" + j);
-            initializeSlot(child, j, false, farmSlots_1, activeDeckSlots_1, player1);
             j++;
         }
+        bearAttackHandler();
     }
 
+    public void bearAttackHandler(){
+        Random rand = new Random();
+        // determine whether to let the bear out or no
+        // because i use bool, the chance of a bear attack happen is 50%
+        boolean attack = rand.nextBoolean();
+        // determine whether the subgrid would be 3x2 or 2x3
+        boolean type = rand.nextBoolean();
+        if(attack){
+            if(type){
+                // 3x2 subgrid
+                // set the bound so it wont went out of ladang
+                int x = rand.nextInt(0, 2);
+                int y = rand.nextInt(0, 2);
+                addDynamicRectangle(100.0*3, 118.0*2, x, y);
+            }else{
+                // 2x3 subgrid
+                // set the bound so it wont went out of ladang
+                int x = rand.nextInt(0, 3);
+                int y = rand.nextInt(0, 1);
+                addDynamicRectangle(100.0*2, 118.0*3, x, y);
+            }
+        }else{
+            addDynamicRectangle(0.0, 0.0, 0.0, 0.0);
+        }
+
+    }
+     public void addDynamicRectangle(double width, double height, double x, double y) {
+        Rectangle rectangle = new Rectangle();
+        // offset
+        double x_value = x * 105 + 25;
+        double y_value = y * 117 + 5;
+        rectangle.setArcHeight(5.0);
+        rectangle.setArcWidth(5.0);
+        rectangle.setFill(Color.web("#c4040400"));
+        rectangle.setHeight(height);
+        rectangle.setWidth(width);
+        rectangle.setStroke(Color.web("#ce1717"));
+        rectangle.setStrokeWidth(5.0);
+        rectangle.setX(x_value);
+        rectangle.setY(y_value);
+        Base.getChildren().add(rectangle);
+    }
     // Pop Up Button Handler
     @FXML
     private void nextButtonHandler(ActionEvent event) {

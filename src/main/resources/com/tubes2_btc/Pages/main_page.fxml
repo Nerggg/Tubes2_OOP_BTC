@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="604.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.MainPageController">
+<AnchorPane prefHeight="604.0" fx:id="Base" prefWidth="775.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.MainPageController">
    <children>
       <GridPane fx:id="Ladang" alignment="CENTER" layoutX="21.0" layoutY="8.0" prefHeight="461.0" prefWidth="518.0">
         <columnConstraints>
