@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
 import java.net.URL;
 
@@ -100,6 +101,7 @@ public class StorePageController {
     @FXML
     private void handleClicked(ActionEvent event) {
         // Tambahkan logika untuk menangani aksi tombol kembali
-        System.out.println("Tombol kembali diklik");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 }

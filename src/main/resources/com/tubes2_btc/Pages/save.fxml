@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.SaveStateController">
    <children>
-      <Button layoutX="40.0" layoutY="51.0" mnemonicParsing="false" text="Kembali">
+      <Button fx:id="kembali" layoutX="40.0" layoutY="51.0" mnemonicParsing="false" text="Kembali" onAction="#handleClicked">
          <font>
             <Font size="14.0" />
          </font></Button>
