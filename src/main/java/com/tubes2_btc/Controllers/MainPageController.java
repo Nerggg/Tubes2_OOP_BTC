@@ -1,33 +1,36 @@
 package com.tubes2_btc.Controllers;
-import com.tubes2_btc.Classes.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import com.tubes2_btc.Classes.Card;
+import com.tubes2_btc.Classes.Player;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.Modality;
-import javafx.stage.StageStyle;
-import javafx.scene.Node;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-
-import java.util.Random;
-import java.util.List;
-import java.util.ArrayList;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import java.util.Map;
 import java.util.HashMap;
-
 public class MainPageController {
     // Misc. variables
     private int draggedCard;
@@ -72,10 +75,24 @@ public class MainPageController {
         label2.setText(tempString);
     }
 
-    public void initializeSlot(Node child, int i, boolean isFarm, List<Node> farmSlots, List<Node> activeDeckSlots, Player player) {
-        Pane pane = (Pane) child;
-        ImageView imageView = null;
-        Label label = null;
+    @FXML
+    private AnchorPane Base;
+
+    @FXML
+    private GridPane Ladang;
+
+    @FXML
+    private GridPane Deck;
+
+    @FXML
+    public void initialize() {
+        Player player1 = new Player();
+
+        int i = 0;
+        for (Node child : Ladang.getChildren()) {
+            Pane pane = (Pane) child;
+            ImageView imageView = null;
+            Label label = null;
 
         // Initialize variables
         for (javafx.scene.Node childPane : pane.getChildren()) {
@@ -210,8 +227,49 @@ public class MainPageController {
             initializeSlot(child, j, false, farmSlots_1, activeDeckSlots_1, player1);
             j++;
         }
+        bearAttackHandler();
     }
+    public void bearAttackHandler(){
+        Random rand = new Random();
+        // determine whether to let the bear out or no
+        // because i use bool, the chance of a bear attack happen is 50%
+        boolean attack = rand.nextBoolean();
+        // determine whether the subgrid would be 3x2 or 2x3
+        boolean type = rand.nextBoolean();
+        if(attack){
+            if(type){
+                // 3x2 subgrid
 
+                // set the bound so it wont went out of ladang
+                int x = rand.nextInt(0, 2);
+                int y = rand.nextInt(0, 2);
+                addDynamicRectangle(100.0*3, 118.0*2, x, y);
+            }else{
+                // 2x3 subgrid
+
+                // set the bound so it wont went out of ladang
+                int x = rand.nextInt(0, 3);
+                int y = rand.nextInt(0, 1);
+                addDynamicRectangle(100.0*2, 118.0*3, x, y);
+            }
+        }
+    }
+    public void addDynamicRectangle(double width, double height, double x, double y) {
+        Rectangle rectangle = new Rectangle();
+        // offset
+        double x_value = x * 105 + 25;
+        double y_value = y * 117 + 5;
+        rectangle.setArcHeight(5.0);
+        rectangle.setArcWidth(5.0);
+        rectangle.setFill(Color.web("#c4040400"));
+        rectangle.setHeight(height);
+        rectangle.setWidth(width);
+        rectangle.setStroke(Color.web("#ce1717"));
+        rectangle.setStrokeWidth(5.0);
+        rectangle.setX(x_value);
+        rectangle.setY(y_value);
+        Base.getChildren().add(rectangle);
+    }
     // Pop Up Button Handler
     @FXML
     private void nextButtonHandler(ActionEvent event) {
