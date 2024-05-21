@@ -1,4 +1,5 @@
 package com.tubes2_btc.Controllers;
+import com.tubes2_btc.Classes.*;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,6 +15,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 
+import java.util.Random;
+
 public class MainPageController {
     @FXML
     private GridPane Ladang;
@@ -23,6 +26,8 @@ public class MainPageController {
 
     @FXML
     public void initialize() {
+        Random random = new Random();
+
         int i = 0;
         for (Node child : Ladang.getChildren()) {
             Pane pane = (Pane) child;
@@ -37,13 +42,17 @@ public class MainPageController {
                 }
             }
 
+            // Get random card
+            int rand = random.nextInt(25);
+            Card randomCard = Card.createCard(rand);
+
             if (imageView != null) {
-                Image image = new Image(getClass().getResource("/com/tubes2_btc/Pages/Images/Produk/corn.png").toExternalForm());
+                Image image = new Image(getClass().getResource(randomCard.getCardPath()).toExternalForm());
                 imageView.setImage(image);
             }
 
             if (label != null) {
-                label.setText("jagung");
+                label.setText(randomCard.getCardName());
             }
 
             child.setId("Ladang_" + i);
