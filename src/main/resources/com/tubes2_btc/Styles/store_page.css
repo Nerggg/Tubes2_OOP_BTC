@@ -1,0 +1,15 @@
+.curved-pane-card {
+    -fx-background-color: #a4a4c1;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+}
+
+.curved-pane-gambar {
+    -fx-background-color: #d1d1e0;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+}
