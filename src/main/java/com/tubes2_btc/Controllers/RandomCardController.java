@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
+
+import java.net.URL;
 import java.util.Random;
 
 public class RandomCardController {
@@ -54,9 +56,28 @@ public class RandomCardController {
     }
 
     private void changeImages() {
-        imageView1.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
-        imageView2.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
-        imageView3.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
-        imageView4.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
+        URL imageUrl1 = getClass().getResource(paths[random.nextInt(0, paths.length-1)]);
+        if (imageUrl1 != null) {
+            Image imageNew1 = new Image(imageUrl1.toExternalForm());
+            imageView1.setImage(imageNew1);
+        }
+        URL imageUrl2 = getClass().getResource(paths[random.nextInt(0, paths.length-1)]);
+        if (imageUrl2 != null){
+            Image imageNew2 = new Image(imageUrl2.toExternalForm());
+            imageView2.setImage(imageNew2);
+        }
+        URL imageUrl3 = getClass().getResource(paths[random.nextInt(0, paths.length-1)]);
+        if (imageUrl3 != null){
+            Image imageNew3 = new Image(imageUrl3.toExternalForm());
+            imageView3.setImage(imageNew3);
+        }
+        URL imageUrl4 = getClass().getResource(paths[random.nextInt(0, paths.length-1)]);
+        if (imageUrl4 != null){
+            Image imageNew4 = new Image(imageUrl4.toExternalForm());
+            imageView4.setImage(imageNew4);
+        }
+//        imageView2.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
+//        imageView3.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
+//        imageView4.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
     }
 }
