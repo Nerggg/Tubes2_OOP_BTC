@@ -388,7 +388,7 @@ public class MainPageController {
         // Update farm
         updateFarm();
 
-        bearAttackHandler();
+//        bearAttackHandler();
     }
 
     private void startTimer(int duration,Runnable onFinish) {

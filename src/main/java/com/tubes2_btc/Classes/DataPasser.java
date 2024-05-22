@@ -1,7 +1,7 @@
 package com.tubes2_btc.Classes;
 
+import javafx.scene.image.Image;
 import java.util.List;
-import java.util.ArrayList;
 
 public class DataPasser {
     // DataPasser is a singleton class that is used to pass data between activities
@@ -28,4 +28,9 @@ public class DataPasser {
 
     // Info Card Temporary Variable
     public Card infoCard;
+
+    // Store Temporary Variable
+    public Store storeTemp;
+    public Image imageTemp;
+    public String labelTemp;
 }

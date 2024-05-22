@@ -1,21 +1,30 @@
 package com.tubes2_btc.Controllers;
 
 import com.tubes2_btc.Classes.CardConstants;
+import com.tubes2_btc.Classes.DataPasser;
 import com.tubes2_btc.Classes.Product;
 import com.tubes2_btc.Classes.Store;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.effect.ColorAdjust;
+import javafx.stage.StageStyle;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -98,6 +107,7 @@ public class StorePageController {
                         if (imageUrl != null) {
                             Image imageNew = new Image(imageUrl.toExternalForm());
                             imageView.setImage(imageNew);
+                            imageView.setId("productImage");
                         } else {
                             System.err.println("Gambar tidak ditemukan: " + product.getCardPath());
                         }
@@ -128,7 +138,37 @@ public class StorePageController {
                     }
 
                     outerPane.setVisible(true);
-                    outerPane.setOnMouseClicked(event -> handlePaneClicked(outerPane));
+                    outerPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            DataPasser dataPasser = DataPasser.getInstance();
+//                            dataPasser.imageTemp =
+//                            dataPasser.labelTemp =
+
+                            try {
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/store-popup.fxml"));
+                                Parent root = fxmlLoader.load();
+                                Stage stage = new Stage();
+                                stage.initModality(Modality.APPLICATION_MODAL);
+                                stage.initStyle(StageStyle.UNDECORATED);
+                                stage.setScene(new Scene(root));
+
+                                // Get the parent stage (assuming the button is within a stage)
+                                Stage parentStage = (Stage) ((Parent) mouseEvent.getSource()).getScene().getWindow();
+
+                                // Center the new stage in the parent stage
+                                stage.setOnShown(e -> {
+                                    stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
+                                    stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
+                                });
+
+                                stage.showAndWait();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
 
                     productIndex++;
                     displayedItems++;
@@ -137,10 +177,6 @@ public class StorePageController {
                 }
             }
         }
-    }
-
-    private void handlePaneClicked(Pane pane) {
-        System.out.println("Pane clicked: " + pane);
     }
 
     @FXML
@@ -184,3 +220,4 @@ public class StorePageController {
         return store;
     }
 }
+    
