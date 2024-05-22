@@ -127,7 +127,7 @@ public class MainPageController {
                 content.putString(child.getId());
                 db.setContent(content);
 
-                // System.out.println("Drag detected for: " + child.getId());
+                System.out.println("Drag detected for: " + child.getId());
                 mouseEvent.consume();
 
                 // deleteCard(draggedCard, isFarm, player1);
@@ -181,7 +181,7 @@ public class MainPageController {
                 Dragboard db = dragEvent.getDragboard();
                 boolean success = false;
                 if (db.hasString()) {
-                    // System.out.println("Drag dropped for: " + child.getId());
+                    System.out.println("Drag dropped for: " + child.getId());
                     success = true;
                 }
                 dragEvent.setDropCompleted(success);
