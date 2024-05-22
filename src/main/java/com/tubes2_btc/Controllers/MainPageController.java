@@ -246,6 +246,66 @@ public class MainPageController {
     void testFunction() {
         System.out.println("Anjay work letsgo");
     }
+
+    public void setFarmAt(int index, Card card, Player player) {
+        // Change data
+        player.setFarmAt(index, card);
+
+        // Change GUI
+        List<Node> farmSlots = (player == player1) ? farmSlots_1 : farmSlots_2;
+        Node slot = farmSlots.get(index);
+
+        Pane pane = (Pane) slot;
+        ImageView imageView = null;
+        Label label = null;
+
+        for (javafx.scene.Node childPane : pane.getChildren()) {
+            if (childPane instanceof ImageView) {
+                imageView = (ImageView) childPane;
+            } else if (childPane instanceof Label) {
+                label = (Label) childPane;
+            }
+        }
+
+        if (imageView != null) {
+            Image image = new Image(getClass().getResource(card.getCardPath()).toExternalForm());
+            imageView.setImage(image);
+        }
+
+        if (label != null) {
+            label.setText(card.getCardName());
+        }
+    }
+
+    public void setActiveDeckAt(int index, Card card, Player player) {
+        // Set data
+        player.setActiveDeckAt(index, card);
+
+        // Set GUI
+        List<Node> activeDeckSlots = (player == player1) ? activeDeckSlots_1 : activeDeckSlots_2;
+        Node slot = activeDeckSlots.get(index);
+
+        Pane pane = (Pane) slot;
+        ImageView imageView = null;
+        Label label = null;
+
+        for (javafx.scene.Node childPane : pane.getChildren()) {
+            if (childPane instanceof ImageView) {
+                imageView = (ImageView) childPane;
+            } else if (childPane instanceof Label) {
+                label = (Label) childPane;
+            }
+        }
+
+        if (imageView != null) {
+            Image image = new Image(getClass().getResource(card.getCardPath()).toExternalForm());
+            imageView.setImage(image);
+        }
+
+        if (label != null) {
+            label.setText(card.getCardName());
+        }
+    }
     
     @FXML
     private AnchorPane Base;
@@ -258,6 +318,12 @@ public class MainPageController {
 
     @FXML
     public void initialize() {
+        // Set player data to DataPasser
+        DataPasser dataPasser = DataPasser.getInstance();
+        dataPasser.player1 = player1;
+        dataPasser.player2 = player2;
+
+        // Initialize farm and active deck
         int i = 0;
         for (Node child : Ladang.getChildren()) {
             child.setId("Ladang_" + i);
