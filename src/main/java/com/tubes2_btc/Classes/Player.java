@@ -69,14 +69,4 @@ public class Player {
         System.out.println("Index " + index1 + ": " + cont1.get(index1).getCardName());
         System.out.println("Index " + index2 + ": " + cont2.get(index2).getCardName());
     }
-
-    public void swapFarm(int index1, int index2) {
-        Card temp = farm.get(index1);
-
-        farm.put(index1, farm.get(index2));
-        farm.put(index2, temp);
-
-        System.out.println("Index " + index1 + ": " + farm.get(index1).getCardName());
-        System.out.println("Index " + index2 + ": " + farm.get(index2).getCardName());
-    }
 }
