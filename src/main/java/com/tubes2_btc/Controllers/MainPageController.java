@@ -17,6 +17,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,10 +27,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import java.util.ArrayList;
 import java.util.List;
-import com.tubes2_btc.Classes.Card;
-import com.tubes2_btc.Classes.Player;
 import java.util.Map;
 import java.util.Random;
+import javafx.application.Platform;
 
 import org.controlsfx.control.action.Action;
 
@@ -353,6 +353,15 @@ public class MainPageController {
     private GridPane Deck;
 
     @FXML
+    private Rectangle BearAttackArea;
+
+    @FXML
+    private Pane TimerPane;
+    
+    @FXML
+    private Label TimerLabel;
+    
+    @FXML
     public void initialize() {
         // Set player data to DataPasser
         DataPasser dataPasser = DataPasser.getInstance();
@@ -382,40 +391,104 @@ public class MainPageController {
         bearAttackHandler();
     }
 
+    private void startTimer(int duration,Runnable onFinish) {
+        Thread timerThread = new Thread(() -> {
+            for (int i = duration * 10; i >= 0; i--) {
+                int finalI = i;
+                Platform.runLater(() -> {
+                    this.TimerLabel.setText(String.format("%.1f s", finalI / 10.0));
+                });
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        Platform.runLater(onFinish);
+
+        });
+        timerThread.setDaemon(true);
+        timerThread.start();
+    }
+
+    private void removeTimer() {
+        if (this.TimerPane != null) {
+            Base.getChildren().remove(this.TimerPane);
+            this.TimerPane = null;
+        }
+        if (this.TimerLabel != null) {
+            Base.getChildren().remove(this.TimerLabel);
+            this.TimerLabel = null;
+        }
+    }
+
+    private void removeBearAttackArea(){
+        if(this.BearAttackArea != null){
+            this.Base.getChildren().remove(this.BearAttackArea);
+        }
+    }
+
     public void bearAttackHandler(){
         Random rand = new Random();
+        int x,y;
         // determine whether to let the bear out or no
         // because i use bool, the chance of a bear attack happen is 50%
         boolean attack = rand.nextBoolean();
         // determine whether the subgrid would be 3x2 or 2x3
-        boolean type = rand.nextBoolean();
+        boolean isHorizontal = rand.nextBoolean();
         if(attack){
-            if(type){
+            System.out.println("The bear is out! Watch yo ass!");
+            int duration =5;
+            if(isHorizontal){
                 // 3x2 subgrid
                 // set the bound so it wont went out of ladang
-                int x = rand.nextInt(0, 2);
-                int y = rand.nextInt(0, 2);
-                addDynamicRectangle(100.0*3, 118.0*2, x, y);
+                x = rand.nextInt(0, 2);
+                y = rand.nextInt(0, 2);
+                this.BearAttackArea = addDynamicRectangle(100.0*3, 118.0*2, x, y);
             }else{
                 // 2x3 subgrid
                 // set the bound so it wont went out of ladang
-                int x = rand.nextInt(0, 3);
-                int y = rand.nextInt(0, 1);
-                addDynamicRectangle(100.0*2, 118.0*3, x, y);
+                x = rand.nextInt(0, 3);
+                y = rand.nextInt(0, 1);
+                this.BearAttackArea = addDynamicRectangle(100.0*2, 118.0*3, x, y);
             }
-        }else{
-            addDynamicRectangle(0.0, 0.0, 0.0, 0.0);
+            addDynamicTimer();
+            startTimer(duration,()->{
+                System.out.println("Deleting card ");
+                if(isHorizontal){
+                int index = x + y*5;
+                    System.out.println(index);
+                    for(int i =index;i<2;i++){
+                        for(int j =0;j<3;j++){
+                            System.out.println("Deleting card "+ (index+j));
+                            deleteCard(index+j,true,player1);
+                        }
+                        index += 5;
+                    }
+                }else{
+                int index = x + y*5;
+                    System.out.println(index);
+                    for(int i =index;i<3;i++){
+                        for(int j =0;j<2;j++){
+                            System.out.println("Deleting card "+ (index+j));
+                            deleteCard(index+j,true,player1);
+                        }
+                        index += 5;
+                    }
+                }
+            });
+            
         }
-
     }
-    public void addDynamicRectangle(double width, double height, double x, double y) {
+
+     public Rectangle addDynamicRectangle(double width, double height, double x, double y) {
         Rectangle rectangle = new Rectangle();
-        // offset
         double x_value = x * 105 + 25;
         double y_value = y * 117 + 5;
         rectangle.setArcHeight(5.0);
         rectangle.setArcWidth(5.0);
-        rectangle.setFill(Color.web("#c4040400"));
+        rectangle.setFill(Color.TRANSPARENT);
+         rectangle.setMouseTransparent(true);
         rectangle.setHeight(height);
         rectangle.setWidth(width);
         rectangle.setStroke(Color.web("#ce1717"));
@@ -423,6 +496,42 @@ public class MainPageController {
         rectangle.setX(x_value);
         rectangle.setY(y_value);
         Base.getChildren().add(rectangle);
+        return rectangle;
+    }
+
+    public void addDynamicTimer() {
+        Pane timerPane = new Pane();
+        
+        // Set the properties for the timer pane
+        timerPane.setLayoutX(570.0);
+        timerPane.setLayoutY(210.0);
+        timerPane.setPrefHeight(84.0);
+        timerPane.setPrefWidth(147.0);
+        timerPane.setStyle("-fx-background-color: white;");
+        
+        // Create the time left label
+        Label timeLabel = new Label("60.0 s");
+        timeLabel.setLayoutX(24.0);
+        timeLabel.setLayoutY(31.0);
+        timeLabel.setStyle("-fx-font-weight: 800;");
+        timeLabel.setTextFill(Color.RED);
+        timeLabel.setFont(new Font(36.0));
+        
+        // Create the label for static text "time left"
+        Label staticLabel = new Label("time left");
+        staticLabel.setLayoutX(14.0);
+        staticLabel.setLayoutY(-1.0);
+        staticLabel.setFont(new Font(20.0));
+        
+        // Add labels to the timer pane
+        timerPane.getChildren().addAll(timeLabel, staticLabel);
+        
+        // Add the timer pane to the base layout
+        Base.getChildren().add(timerPane);
+        
+        // Keep a reference to the timer pane and label for further updates
+        this.TimerPane = timerPane;
+        this.TimerLabel = timeLabel;
     }
     // Pop Up Button Handler
     @FXML
