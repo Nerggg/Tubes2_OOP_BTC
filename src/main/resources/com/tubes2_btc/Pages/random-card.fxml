@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="468.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.RandomCardController">
+<VBox prefHeight="468.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.RandomCardController">
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="538.0" VBox.vgrow="ALWAYS">
             <children>
@@ -12,7 +15,7 @@
                     <children>
                         <VBox alignment="CENTER">
                             <ImageView fx:id="imageView1" fitHeight="82.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
-                            <Label fx:id="label1" text=" " alignment="CENTER"/>
+                            <Label fx:id="label1" alignment="CENTER" text=" " />
                         </VBox>
                     </children>
                 </StackPane>
@@ -20,7 +23,7 @@
                     <children>
                         <VBox alignment="CENTER">
                             <ImageView fx:id="imageView2" fitHeight="82.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
-                            <Label fx:id="label2" text=" " alignment="CENTER"/>
+                            <Label fx:id="label2" alignment="CENTER" text=" " />
                         </VBox>
                     </children>
                 </StackPane>
@@ -28,7 +31,7 @@
                     <children>
                         <VBox alignment="CENTER">
                             <ImageView fx:id="imageView3" fitHeight="82.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
-                            <Label fx:id="label3" text=" " alignment="CENTER"/>
+                            <Label fx:id="label3" alignment="CENTER" text=" " />
                         </VBox>
                     </children>
                 </StackPane>
@@ -36,19 +39,11 @@
                     <children>
                         <VBox alignment="CENTER">
                             <ImageView fx:id="imageView4" fitHeight="82.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
-                            <Label fx:id="label4" text=" " alignment="CENTER"/>
+                            <Label fx:id="label4" alignment="CENTER" text=" " />
                         </VBox>
                     </children>
                 </StackPane>
-                <Button fx:id="randomizeButton" layoutX="297.0" layoutY="393.0" mnemonicParsing="false">
-                    <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0">
-                            <image>
-                                <Image url="@Downloads/icons8-retry-50.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
+            <Button fx:id="randomizeButton" layoutX="293.0" layoutY="393.0" mnemonicParsing="false" text="Shuffle" />
             </children>
         </AnchorPane>
     </children>
