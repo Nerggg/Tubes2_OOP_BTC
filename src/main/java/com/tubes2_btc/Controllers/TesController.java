@@ -1,53 +1,137 @@
 //package com.tubes2_btc.Controllers;
 //
-//import com.tubes2_btc.Classes.Card;
 //import com.tubes2_btc.Classes.CardConstants;
 //import com.tubes2_btc.Classes.Product;
 //import com.tubes2_btc.Classes.Store;
 //import javafx.fxml.FXML;
-//import javafx.scene.control.Button;
-//import javafx.scene.control.TitledPane;
-//import javafx.stage.DirectoryChooser;
-//import javafx.stage.FileChooser;
-//import javafx.stage.Stage;
 //import javafx.scene.Node;
+//import javafx.scene.control.Button;
+//import javafx.scene.control.Label;
+//import javafx.scene.image.Image;
+//import javafx.scene.image.ImageView;
+//import javafx.scene.layout.AnchorPane;
+//import javafx.scene.layout.GridPane;
+//import javafx.scene.layout.Pane;
+//import javafx.scene.layout.VBox;
 //import javafx.event.ActionEvent;
+//import javafx.stage.Stage;
+//import javafx.scene.effect.ColorAdjust;
 //
-//import java.io.BufferedReader;
-//import java.io.File;
-//import java.io.FileReader;
-//import java.io.IOException;
+//import java.net.URL;
 //import java.util.ArrayList;
-//import java.util.HashMap;
 //import java.util.List;
-//import java.util.Map;
 //
-//public class LoadStateController {
+//public class StorePageController {
 //
 //    @FXML
 //    private Button kembali;
 //
 //    @FXML
-//    private TitledPane formatTitledPane;
+//    private AnchorPane main;
 //
 //    @FXML
-//    private Button txtButton;
+//    private GridPane Toko;
 //
 //    @FXML
-//    private Button loadButton;
-//
-//
-//    @FXML
-//    private Button jsonButton;
+//    private Button previousButton;
 //
 //    @FXML
-//    private Button browseButton;
+//    private Button nextButton;
 //
-//    private int turn;
-//    private Store store;
-//    private DirectoryChooser directoryChooser;
-//    File selectedDirectory;
-//    private static Map<String, Integer> storeMap = new HashMap<>();
+//    private static Store store = new Store(generateProducts(), 8);
+//    private int currentPage = 0;
+//    private static final int ITEMS_PER_PAGE = 6;
+//
+//    @FXML
+//    public void initialize() {
+//        // Initialize the list of products
+//        initializeStore(Toko, this.store.getProducts());
+//        updatePaginationButtons();
+//    }
+//
+//    public static void initializeStore() {
+//
+//    }
+//
+//    private static List<Product> generateProducts() {
+//        List<Product> products = new ArrayList<>();
+//        products.add(new Product(CardConstants.CARD_SIRIP_HIU, CardConstants.CARD_SIRIP_HIU_PATH, 500, 12, 20, Product.PRODUCT_CARNIVORE_FOOD));
+//        products.add(new Product(CardConstants.CARD_SUSU, CardConstants.CARD_SUSU_PATH, 100, 4, 10, Product.PRODUCT_CARNIVORE_FOOD));
+//        products.add(new Product(CardConstants.CARD_DAGING_DOMBA, CardConstants.CARD_DAGING_DOMBA_PATH, 120, 6, 12, Product.PRODUCT_CARNIVORE_FOOD));
+//        products.add(new Product(CardConstants.CARD_DAGING_KUDA, CardConstants.CARD_DAGING_KUDA_PATH, 150, 8, 14, Product.PRODUCT_CARNIVORE_FOOD));
+//        products.add(new Product(CardConstants.CARD_TELUR, CardConstants.CARD_TELUR_PATH, 50, 2, 5, Product.PRODUCT_CARNIVORE_FOOD));
+//        products.add(new Product(CardConstants.CARD_DAGING_BERUANG, CardConstants.CARD_DAGING_BERUANG_PATH, 150, 8, 25, Product.PRODUCT_CARNIVORE_FOOD));
+//        products.add(new Product(CardConstants.CARD_JAGUNG, CardConstants.CARD_JAGUNG_PATH, 500, 8, 3, Product.PRODUCT_HERBIVORE_FOOD));
+//        products.add(new Product(CardConstants.CARD_LABU, CardConstants.CARD_LABU_PATH, 500, 8, 5, Product.PRODUCT_HERBIVORE_FOOD));
+//        products.add(new Product(CardConstants.CARD_STROBERI, CardConstants.CARD_STROBERI_PATH, 1500, 3, 4, Product.PRODUCT_HERBIVORE_FOOD));
+//        return products;
+//    }
+//
+//    private void initializeStore(GridPane tokoPane, List<Product> products) {
+//        int productIndex = currentPage * ITEMS_PER_PAGE;
+//        int displayedItems = 0;
+//
+//        for (Node node : tokoPane.getChildren()) {
+//            if (node instanceof Pane) {
+//                Pane outerPane = (Pane) node;
+//                if (displayedItems < ITEMS_PER_PAGE && productIndex < products.size()) {
+//                    Product product = products.get(productIndex);
+//
+//                    VBox imagePane = (VBox) outerPane.lookup("#imagePane");
+//                    VBox detailsPane = (VBox) outerPane.lookup("#detailsPane");
+//
+//                    ImageView imageView = (ImageView) imagePane.lookup("#image");
+//                    Label productLabel = (Label) imagePane.lookup("#labelNama");
+//                    Label priceLabel = (Label) detailsPane.lookup("#labelHarga");
+//                    Label quantityLabel = (Label) detailsPane.lookup("#labelJumlah");
+//
+//                    if (imageView != null) {
+//                        URL imageUrl = getClass().getResource(product.getCardPath());
+//                        if (imageUrl != null) {
+//                            Image imageNew = new Image(imageUrl.toExternalForm());
+//                            imageView.setImage(imageNew);
+//                        } else {
+//                            System.err.println("Gambar tidak ditemukan: " + product.getCardPath());
+//                        }
+//                    }
+//
+//                    if (productLabel != null) {
+//                        productLabel.setText(product.getCardName());
+//                    }
+//                    if (priceLabel != null) {
+//                        priceLabel.setText("Gd. " + product.getSellPrice());
+//                    }
+//
+//                    int productCount = store.getProductCount(product.getCardName());
+//                    if (quantityLabel != null) {
+//                        quantityLabel.setText(String.valueOf(productCount));
+//                    }
+//
+//                    if (productCount == 0) {
+//                        ColorAdjust colorAdjust = new ColorAdjust();
+//                        colorAdjust.setBrightness(-0.5);
+//                        outerPane.setEffect(colorAdjust);
+//                        outerPane.setDisable(true);
+//                    } else {
+//                        outerPane.setEffect(null);
+//                        outerPane.setDisable(false);
+//                    }
+//
+//                    outerPane.setVisible(true);
+//                    outerPane.setOnMouseClicked(event -> handlePaneClicked(outerPane));
+//
+//                    productIndex++;
+//                    displayedItems++;
+//                } else {
+//                    outerPane.setVisible(false);
+//                }
+//            }
+//        }
+//    }
+//
+//    private void handlePaneClicked(Pane pane) {
+//        System.out.println("Pane clicked: " + pane);
+//    }
 //
 //    @FXML
 //    private void handleClicked(ActionEvent event) {
@@ -56,121 +140,44 @@
 //    }
 //
 //    @FXML
-//    public void handleTxtButton() {
-//        formatTitledPane.setText("TXT");
-//        formatTitledPane.setExpanded(false);
+//    private void handleNext(ActionEvent event) {
+//        if (currentPage < Math.ceil((double) store.getProducts().size() / ITEMS_PER_PAGE) - 1) {
+//            currentPage++;
+//            updatePaginationButtons();
+//            initializeStore(Toko, store.getProducts());
+//        }
 //    }
 //
 //    @FXML
-//    public void handleJsonButton() {
-//        formatTitledPane.setText("JSON");
-//        formatTitledPane.setExpanded(false);
-//    }
-//
-//    @FXML
-//    public void handleBrowseButton() {
-//        directoryChooser = new DirectoryChooser();
-//
-//        selectedDirectory = directoryChooser.showDialog(browseButton.getScene().getWindow());
-//        if (selectedDirectory != null) {
-//            System.out.println("Folder yang dipilih: " + ((File) selectedDirectory).getAbsolutePath());
-//            // Lakukan operasi lain yang diperlukan dengan folder yang dipilih
-//        } else {
-//            System.out.println("Tidak ada folder yang dipilih.");
+//    private void handlePrevious(ActionEvent event) {
+//        if (currentPage > 0) {
+//            currentPage--;
+//            updatePaginationButtons();
+//            initializeStore(Toko, store.getProducts());
 //        }
 //    }
 //
-//    public void handleLoadButton() {
+//    private void updatePaginationButtons() {
+//        int totalItems = store.getProducts().size();
+//        int totalPages = (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE);
 //
-//        if (selectedDirectory != null) {
-//            System.out.println("Folder yang dipilih: " + selectedDirectory.getAbsolutePath());
-//
-//            String format = formatTitledPane.getText();
-//
-//            File[] files = selectedDirectory.listFiles();
-//            if (files != null) {
-//                System.out.println("Daftar file dalam folder:");
-//                for (File file : files) {
-//                    if (file.isFile()) {  // Memastikan file (bukan direktori)
-//                        if (("TXT".equals(format) && file.getName().endsWith(".txt")) ||
-//                                ("JSON".equals(format) && file.getName().endsWith(".json"))) {
-//                            System.out.println(file.getName());
-//                            System.out.println("Isi File:");
-//                            readAndPrintFile(file);
-//                        }
-//                    }
-//                }
-//            } else {
-//                System.out.println("Folder kosong atau tidak dapat diakses.");
-//            }
-//        } else {
-//            System.out.println("Tidak ada folder yang dipilih.");
-//        }
+//        previousButton.setDisable(currentPage <= 0);
+//        nextButton.setDisable(currentPage >= totalPages - 1);
 //    }
 //
-//    private void readAndPrintFile(File file) {
-//        StorePageController.initializeStore(); // Pastikan store diinisialisasi
-//        createMap();
-//        if(file.getName().equals("gamestate.txt")) {
-//            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-//                turn = Integer.parseInt(reader.readLine());
-//                int numOfItems = Integer.parseInt(reader.readLine().trim());
-//                List<Product> products = new ArrayList<>(numOfItems);
-//                store = StorePageController.getStore();
-//                CardConstants cc = new CardConstants();
-//                for (int i = 0; i < numOfItems; i++) {
-//                    String line = reader.readLine();
-//                    String[] parts = line.split("\\s+");
-//                    if (parts.length == 2) {
-//                        String productName = parts[0];
-//                        int quantity = Integer.parseInt(parts[1]);
-//                        Product temp = (Product) cc.createCard(storeMap.get(productName));
-//                        StorePageController.addNewProductToStore(temp,quantity);
-//                    } else {
-//                        System.out.println("Format data tidak sesuai pada baris " + (i + 2) + ": " + line);
-//                    }
-//                }
-//            } catch (IOException e) {
-//                System.out.println("Error saat membaca file: " + e.getMessage());
-//            }
-//        }
-//        printStoreInfo(store);
+//    public static void addNewProductToStore(Product product, int jumlah) {
+//        store.addProduct(product, jumlah);
 //    }
 //
-//    public Map<String, Integer> createMap() {
-//        storeMap.put("HIU", 1);
-//        storeMap.put("SAPI", 2);
-//        storeMap.put("DOMBA", 3);
-//        storeMap.put("KUDA",4);
-//        storeMap.put("AYAM", 5);
-//        storeMap.put("BERUANG", 6);
-//        storeMap.put("LABU", 7);
-//        storeMap.put("JAGUNG", 8);
-//        storeMap.put("STROBERI", 9);
-//        storeMap.put("SUSU", 10);
-//        storeMap.put("TELUR", 11);
-//        storeMap.put("SIRIP_HIU", 12);
-//        storeMap.put("DAGING_KUDA", 13);
-//        storeMap.put("DAGING_DOMBA", 14);
-//        storeMap.put("DAGING_BERUANG", 15);
-//        storeMap.put("BIJI_LABU", 16);
-//        storeMap.put("BIJI_JAGUNG", 17);
-//        storeMap.put("BIJI_STROBERI", 18);
-//        storeMap.put("ACCELERATE", 19);
-//        storeMap.put("DELAY", 20);
-//        storeMap.put("INSTANT_HARVEST", 21);
-//        storeMap.put("DESTROY", 22);
-//        storeMap.put("PROTECT", 23);
-//        storeMap.put("TRAP", 24);
-//
-//        return storeMap;
+//    public static void loadDataProductToStore(Product product, int jumlah) {
+//        store.addProduct(product, jumlah);
 //    }
 //
-//    public static void printStoreInfo(Store store) {
-//        System.out.println("Daftar Produk di Toko:");
-//        for (Product product : store.getProducts()) {
-//            System.out.println("Nama Produk: " + product.getCardName() + ", Jumlah: " + store.getProductCount(product.getCardName()));
-//        }
+//    public static void resetAllDataStore(){
+//        store.setZeroCounts();
 //    }
 //
+//    public static Store getStore() {
+//        return store;
+//    }
 //}

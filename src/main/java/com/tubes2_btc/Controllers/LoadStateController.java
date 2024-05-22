@@ -126,15 +126,14 @@ public class LoadStateController {
     }
 
     private void readAndPrintFile(File file) {
-        StorePageController.initializeStore(); // Pastikan store diinisialisasi
         createMap();
-        if(file.getName().equals("gamestate.txt")) {
+        if (file.getName().equals("gamestate.txt")) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 turn = Integer.parseInt(reader.readLine());
                 int numOfItems = Integer.parseInt(reader.readLine().trim());
-                List<Product> products = new ArrayList<>(numOfItems);
                 store = StorePageController.getStore();
                 CardConstants cc = new CardConstants();
+                StorePageController.resetAllDataStore();
                 for (int i = 0; i < numOfItems; i++) {
                     String line = reader.readLine();
                     String[] parts = line.split("\\s+");
@@ -142,11 +141,12 @@ public class LoadStateController {
                         String productName = parts[0];
                         int quantity = Integer.parseInt(parts[1]);
                         Product temp = (Product) cc.createCard(storeMap.get(productName));
-                        StorePageController.addNewProductToStore(temp,quantity);
+                        StorePageController.loadDataProductToStore(temp, quantity); // Ubah fungsi ini
                     } else {
                         System.out.println("Format data tidak sesuai pada baris " + (i + 2) + ": " + line);
                     }
                 }
+                StorePageController.initializeStore(); // Tambahkan ini untuk memperbarui tampilan
             } catch (IOException e) {
                 System.out.println("Error saat membaca file: " + e.getMessage());
             }

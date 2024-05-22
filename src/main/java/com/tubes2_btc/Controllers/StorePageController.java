@@ -47,28 +47,26 @@ public class StorePageController {
     @FXML
     private Button nextButton;
 
-    private static Store store;
+    private static Store store = new Store(generateProducts(), 8);
     private int currentPage = 0;
     private static final int ITEMS_PER_PAGE = 6;
 
     @FXML
     public void initialize() {
         // Initialize the list of products
-        List<Product> products = generateProducts();
-        // Create store
-        store = new Store(products, 8);
-        initializeStore(Toko, store.getProducts());
+        initializeStore(Toko, this.store.getProducts());
         updatePaginationButtons();
     }
 
     public static void initializeStore() {
-        if (store == null) {
-            // Initialize the list of products
-            List<Product> products = generateProducts();
-            // Create store
-            store = new Store(products, 8);
-        }
+//        if (store == null) {
+//            // Initialize the list of products
+//            List<Product> products = generateProducts();
+//            // Create store
+//            store = new Store(products, 8);
+//        }
     }
+
 
     private static List<Product> generateProducts() {
         List<Product> products = new ArrayList<>();
@@ -212,8 +210,15 @@ public class StorePageController {
     }
 
     public static void addNewProductToStore(Product product, int jumlah) {
-        initializeStore();
         store.addProduct(product, jumlah);
+    }
+
+    public static void loadDataProductToStore(Product product, int jumlah) {
+        store.addProduct(product, jumlah);
+    }
+
+    public static void resetAllDataStore(){
+        store.setZeroCounts();
     }
 
     public static Store getStore() {

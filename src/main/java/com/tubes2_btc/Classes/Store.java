@@ -39,19 +39,35 @@ public class Store {
     }
 
     public void addProduct(Product product, int jumlah) {
-        String productName = product.getCardName(); // Sesuaikan dengan cara mendapatkan identitas unik produk
+        String productName = product.getCardName();
 
         if (productCounts.containsKey(productName)) {
-            // Produk sudah ada, perbarui jumlahnya saja
             productCounts.put(productName, productCounts.get(productName) + jumlah);
         } else {
-            // Produk baru, tambahkan ke daftar dan inisialisasi jumlahnya
             this.products.add(product);
             productCounts.put(productName, jumlah);
         }
     }
 
+
     public int getProductCount(String productName) {
         return productCounts.getOrDefault(productName, 0);
     }
+
+    public void setProductCounts(String productName, int jumlah) {
+        productCounts.put(productName, jumlah);
+    }
+
+    public void setZeroCounts(){
+        productCounts.put(CardConstants.CARD_SIRIP_HIU, 0);
+        productCounts.put(CardConstants.CARD_SUSU, 0);
+        productCounts.put(CardConstants.CARD_DAGING_DOMBA, 0);
+        productCounts.put(CardConstants.CARD_DAGING_KUDA, 0);
+        productCounts.put(CardConstants.CARD_TELUR, 0);
+        productCounts.put(CardConstants.CARD_DAGING_BERUANG, 0);
+        productCounts.put(CardConstants.CARD_JAGUNG, 0);
+        productCounts.put(CardConstants.CARD_LABU, 0);
+        productCounts.put(CardConstants.CARD_STROBERI, 0);
+    }
+
 }
