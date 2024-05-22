@@ -14,4 +14,12 @@ public class Product extends Card {
         this.addedWeight = addedWeight;
         this.foodType = foodType;
     }
+
+    public int getSellPrice() {
+        return this.sellPrice;
+    }
+
+    public int getAddedWeight(){
+        return this.addedWeight;
+    }
 }
