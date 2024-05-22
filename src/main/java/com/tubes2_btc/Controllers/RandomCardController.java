@@ -44,11 +44,16 @@ public class RandomCardController {
 
     @FXML
     private void initialize() {
-        changeImages();
+        // changeImages();
         randomizeButton.setOnAction(event -> changeImages());
     }
 
     private void changeImages() {
+        // Get DataPasser
+        DataPasser dataPasser = DataPasser.getInstance();
+
+        // ======== Get random cards ========
+        // Card 1
         int random1 = random.nextInt(1, 25);
         Card card1 = CardConstants.createCard(random1);
 
@@ -57,9 +62,10 @@ public class RandomCardController {
             Image imageNew1 = new Image(imageUrl1.toExternalForm());
             imageView1.setImage(imageNew1);
             label1.setText(card1.getCardName());
-
         }
-        
+        mainPageController.setFarmAt(0, card1, dataPasser.player1);
+
+        // Card 2
         int random2 = random.nextInt(1, 25);
         Card card2 = CardConstants.createCard(random2);
 
@@ -69,7 +75,9 @@ public class RandomCardController {
             imageView2.setImage(imageNew2);
             label2.setText(card2.getCardName());
         }
+        mainPageController.setFarmAt(1, card2, dataPasser.player1);
 
+        // Card 3
         int random3 = random.nextInt(1, 25);
         Card card3 = CardConstants.createCard(random3);
 
@@ -79,7 +87,9 @@ public class RandomCardController {
             imageView3.setImage(imageNew3);
             label3.setText(card3.getCardName());
         }
+        mainPageController.setFarmAt(2, card3, dataPasser.player1);
 
+        // Card 4
         int random4 = random.nextInt(1, 25);
         Card card4 = CardConstants.createCard(random4);
 
@@ -89,6 +99,7 @@ public class RandomCardController {
             imageView4.setImage(imageNew4);
             label4.setText(card4.getCardName());
         }
+        mainPageController.setFarmAt(3, card4, dataPasser.player1);
 //        imageView2.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
 //        imageView3.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
 //        imageView4.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));

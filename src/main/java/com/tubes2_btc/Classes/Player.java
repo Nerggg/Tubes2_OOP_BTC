@@ -82,4 +82,12 @@ public class Player {
     public int getActiveDeckFreeSlots() {
         return PLAYER_ACTIVE_DECK_SLOTS - activeDeck.size();
     }
+
+    public void setFarmAt(int index, Card card) {
+        farm.put(index, card);
+    }
+
+    public void setActiveDeckAt(int index, Card card) {
+        activeDeck.put(index, card);
+    }
 }
