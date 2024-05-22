@@ -43,7 +43,8 @@
                         </VBox>
                     </children>
                 </StackPane>
-            <Button fx:id="randomizeButton" layoutX="293.0" layoutY="393.0" mnemonicParsing="false" text="Shuffle" />
+            <Button fx:id="randomizeButton" layoutX="229.0" layoutY="393.0" mnemonicParsing="false" text="Shuffle" />
+            <Button layoutX="345.0" layoutY="393.0" mnemonicParsing="false" text="Confirm" onAction="#handleClicked"/>
             </children>
         </AnchorPane>
     </children>
