@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import javafx.scene.effect.ColorAdjust;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -44,22 +45,16 @@ public class StorePageController {
     @FXML
     public void initialize() {
         // Initialize the list of products
-        List<Product> products = new ArrayList<>();
-        products.add(new Product(CardConstants.CARD_DAGING_KUDA, CardConstants.CARD_DAGING_KUDA_PATH, 1000, 10, 14, Product.PRODUCT_CARNIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_SIRIP_HIU, CardConstants.CARD_SIRIP_HIU_PATH, 2000, 5, 20, Product.PRODUCT_CARNIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_STROBERI, CardConstants.CARD_STROBERI_PATH, 1500, 3, 4, Product.PRODUCT_HERBIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_JAGUNG, CardConstants.CARD_JAGUNG_PATH, 500, 8, 3, Product.PRODUCT_HERBIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_SUSU, CardConstants.CARD_SUSU_PATH, 500, 8, 10, Product.PRODUCT_HERBIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_TELUR, CardConstants.CARD_TELUR_PATH, 500, 8, 5, Product.PRODUCT_HERBIVORE_FOOD));
-
+        List<Product> products = generateProducts();
         // Create store
-        store = new Store(products);
+        store = new Store(products, 8);
         initializeStore(Toko, store.getProducts());
+        updatePaginationButtons();
     }
 
     private List<Product> generateProducts() {
         List<Product> products = new ArrayList<>();
-        products.add(new Product(CardConstants.CARD_SIRIP_HIU, CardConstants.CARD_SIRIP_HIU_PATH, 500, 12, 20, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_SIRIP_HIU, CardConstants.CARD_SIRIP_HIU_PATH, 500, 12, 20,  Product.PRODUCT_CARNIVORE_FOOD));
         products.add(new Product(CardConstants.CARD_SUSU, CardConstants.CARD_SUSU_PATH, 100, 4, 10, Product.PRODUCT_CARNIVORE_FOOD));
         products.add(new Product(CardConstants.CARD_DAGING_DOMBA, CardConstants.CARD_DAGING_DOMBA_PATH, 120, 6, 12, Product.PRODUCT_CARNIVORE_FOOD));
         products.add(new Product(CardConstants.CARD_DAGING_KUDA, CardConstants.CARD_DAGING_KUDA_PATH, 150, 8, 14, Product.PRODUCT_CARNIVORE_FOOD));
@@ -105,8 +100,22 @@ public class StorePageController {
                     if (priceLabel != null) {
                         priceLabel.setText("Gd. " + product.getSellPrice());
                     }
+
+                    // Get product count from store
+                    int productCount = store.getProductCount(product.getCardName());
                     if (quantityLabel != null) {
-                        quantityLabel.setText(String.valueOf(product.getAddedWeight()));
+                        quantityLabel.setText(String.valueOf(productCount));
+                    }
+
+                    // Check product quantity
+                    if (productCount == 0) {
+                        ColorAdjust colorAdjust = new ColorAdjust();
+                        colorAdjust.setBrightness(-0.5);
+                        outerPane.setEffect(colorAdjust);
+                        outerPane.setDisable(true);
+                    } else {
+                        outerPane.setEffect(null);
+                        outerPane.setDisable(false);
                     }
 
                     outerPane.setVisible(true);
@@ -157,8 +166,8 @@ public class StorePageController {
         nextButton.setDisable(currentPage >= totalPages - 1);
     }
 
-    public void addNewProductToStore(Product product) {
-        store.addProduct(product);
+    public void addNewProductToStore(Product product, int jumlah) {
+        store.addProduct(product, jumlah);
         updatePaginationButtons();
         initializeStore(Toko, store.getProducts());
     }
