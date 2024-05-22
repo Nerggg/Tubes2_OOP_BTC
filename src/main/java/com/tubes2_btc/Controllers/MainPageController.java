@@ -31,13 +31,19 @@ import com.tubes2_btc.Classes.Player;
 import java.util.Map;
 import java.util.Random;
 
+import org.controlsfx.control.action.Action;
+
 public class MainPageController {
     // Misc. variables
     private int draggedCard;
     private boolean draggedIsFarm;
 
-    Player player1 = new Player();
-    Player player2 = new Player();
+    private Player player1 = new Player();
+    private Player player2 = new Player();
+
+    private int currentPlayer = 1;
+    private int currentFarmView = 1;
+    private int currentTurn = 1;    
 
     private List<Node> farmSlots_1 = new ArrayList<>();
     private List<Node> farmSlots_2 = new ArrayList<>();
@@ -80,18 +86,18 @@ public class MainPageController {
     }
 
     public void initializeSlot(Node child, int i, boolean isFarm, List<Node> farmSlots, List<Node> activeDeckSlots, Player player) {
-        Pane pane = (Pane) child;
-        ImageView imageView = null;
-        Label label = null;
+        // Pane pane = (Pane) child;
+        // ImageView imageView = null;
+        // Label label = null;
 
-        // Initialize variables
-        for (javafx.scene.Node childPane : pane.getChildren()) {
-            if (childPane instanceof ImageView) {
-                imageView = (ImageView) childPane;
-            } else if (childPane instanceof Label) {
-                label = (Label) childPane;
-            }
-        }
+        // // Initialize variables
+        // for (javafx.scene.Node childPane : pane.getChildren()) {
+        //     if (childPane instanceof ImageView) {
+        //         imageView = (ImageView) childPane;
+        //     } else if (childPane instanceof Label) {
+        //         label = (Label) childPane;
+        //     }
+        // }
 
         // Push to farm slots
         if (isFarm) 
@@ -100,22 +106,22 @@ public class MainPageController {
             activeDeckSlots.add(child);
 
         // Set image and name for farm slot
-        Card card;
-        if (isFarm) 
-            card = player.getFarm().get(i);
-        else 
-            card = player.getActiveDeck().get(i);
+        // Card card;
+        // if (isFarm) 
+        //     card = player.getFarm().get(i);
+        // else 
+        //     card = player.getActiveDeck().get(i);
         
-        if (card != null) {
-            if (imageView != null) {
-                Image image = new Image(getClass().getResource(card.getCardPath()).toExternalForm());
-                imageView.setImage(image);
-            }
+        // if (card != null) {
+        //     if (imageView != null) {
+        //         Image image = new Image(getClass().getResource(card.getCardPath()).toExternalForm());
+        //         imageView.setImage(image);
+        //     }
 
-            if (label != null) {
-                label.setText(card.getCardName());
-            }
-        }
+        //     if (label != null) {
+        //         label.setText(card.getCardName());
+        //     }
+        // }
 
         // Set farm slot event handlers
         child.setOnDragDetected(new EventHandler<MouseEvent>() {
@@ -170,19 +176,22 @@ public class MainPageController {
                 else                                        droppedIsFarm = false;
 
                 // Swap farm slots
-                Map<Integer, Card> cont1, cont2;
-
-                cont1 = (draggedIsFarm) ? player.getFarm() : player.getActiveDeck();
-                cont2 = (droppedIsFarm) ? player.getFarm() : player.getActiveDeck();
-
-                player.swapSlots(draggedCard, droppedCard, cont1, cont2);
-
-                // Swap images and names
-                Node slot_dragged;
-                if (draggedIsFarm)  slot_dragged = farmSlots.get(draggedCard);
-                else                slot_dragged = activeDeckSlots.get(draggedCard);
-                
-                swapNodes(child, slot_dragged);
+                if (currentPlayer == currentFarmView) {
+                    Map<Integer, Card> cont1, cont2; 
+                    Player p = (currentFarmView == 1) ? player1 : player2;
+    
+                    cont1 = (draggedIsFarm) ? p.getFarm() : p.getActiveDeck();
+                    cont2 = (droppedIsFarm) ? p.getFarm() : p.getActiveDeck();
+    
+                    p.swapSlots(draggedCard, droppedCard, cont1, cont2);
+    
+                    // Swap images and names
+                    Node slot_dragged;
+                    if (draggedIsFarm)  slot_dragged = farmSlots.get(draggedCard);
+                    else                slot_dragged = activeDeckSlots.get(draggedCard);
+                    
+                    swapNodes(child, slot_dragged);
+                }
 
                 // Event handler 
                 Dragboard db = dragEvent.getDragboard();
@@ -307,6 +316,19 @@ public class MainPageController {
         }
     }
     
+    public void updateFarm() {
+        // Get player
+        Player player = (currentFarmView == 1) ? player1 : player2;
+
+        // Update farm slots
+        for (int i = 0; i < 20; i++) {
+            Card card = player.getFarm().get(i);
+            if (card != null) {
+                setFarmAt(i, card, player);
+            }
+        }
+    }
+
     @FXML
     private AnchorPane Base;
     
@@ -328,6 +350,7 @@ public class MainPageController {
         for (Node child : Ladang.getChildren()) {
             child.setId("Ladang_" + i);
             initializeSlot(child, i, true, farmSlots_1, activeDeckSlots_1, player1);
+            initializeSlot(child, i, true, farmSlots_2, activeDeckSlots_2, player2);
             i++;
         }
 
@@ -335,8 +358,13 @@ public class MainPageController {
         for (Node child : Deck.getChildren()) {
             child.setId("Deck_" + j);
             initializeSlot(child, j, false, farmSlots_1, activeDeckSlots_1, player1);
+            initializeSlot(child, j, false, farmSlots_2, activeDeckSlots_2, player2);
             j++;
         }
+
+        // Update farm
+        updateFarm();
+
         bearAttackHandler();
     }
 
@@ -366,7 +394,7 @@ public class MainPageController {
         }
 
     }
-     public void addDynamicRectangle(double width, double height, double x, double y) {
+    public void addDynamicRectangle(double width, double height, double x, double y) {
         Rectangle rectangle = new Rectangle();
         // offset
         double x_value = x * 105 + 25;
@@ -411,6 +439,28 @@ public class MainPageController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void myFarmHandler(ActionEvent event) {
+        if (currentFarmView == currentPlayer) return;
+
+        // Change farm view
+        currentFarmView = currentPlayer;
+
+        // Update farm
+        updateFarm();
+    }
+
+    @FXML
+    private void opponentFarmHandler(ActionEvent event) {
+        if (currentFarmView != currentPlayer) return;
+
+        // Change farm view
+        currentFarmView = (currentPlayer == 1) ? 2 : 1;
+
+        // Update farm
+        updateFarm();
     }
 
     @FXML
