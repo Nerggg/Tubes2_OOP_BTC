@@ -11,7 +11,7 @@
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="538.0" VBox.vgrow="ALWAYS">
             <children>
-                <StackPane layoutX="100.0" layoutY="37.0" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;">
+                <StackPane fx:id="stackPane1" layoutX="100.0" layoutY="37.0" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;" onMouseClicked="#handleStackPaneClick">
                     <children>
                         <VBox alignment="CENTER">
                             <ImageView fx:id="imageView1" fitHeight="82.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
@@ -19,7 +19,7 @@
                         </VBox>
                     </children>
                 </StackPane>
-                <StackPane layoutX="375.0" layoutY="37.0" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;">
+                <StackPane fx:id="stackPane2" layoutX="375.0" layoutY="37.0" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;" onMouseClicked="#handleStackPaneClick">
                     <children>
                         <VBox alignment="CENTER">
                             <ImageView fx:id="imageView2" fitHeight="82.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
@@ -27,7 +27,7 @@
                         </VBox>
                     </children>
                 </StackPane>
-                <StackPane layoutX="100.0" layoutY="204.0" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;">
+                <StackPane fx:id="stackPane3" layoutX="100.0" layoutY="204.0" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;" onMouseClicked="#handleStackPaneClick">
                     <children>
                         <VBox alignment="CENTER">
                             <ImageView fx:id="imageView3" fitHeight="82.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
@@ -35,7 +35,7 @@
                         </VBox>
                     </children>
                 </StackPane>
-                <StackPane layoutX="375.0" layoutY="204.0" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;">
+                <StackPane fx:id="stackPane4" layoutX="375.0" layoutY="204.0" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;" onMouseClicked="#handleStackPaneClick">
                     <children>
                         <VBox alignment="CENTER">
                             <ImageView fx:id="imageView4" fitHeight="82.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
