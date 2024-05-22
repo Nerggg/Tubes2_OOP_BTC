@@ -8,6 +8,11 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Player {
+    // Static attributes
+    private static int PLAYER_FARM_SLOTS = 20;
+    private static int PLAYER_ACTIVE_DECK_SLOTS = 6;
+    
+    // Instance attributes
     private int guldenCount;
     
     private List<Card> deck;
@@ -68,5 +73,13 @@ public class Player {
 
         System.out.println("Index " + index1 + ": " + cont1.get(index1).getCardName());
         System.out.println("Index " + index2 + ": " + cont2.get(index2).getCardName());
+    }
+
+    public int getFarmFreeSlots() {
+        return PLAYER_FARM_SLOTS - farm.size();
+    }
+
+    public int getActiveDeckFreeSlots() {
+        return PLAYER_ACTIVE_DECK_SLOTS - activeDeck.size();
     }
 }

@@ -243,6 +243,10 @@ public class MainPageController {
         }
     }
 
+    void testFunction() {
+        System.out.println("Anjay work letsgo");
+    }
+    
     @FXML
     private AnchorPane Base;
     
@@ -318,6 +322,11 @@ public class MainPageController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/random-card.fxml"));
             Parent root = fxmlLoader.load();
+            
+            // Set main page controller in random card controller
+            RandomCardController r = fxmlLoader.getController();
+            r.setMainPageController(this);
+            
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UNDECORATED);
