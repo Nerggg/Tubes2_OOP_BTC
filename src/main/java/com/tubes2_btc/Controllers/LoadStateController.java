@@ -150,6 +150,52 @@ public class LoadStateController {
                 System.out.println("Error saat membaca file: " + e.getMessage());
             }
         }
+
+        if(file.getName().equals("player1.txt")) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                int gulden = Integer.parseInt(reader.readLine().trim());
+                int deck = Integer.parseInt(reader.readLine().trim());
+                int jumlahDeckAktif = Integer.parseInt(reader.readLine().trim());
+                List<String> listDeckAktif = new ArrayList<>(jumlahDeckAktif);
+                for (int i = 0; i < jumlahDeckAktif; i++) {
+                    String temp = reader.readLine();
+                    listDeckAktif.add(temp);
+                }
+                int jumlahDeckDiLadang = Integer.parseInt(reader.readLine().trim());
+                List<String> listDeckLadang = new ArrayList<>(jumlahDeckDiLadang);
+                for (int i = 0; i < jumlahDeckDiLadang; i++) {
+                    String temp = reader.readLine();
+                    listDeckLadang.add(temp);
+                }
+                System.out.println(listDeckAktif);
+                System.out.println(listDeckLadang);
+            } catch (IOException e) {
+                System.out.println("Error saat membaca file: " + e.getMessage());
+            }
+        }
+
+        if(file.getName().equals("player2.txt")) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                int gulden = Integer.parseInt(reader.readLine().trim());
+                int deck = Integer.parseInt(reader.readLine().trim());
+                int jumlahDeckAktif = Integer.parseInt(reader.readLine().trim());
+                List<String> listDeckAktif = new ArrayList<>(jumlahDeckAktif);
+                for (int i = 0; i < jumlahDeckAktif; i++) {
+                    String temp = reader.readLine();
+                    listDeckAktif.add(temp);
+                }
+                int jumlahDeckDiLadang = Integer.parseInt(reader.readLine().trim());
+                List<String> listDeckLadang = new ArrayList<>(jumlahDeckDiLadang);
+                for (int i = 0; i < jumlahDeckDiLadang; i++) {
+                    String temp = reader.readLine();
+                    listDeckLadang.add(temp);
+                }
+                System.out.println(listDeckAktif);
+                System.out.println(listDeckLadang);
+            } catch (IOException e) {
+                System.out.println("Error saat membaca file: " + e.getMessage());
+            }
+        }
         printStoreInfo(store);
     }
 
