@@ -86,42 +86,11 @@ public class MainPageController {
     }
 
     public void initializeSlot(Node child, int i, boolean isFarm, List<Node> farmSlots, List<Node> activeDeckSlots, Player player) {
-        // Pane pane = (Pane) child;
-        // ImageView imageView = null;
-        // Label label = null;
-
-        // // Initialize variables
-        // for (javafx.scene.Node childPane : pane.getChildren()) {
-        //     if (childPane instanceof ImageView) {
-        //         imageView = (ImageView) childPane;
-        //     } else if (childPane instanceof Label) {
-        //         label = (Label) childPane;
-        //     }
-        // }
-
         // Push to farm slots
         if (isFarm) 
             farmSlots.add(child);
         else 
             activeDeckSlots.add(child);
-
-        // Set image and name for farm slot
-        // Card card;
-        // if (isFarm) 
-        //     card = player.getFarm().get(i);
-        // else 
-        //     card = player.getActiveDeck().get(i);
-        
-        // if (card != null) {
-        //     if (imageView != null) {
-        //         Image image = new Image(getClass().getResource(card.getCardPath()).toExternalForm());
-        //         imageView.setImage(image);
-        //     }
-
-        //     if (label != null) {
-        //         label.setText(card.getCardName());
-        //     }
-        // }
 
         // Set farm slot event handlers
         child.setOnDragDetected(new EventHandler<MouseEvent>() {
