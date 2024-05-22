@@ -361,10 +361,5 @@
             <Button mnemonicParsing="false" onAction="#saveStateButtonHandler" prefHeight="26.0" prefWidth="140.0" text="Save State" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label layoutX="677.0" layoutY="118.0" text="0 Gold">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>
