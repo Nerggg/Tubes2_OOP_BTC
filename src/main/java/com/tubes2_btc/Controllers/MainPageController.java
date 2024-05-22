@@ -35,6 +35,10 @@ public class MainPageController {
     // Misc. variables
     private int draggedCard;
     private boolean draggedIsFarm;
+
+    Player player1 = new Player();
+    Player player2 = new Player();
+
     private List<Node> farmSlots_1 = new ArrayList<>();
     private List<Node> farmSlots_2 = new ArrayList<>();
 
@@ -135,6 +139,9 @@ public class MainPageController {
 
                 // System.out.println("Drag detected for: " + child.getId());
                 mouseEvent.consume();
+
+                // deleteCard(draggedCard, isFarm, player1);
+                // System.out.println("Drag detected for: " + child.getId());
             }
         });
 
@@ -190,6 +197,52 @@ public class MainPageController {
         });
     }
 
+    public void deleteCard(int index, boolean isFarm, Player player) {
+        // ==== Initialize lists of farmSlots and activeDeckSlots ====
+        List<Node> farmSlots = (player == player1) ? farmSlots_1 : farmSlots_2;
+        List<Node> activeDeckSlots = (player == player1) ? activeDeckSlots_1 : activeDeckSlots_2;
+
+        // ==== Delete card from player's farm or active deck ====
+        if (isFarm) {
+            player.getFarm().remove(index);
+        } else {
+            player.getActiveDeck().remove(index);
+        }
+
+        // ==== Delete card GUI ====
+        // Get slot node
+        Node slot;
+        if (isFarm) {
+            slot = farmSlots.get(index);
+        } else {
+            slot = activeDeckSlots.get(index);
+        }
+
+        // Get pane, imageview, and label
+        Pane pane = (Pane) slot;
+        ImageView imageView = null;
+        Label label = null;
+
+        for (javafx.scene.Node childPane : pane.getChildren()) {
+            if (childPane instanceof ImageView) {
+                imageView = (ImageView) childPane;
+            } else if (childPane instanceof Label) {
+                label = (Label) childPane;
+            }
+        }
+
+        // Set pane to empty card
+        Card empty = CardConstants.createCard(CardConstants.CARD_EMPTY_INDEX);
+        if (imageView != null) {
+            Image image = new Image(getClass().getResource(empty.getCardPath()).toExternalForm());
+            imageView.setImage(image);
+        }
+
+        if (label != null) {
+            label.setText(empty.getCardName());
+        }
+    }
+
     @FXML
     private AnchorPane Base;
     
@@ -201,8 +254,6 @@ public class MainPageController {
 
     @FXML
     public void initialize() {
-        Player player1 = new Player();
-
         int i = 0;
         for (Node child : Ladang.getChildren()) {
             child.setId("Ladang_" + i);
