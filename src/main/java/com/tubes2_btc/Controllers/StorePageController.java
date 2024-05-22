@@ -69,24 +69,12 @@ public class StorePageController {
                         imageView = (ImageView) node;
                     } else if (node instanceof Label) {
                         Label tempLabel = (Label) node;
-                        if ("Label".equals(tempLabel.getText())) {
+                        if (tempLabel.getText().equals("Nama")) {
                             productLabel = tempLabel;
-                        } else if ("Harga".equals(tempLabel.getText())) {
-                            priceLabel = tempLabel;
-                        } else if ("Jumlah".equals(tempLabel.getText())) {
-                            quantityLabel = tempLabel;
-                        }
-                    }
-                }
-
-                // Find the Labels outside of the deepest Pane
-                for (Node node : innerPane.getChildren()) {
-                    if (node instanceof Label) {
-                        Label tempLabel = (Label) node;
-                        if ("Harga".equals(tempLabel.getText())) {
-                            priceLabel = tempLabel;
-                        } else if ("Jumlah".equals(tempLabel.getText())) {
-                            quantityLabel = tempLabel;
+                        } else if (tempLabel.getText().equals("Gd.")) {
+                            priceLabel = (Label) deepestPane.getChildren().get(deepestPane.getChildren().indexOf(tempLabel) + 1);
+                        } else if (tempLabel.getText().equals("Jumlah")) {
+                            quantityLabel = (Label) deepestPane.getChildren().get(deepestPane.getChildren().indexOf(tempLabel) + 1);
                         }
                     }
                 }
@@ -105,13 +93,12 @@ public class StorePageController {
                     productLabel.setText(product.getCardName());
                 }
                 if (priceLabel != null) {
-                    priceLabel.setText("Rp. " + product.getSellPrice());
+                    priceLabel.setText("Gd. " + product.getSellPrice());
                 }
                 if (quantityLabel != null) {
-                    quantityLabel.setText(String.valueOf(product.getAddedWeight())); // Misalkan untuk menampilkan berat tambahan
+                    quantityLabel.setText(String.valueOf(product.getAddedWeight()));
                 }
 
-                // Set visibility and event handler
                 outerPane.setVisible(true);
                 outerPane.setOnMouseClicked(event -> handlePaneClicked(outerPane));
 
@@ -125,13 +112,16 @@ public class StorePageController {
 
     private void handlePaneClicked(Pane pane) {
         System.out.println("Pane clicked: " + pane);
-        // Tambahkan logika tambahan di sini
     }
 
     @FXML
     private void handleClicked(ActionEvent event) {
-        // Tambahkan logika untuk menangani aksi tombol kembali
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    public void addNewProductToStore(Product product) {
+        store.addProduct(product);
+        initializeStore(Toko, store.getProducts());
     }
 }
