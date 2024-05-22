@@ -1,11 +1,14 @@
 package com.tubes2_btc.Controllers;
 
 import com.tubes2_btc.Classes.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Random;
@@ -81,5 +84,11 @@ public class RandomCardController {
 //        imageView2.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
 //        imageView3.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
 //        imageView4.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
+    }
+
+    @FXML
+    private void handleClicked(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 }
