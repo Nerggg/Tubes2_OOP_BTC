@@ -13,3 +13,9 @@
     -fx-border-color: #000000;
     -fx-border-width: 1px;
 }
+
+.curved-pane-store {
+    -fx-border-color: #000000;
+    -fx-border-radius: 10px;
+    -fx-border-width: 4px;
+}
