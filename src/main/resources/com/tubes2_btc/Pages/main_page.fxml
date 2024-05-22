@@ -69,6 +69,16 @@
                   </Label>
                </children>
             </Pane>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="4">
+               <children>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.rowIndex="1">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
@@ -80,56 +90,6 @@
                </children>
             </Pane>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.rowIndex="2">
-               <children>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.rowIndex="3">
-               <children>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <children>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -159,7 +119,37 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -179,37 +169,47 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="3" GridPane.rowIndex="3">
-               <children>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="4">
-               <children>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="4" GridPane.rowIndex="1">
-               <children>
-                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="4" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.rowIndex="3">
+               <children>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <children>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">

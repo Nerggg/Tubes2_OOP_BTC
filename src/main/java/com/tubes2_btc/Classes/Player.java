@@ -71,8 +71,8 @@ public class Player {
         cont1.put(index1, cont2.get(index2));
         cont2.put(index2, temp);
 
-        System.out.println("Index " + index1 + ": " + cont1.get(index1).getCardName());
-        System.out.println("Index " + index2 + ": " + cont2.get(index2).getCardName());
+        // System.out.println("Index " + index1 + ": " + cont1.get(index1).getCardName());
+        // System.out.println("Index " + index2 + ": " + cont2.get(index2).getCardName());
     }
 
     public int getFarmFreeSlots() {
