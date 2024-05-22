@@ -430,52 +430,130 @@ public class MainPageController {
 
     public void bearAttackHandler(){
         Random rand = new Random();
-        int x,y;
         // determine whether to let the bear out or no
         // because i use bool, the chance of a bear attack happen is 50%
-        boolean attack = rand.nextBoolean();
+        boolean attack = true;
         // determine whether the subgrid would be 3x2 or 2x3
         boolean isHorizontal = rand.nextBoolean();
+        int width=0,height=0,x=0,y=0;
         if(attack){
             System.out.println("The bear is out! Watch yo ass!");
             int duration =5;
-            if(isHorizontal){
-                // 3x2 subgrid
-                // set the bound so it wont went out of ladang
-                x = rand.nextInt(0, 2);
-                y = rand.nextInt(0, 2);
-                this.BearAttackArea = addDynamicRectangle(100.0*3, 118.0*2, x, y);
-            }else{
-                // 2x3 subgrid
-                // set the bound so it wont went out of ladang
-                x = rand.nextInt(0, 3);
-                y = rand.nextInt(0, 1);
-                this.BearAttackArea = addDynamicRectangle(100.0*2, 118.0*3, x, y);
+            int area = rand.nextInt(1,6);
+            
+            switch(area){
+                case 6:
+                    if(isHorizontal){
+                        // 3x2 subgrid
+                        // set the bound so it wont went out of ladang
+                        width=3;
+                        height=2;
+                        x = rand.nextInt(0, 2);
+                        y = rand.nextInt(0, 2);
+                    }else{
+                        // 2x3 subgrid
+                        // set the bound so it wont went out of ladang
+                        width=2;
+                        height=3;
+                        x = rand.nextInt(0, 3);
+                        y = rand.nextInt(0, 1);
+                    }
+                    break;
+                case 5:
+                    // 5x1 subgrid
+                    // set the bound so it wont went out of ladang
+                    width=5;
+                    height=1;
+                    x = 0;
+                    y = rand.nextInt(0, 3);
+                    break;
+                case 4:
+                    // 2x2 subgrid
+                    // set the bound so it wont went out of ladang
+                    width=2;
+                    height=2;
+                    x = rand.nextInt(0, 2);
+                    y = rand.nextInt(0, 1);
+                    break;
+                case 3:
+                    if(isHorizontal){
+                        // 3x1 subgrid
+                        // set the bound so it wont went out of ladang
+                        width=3;
+                        height=1;
+                        x = rand.nextInt(0, 2);
+                        y = rand.nextInt(0, 3);
+                    }else{
+                        // 1x3 subgrid
+                        // set the bound so it wont went out of ladang
+                        width=1;
+                        height=3;
+                        x = rand.nextInt(0, 4);
+                        y = rand.nextInt(0, 1);
+                    }
+                    break;
+                case 2:
+                    if(isHorizontal){
+                        // 2x1 subgrid
+                        // set the bound so it wont went out of ladang
+                        width=2;
+                        height=1;
+                        x = rand.nextInt(0, 3);
+                        y = rand.nextInt(0, 3);
+                    }else{
+                        // 1x2 subgrid
+                        // set the bound so it wont went out of ladang
+                        width=1;
+                        height=2;
+                        x = rand.nextInt(0, 4);
+                        y = rand.nextInt(0, 2);
+                    }
+                    break;
+                case 1:
+                    // 1x1 subgrid
+                    // set the bound so it wont went out of ladang
+                    width=1;
+                    height=1;
+                    x = rand.nextInt(0, 4);
+                    y = rand.nextInt(0, 3);
+                    break;
             }
+            final int finalWidth = width;
+            final int finalHeight = height;
+            final int finalX = x;
+            final int finalY = y;
+            System.out.println("final width "+ finalWidth);
+            System.out.println("final height "+ finalHeight);
+            System.out.println("final x "+ finalX);
+            System.out.println("final y "+ finalY);
+
+            this.BearAttackArea = addDynamicRectangle(100.0*finalWidth, 118.0*finalHeight, x, y);
             addDynamicTimer();
             startTimer(duration,()->{
                 System.out.println("Deleting card ");
                 if(isHorizontal){
-                int index = x + y*5;
+                int index = finalX + finalY*5;
                     System.out.println(index);
-                    for(int i =index;i<2;i++){
-                        for(int j =0;j<3;j++){
+                    for(int i =0;i<finalHeight;i++){
+                        for(int j =0;j<finalWidth;j++){
                             System.out.println("Deleting card "+ (index+j));
                             deleteCard(index+j,true,player1);
                         }
                         index += 5;
                     }
                 }else{
-                int index = x + y*5;
+                int index = finalX + finalY*5;
                     System.out.println(index);
-                    for(int i =index;i<3;i++){
-                        for(int j =0;j<2;j++){
+                    for(int i =0;i<finalHeight;i++){
+                        for(int j =0;j<finalWidth;j++){
                             System.out.println("Deleting card "+ (index+j));
                             deleteCard(index+j,true,player1);
                         }
                         index += 5;
                     }
                 }
+                removeBearAttackArea();
+                removeTimer();
             });
             
         }
@@ -488,13 +566,14 @@ public class MainPageController {
         rectangle.setArcHeight(5.0);
         rectangle.setArcWidth(5.0);
         rectangle.setFill(Color.TRANSPARENT);
-         rectangle.setMouseTransparent(true);
+        rectangle.setMouseTransparent(true);
         rectangle.setHeight(height);
         rectangle.setWidth(width);
         rectangle.setStroke(Color.web("#ce1717"));
         rectangle.setStrokeWidth(5.0);
         rectangle.setX(x_value);
         rectangle.setY(y_value);
+        rectangle.setMouseTransparent(true);
         Base.getChildren().add(rectangle);
         return rectangle;
     }
