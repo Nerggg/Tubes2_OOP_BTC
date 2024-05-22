@@ -1,12 +1,193 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.TesController">
+<AnchorPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../Styles/store_page.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.StorePageController">
     <children>
-        <Button fx:id="uploadButton" layoutX="20.0" layoutY="20.0" text="Upload Image" onAction="#handleUploadButtonAction"/>
-        <ImageView fx:id="imageView" fitHeight="400.0" fitWidth="600.0" layoutX="20.0" layoutY="60.0"/>
+        <Button fx:id="kembali" layoutX="28.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleClicked" text="Kembali" />
+        <Text layoutX="258.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOKO">
+            <font>
+                <Font size="32.0" />
+            </font>
+        </Text>
+        <GridPane fx:id="Toko" layoutX="41.0" layoutY="95.0" prefHeight="271.0" prefWidth="518.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Pane prefHeight="60.0" prefWidth="59.0">
+                    <children>
+                        <Pane fx:id="cardPane" prefHeight="110.0" prefWidth="166.0" styleClass="curved-pane-card">
+                            <children>
+                                <VBox fx:id="imagePane" layoutX="14.0" layoutY="8.0" prefHeight="94.0" prefWidth="84.0" alignment="CENTER" styleClass="curved-pane-gambar">
+                                    <children>
+                                        <ImageView fx:id="image" fitHeight="71.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true" />
+                                        <Label fx:id="labelNama" text="Nama" />
+                                    </children>
+                                </VBox>
+                                <VBox fx:id="detailsPane" layoutX="113.0" layoutY="11.0" prefHeight="94.0" alignment="CENTER">
+                                    <children>
+                                        <Label text="Harga" />
+                                        <Label fx:id="labelHarga" text="Gd." />
+                                        <Label text="Jumlah" />
+                                        <Label fx:id="labelJumlah" text="n" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
+                <Pane prefHeight="60.0" prefWidth="59.0">
+                    <children>
+                        <Pane fx:id="cardPane" prefHeight="110.0" prefWidth="166.0" styleClass="curved-pane-card">
+                            <children>
+                                <VBox fx:id="imagePane" layoutX="14.0" layoutY="8.0" prefHeight="94.0" prefWidth="84.0" alignment="CENTER" styleClass="curved-pane-gambar">
+                                    <children>
+                                        <ImageView fx:id="image" fitHeight="71.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true" />
+                                        <Label fx:id="labelNama" text="Nama" />
+                                    </children>
+                                </VBox>
+                                <VBox fx:id="detailsPane" layoutX="113.0" layoutY="11.0" prefHeight="94.0" alignment="CENTER">
+                                    <children>
+                                        <Label text="Harga" />
+                                        <Label fx:id="labelHarga" text="Gd." />
+                                        <Label text="Jumlah" />
+                                        <Label fx:id="labelJumlah" text="n" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                    <children>
+                        <Pane fx:id="cardPane" prefHeight="110.0" prefWidth="166.0" styleClass="curved-pane-card">
+                            <children>
+                                <VBox fx:id="imagePane" layoutX="14.0" layoutY="8.0" prefHeight="94.0" prefWidth="84.0" alignment="CENTER" styleClass="curved-pane-gambar">
+                                    <children>
+                                        <ImageView fx:id="image" fitHeight="71.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true" />
+                                        <Label fx:id="labelNama" text="Nama" />
+                                    </children>
+                                </VBox>
+                                <VBox fx:id="detailsPane" layoutX="113.0" layoutY="11.0" prefHeight="94.0" alignment="CENTER">
+                                    <children>
+                                        <Label text="Harga" />
+                                        <Label fx:id="labelHarga" text="Gd." />
+                                        <Label text="Jumlah" />
+                                        <Label fx:id="labelJumlah" text="n" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                    <children>
+                        <Pane fx:id="cardPane" prefHeight="110.0" prefWidth="166.0" styleClass="curved-pane-card">
+                            <children>
+                                <VBox fx:id="imagePane" layoutX="14.0" layoutY="8.0" prefHeight="94.0" prefWidth="84.0" alignment="CENTER" styleClass="curved-pane-gambar">
+                                    <children>
+                                        <ImageView fx:id="image" fitHeight="71.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true" />
+                                        <Label fx:id="labelNama" text="Nama" />
+                                    </children>
+                                </VBox>
+                                <VBox fx:id="detailsPane" layoutX="113.0" layoutY="11.0" prefHeight="94.0" alignment="CENTER">
+                                    <children>
+                                        <Label text="Harga" />
+                                        <Label fx:id="labelHarga" text="Gd." />
+                                        <Label text="Jumlah" />
+                                        <Label fx:id="labelJumlah" text="n" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                    <children>
+                        <Pane fx:id="cardPane" prefHeight="110.0" prefWidth="166.0" styleClass="curved-pane-card">
+                            <children>
+                                <VBox fx:id="imagePane" layoutX="14.0" layoutY="8.0" prefHeight="94.0" prefWidth="84.0" alignment="CENTER" styleClass="curved-pane-gambar">
+                                    <children>
+                                        <ImageView fx:id="image" fitHeight="71.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true" />
+                                        <Label fx:id="labelNama" text="Nama" />
+                                    </children>
+                                </VBox>
+                                <VBox fx:id="detailsPane" layoutX="113.0" layoutY="11.0" prefHeight="94.0" alignment="CENTER">
+                                    <children>
+                                        <Label text="Harga" />
+                                        <Label fx:id="labelHarga" text="Gd." />
+                                        <Label text="Jumlah" />
+                                        <Label fx:id="labelJumlah" text="n" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+                        <Pane fx:id="cardPane" prefHeight="110.0" prefWidth="166.0" styleClass="curved-pane-card">
+                            <children>
+                                <VBox fx:id="imagePane" layoutX="14.0" layoutY="8.0" prefHeight="94.0" prefWidth="84.0" alignment="CENTER" styleClass="curved-pane-gambar">
+                                    <children>
+                                        <ImageView fx:id="image" fitHeight="71.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true" />
+                                        <Label fx:id="labelNama" text="Nama" />
+                                    </children>
+                                </VBox>
+                                <VBox fx:id="detailsPane" layoutX="113.0" layoutY="11.0" prefHeight="94.0" alignment="CENTER">
+                                    <children>
+                                        <Label text="Harga" />
+                                        <Label fx:id="labelHarga" text="Gd." />
+                                        <Label text="Jumlah" />
+                                        <Label fx:id="labelJumlah" text="n" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <children>
+                        <Pane fx:id="cardPane" prefHeight="110.0" prefWidth="166.0" styleClass="curved-pane-card">
+                            <children>
+                                <VBox fx:id="imagePane" layoutX="14.0" layoutY="8.0" prefHeight="94.0" prefWidth="84.0" alignment="CENTER" styleClass="curved-pane-gambar">
+                                    <children>
+                                        <ImageView fx:id="image" fitHeight="71.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true" />
+                                        <Label fx:id="labelNama" text="Nama" />
+                                    </children>
+                                </VBox>
+                                <VBox fx:id="detailsPane" layoutX="113.0" layoutY="11.0" prefHeight="94.0" alignment="CENTER">
+                                    <children>
+                                        <Label text="Harga" />
+                                        <Label fx:id="labelHarga" text="Gd." />
+                                        <Label text="Jumlah" />
+                                        <Label fx:id="labelJumlah" text="n" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </Pane>
+                    </children>
+                </Pane>
+            </children>
+        </GridPane>
+        <Button fx:id="previousButton" layoutX="41.0" layoutY="370.0" mnemonicParsing="false" onAction="#handlePrevious" text="Previous" />
+        <Button fx:id="nextButton" layoutX="478.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleNext" text="Next" />
     </children>
 </AnchorPane>

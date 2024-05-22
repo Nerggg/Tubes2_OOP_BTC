@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
@@ -30,82 +31,86 @@ public class StorePageController {
     @FXML
     private GridPane Toko;
 
+    @FXML
+    private Button previousButton;
+
+    @FXML
+    private Button nextButton;
+
     private Store store;
+    private int currentPage = 0;
+    private static final int ITEMS_PER_PAGE = 6;
 
     @FXML
     public void initialize() {
         // Initialize the list of products
-        List<Product> products = new ArrayList<>();
-        products.add(new Product(CardConstants.CARD_DAGING_KUDA, CardConstants.CARD_DAGING_KUDA_PATH, 1000, 10, Product.PRODUCT_CARNIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_SIRIP_HIU, CardConstants.CARD_SIRIP_HIU_PATH, 2000, 5, Product.PRODUCT_CARNIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_STROBERI, CardConstants.CARD_STROBERI_PATH, 1500, 3, Product.PRODUCT_HERBIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_JAGUNG, CardConstants.CARD_JAGUNG_PATH, 500, 8, Product.PRODUCT_HERBIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_SUSU, CardConstants.CARD_SUSU_PATH, 500, 8, Product.PRODUCT_HERBIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_TELUR, CardConstants.CARD_TELUR_PATH, 500, 8, Product.PRODUCT_HERBIVORE_FOOD));
-
+        List<Product> products = generateProducts();
         // Create store
         store = new Store(products);
         initializeStore(Toko, store.getProducts());
+        updatePaginationButtons();
+    }
+
+    private List<Product> generateProducts() {
+        List<Product> products = new ArrayList<>();
+        products.add(new Product(CardConstants.CARD_SIRIP_HIU, CardConstants.CARD_SIRIP_HIU_PATH, 500, 12, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_SUSU, CardConstants.CARD_SUSU_PATH, 100, 4, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_DAGING_DOMBA, CardConstants.CARD_DAGING_DOMBA_PATH, 120, 6, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_DAGING_KUDA, CardConstants.CARD_DAGING_KUDA_PATH, 150, 8, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_TELUR, CardConstants.CARD_TELUR_PATH, 50, 2, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_DAGING_BERUANG, CardConstants.CARD_DAGING_BERUANG_PATH, 150, 8, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_JAGUNG, CardConstants.CARD_JAGUNG_PATH, 500, 8, Product.PRODUCT_HERBIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_LABU, CardConstants.CARD_LABU_PATH, 500, 8, Product.PRODUCT_HERBIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_STROBERI, CardConstants.CARD_STROBERI_PATH, 1500, 3, Product.PRODUCT_HERBIVORE_FOOD));
+        return products;
     }
 
     private void initializeStore(GridPane tokoPane, List<Product> products) {
-        int productIndex = 0;
+        int productIndex = currentPage * ITEMS_PER_PAGE;
+        int displayedItems = 0;
 
-        for (Product product : products) {
-            if (productIndex < tokoPane.getChildren().size() && product.getAddedWeight() != 0) {
-                Pane outerPane = (Pane) tokoPane.getChildren().get(productIndex);
+        for (Node node : tokoPane.getChildren()) {
+            if (node instanceof Pane) {
+                Pane outerPane = (Pane) node;
+                if (displayedItems < ITEMS_PER_PAGE && productIndex < products.size()) {
+                    Product product = products.get(productIndex);
 
-                // Nested panes to reach the ImageView and Labels
-                Pane innerPane = (Pane) outerPane.getChildren().get(0);
-                Pane deepestPane = (Pane) innerPane.getChildren().get(0);
+                    VBox imagePane = (VBox) outerPane.lookup("#imagePane");
+                    VBox detailsPane = (VBox) outerPane.lookup("#detailsPane");
 
-                ImageView imageView = null;
-                Label productLabel = null;
-                Label priceLabel = null;
-                Label quantityLabel = null;
+                    ImageView imageView = (ImageView) imagePane.lookup("#image");
+                    Label productLabel = (Label) imagePane.lookup("#labelNama");
+                    Label priceLabel = (Label) detailsPane.lookup("#labelHarga");
+                    Label quantityLabel = (Label) detailsPane.lookup("#labelJumlah");
 
-                for (Node node : deepestPane.getChildren()) {
-                    if (node instanceof ImageView) {
-                        imageView = (ImageView) node;
-                    } else if (node instanceof Label) {
-                        Label tempLabel = (Label) node;
-                        if (tempLabel.getText().equals("Nama")) {
-                            productLabel = tempLabel;
-                        } else if (tempLabel.getText().equals("Gd.")) {
-                            priceLabel = (Label) deepestPane.getChildren().get(deepestPane.getChildren().indexOf(tempLabel) + 1);
-                        } else if (tempLabel.getText().equals("Jumlah")) {
-                            quantityLabel = (Label) deepestPane.getChildren().get(deepestPane.getChildren().indexOf(tempLabel) + 1);
+                    if (imageView != null) {
+                        URL imageUrl = getClass().getResource(product.getCardPath());
+                        if (imageUrl != null) {
+                            Image imageNew = new Image(imageUrl.toExternalForm());
+                            imageView.setImage(imageNew);
+                        } else {
+                            System.err.println("Gambar tidak ditemukan: " + product.getCardPath());
                         }
                     }
-                }
 
-                if (imageView != null) {
-                    URL imageUrl = getClass().getResource(product.getCardPath());
-                    if (imageUrl != null) {
-                        Image imageNew = new Image(imageUrl.toExternalForm());
-                        imageView.setImage(imageNew);
-                    } else {
-                        System.err.println("Gambar tidak ditemukan: " + product.getCardPath());
+                    if (productLabel != null) {
+                        productLabel.setText(product.getCardName());
                     }
-                }
+                    if (priceLabel != null) {
+                        priceLabel.setText("Gd. " + product.getSellPrice());
+                    }
+                    if (quantityLabel != null) {
+                        quantityLabel.setText(String.valueOf(product.getAddedWeight()));
+                    }
 
-                if (productLabel != null) {
-                    productLabel.setText(product.getCardName());
-                }
-                if (priceLabel != null) {
-                    priceLabel.setText("Gd. " + product.getSellPrice());
-                }
-                if (quantityLabel != null) {
-                    quantityLabel.setText(String.valueOf(product.getAddedWeight()));
-                }
+                    outerPane.setVisible(true);
+                    outerPane.setOnMouseClicked(event -> handlePaneClicked(outerPane));
 
-                outerPane.setVisible(true);
-                outerPane.setOnMouseClicked(event -> handlePaneClicked(outerPane));
-
-                productIndex++;
-            } else if (productIndex < tokoPane.getChildren().size()) {
-                Pane outerPane = (Pane) tokoPane.getChildren().get(productIndex);
-                outerPane.setVisible(false);
+                    productIndex++;
+                    displayedItems++;
+                } else {
+                    outerPane.setVisible(false);
+                }
             }
         }
     }
@@ -120,8 +125,35 @@ public class StorePageController {
         stage.close();
     }
 
+    @FXML
+    private void handleNext(ActionEvent event) {
+        if (currentPage < Math.ceil((double) store.getProducts().size() / ITEMS_PER_PAGE) - 1) {
+            currentPage++;
+            updatePaginationButtons();
+            initializeStore(Toko, store.getProducts());
+        }
+    }
+
+    @FXML
+    private void handlePrevious(ActionEvent event) {
+        if (currentPage > 0) {
+            currentPage--;
+            updatePaginationButtons();
+            initializeStore(Toko, store.getProducts());
+        }
+    }
+
+    private void updatePaginationButtons() {
+        int totalItems = store.getProducts().size();
+        int totalPages = (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE);
+
+        previousButton.setDisable(currentPage <= 0);
+        nextButton.setDisable(currentPage >= totalPages - 1);
+    }
+
     public void addNewProductToStore(Product product) {
         store.addProduct(product);
+        updatePaginationButtons();
         initializeStore(Toko, store.getProducts());
     }
 }
