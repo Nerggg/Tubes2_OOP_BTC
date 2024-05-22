@@ -149,23 +149,23 @@ public class CardConstants {
                 return new Plant(CARD_BIJI_STROBERI, CARD_BIJI_STROBERI_PATH, 0, 4, CARD_STROBERI);
 
             case CARD_SIRIP_HIU_INDEX:
-                return new Product(CARD_SIRIP_HIU, CARD_SIRIP_HIU_PATH, 500, 12, Product.PRODUCT_CARNIVORE_FOOD);
+                return new Product(CARD_SIRIP_HIU, CARD_SIRIP_HIU_PATH, 500, 12, 20, Product.PRODUCT_CARNIVORE_FOOD);
             case CARD_SUSU_INDEX:
-                return new Product(CARD_SUSU, CARD_SUSU_PATH, 100, 4, Product.PRODUCT_CARNIVORE_FOOD);
+                return new Product(CARD_SUSU, CARD_SUSU_PATH, 100, 4, 10, Product.PRODUCT_CARNIVORE_FOOD);
             case CARD_DAGING_DOMBA_INDEX:
-                return new Product(CARD_DAGING_DOMBA, CARD_DAGING_DOMBA_PATH, 120, 6, Product.PRODUCT_CARNIVORE_FOOD);
+                return new Product(CARD_DAGING_DOMBA, CARD_DAGING_DOMBA_PATH, 120, 6, 12, Product.PRODUCT_CARNIVORE_FOOD);
             case CARD_DAGING_KUDA_INDEX:
-                return new Product(CARD_DAGING_KUDA, CARD_DAGING_KUDA_PATH, 150, 8, Product.PRODUCT_CARNIVORE_FOOD);
+                return new Product(CARD_DAGING_KUDA, CARD_DAGING_KUDA_PATH, 150, 8, 14, Product.PRODUCT_CARNIVORE_FOOD);
             case CARD_TELUR_INDEX:
-                return new Product(CARD_TELUR, CARD_TELUR_PATH, 50, 2, Product.PRODUCT_CARNIVORE_FOOD);
+                return new Product(CARD_TELUR, CARD_TELUR_PATH, 50, 2, 5, Product.PRODUCT_CARNIVORE_FOOD);
             case CARD_DAGING_BERUANG_INDEX:
-                return new Product(CARD_DAGING_BERUANG, CARD_DAGING_BERUANG_PATH, 500, 12, Product.PRODUCT_CARNIVORE_FOOD);
+                return new Product(CARD_DAGING_BERUANG, CARD_DAGING_BERUANG_PATH, 500, 12, 25, Product.PRODUCT_CARNIVORE_FOOD);
             case CARD_JAGUNG_INDEX:
-                return new Product(CARD_JAGUNG, CARD_JAGUNG_PATH, 150, 3, Product.PRODUCT_HERBIVORE_FOOD);
+                return new Product(CARD_JAGUNG, CARD_JAGUNG_PATH, 150, 3, 3, Product.PRODUCT_HERBIVORE_FOOD);
             case CARD_LABU_INDEX:
-                return new Product(CARD_LABU, CARD_LABU_PATH, 500, 10, Product.PRODUCT_HERBIVORE_FOOD);
+                return new Product(CARD_LABU, CARD_LABU_PATH, 500, 10, 5, Product.PRODUCT_HERBIVORE_FOOD);
             case CARD_STROBERI_INDEX:
-                return new Product(CARD_STROBERI, CARD_STROBERI_PATH, 350, 5, Product.PRODUCT_HERBIVORE_FOOD);
+                return new Product(CARD_STROBERI, CARD_STROBERI_PATH, 350, 5, 4, Product.PRODUCT_HERBIVORE_FOOD);
 
             case CARD_ACCELERATE_INDEX:
                 return new Card(CARD_ACCELERATE, CARD_ACCELERATE_PATH);

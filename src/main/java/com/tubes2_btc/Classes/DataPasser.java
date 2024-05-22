@@ -25,4 +25,7 @@ public class DataPasser {
 
     // Random card data
     List<Card> randomCards;
+
+    // Info Card Temporary Variable
+    public Card infoCard;
 }
