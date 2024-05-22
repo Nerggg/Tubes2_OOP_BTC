@@ -2,11 +2,13 @@ package com.tubes2_btc.Controllers;
 import com.tubes2_btc.Classes.*;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
 import java.net.URL;
 
@@ -41,9 +43,8 @@ public class CardInfoController {
 
     @FXML
     private void handleClickedKembali(ActionEvent event) {
-        // Logika untuk menangani tombol "Kembali" ditekan
-        System.out.println("Tombol 'Kembali' ditekan.");
-        // Misalnya, kembali ke layar sebelumnya atau menutup jendela saat ini
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -54,39 +55,61 @@ public class CardInfoController {
     }
 
     @FXML
-    public void initialize(Animal animal) {
-        // Nama item
-        labelText1.setText(animal.getCardName());
-        // Berat atau umur
-        labelText2.setText("Berat:");
-        // Berat atau umur sekarang
-        labelValue1.setText(Integer.toString(animal.getWeight()));
-        // Berat atau umur untuk dipanen
-        labelValue2.setText(Integer.toString(animal.getHarvestWeight()));
-        // Item aktif
-        labelItemAktifValue.setText(animal.getCardActive());
-        // set image card
-        Image image = new Image(getClass().getResource(animal.getCardPath()).toExternalForm());
-        imageView.setImage(image);
-        // tombol panen
-        panen.setDisable(animal.getWeight()<animal.getHarvestWeight());
-    }
-
-    public void initialize(Plant plant) {
-        // Nama item
-        labelText1.setText(plant.getCardName());
-        // Berat atau umur
-        labelText2.setText("Berat:");
-        // Berat atau umur sekarang
-        labelValue1.setText(Integer.toString(plant.getAge()));
-        // Berat atau umur untuk dipanen
-        labelValue2.setText(Integer.toString(plant.getHarvestAge()));
-        // Item aktif
-        labelItemAktifValue.setText(plant.getCardActive());
-        // set image card
-        Image image = new Image(getClass().getResource(plant.getCardPath()).toExternalForm());
-        imageView.setImage(image);
-        // tombol panen
-        panen.setDisable(plant.getAge()<plant.getHarvestAge());
+    public void initialize() {
+        DataPasser dataPasser = DataPasser.getInstance();
+        if (dataPasser.infoCard.getClass().getSimpleName().equals("Animal")) {
+            Animal card = (Animal) dataPasser.infoCard;
+            // Nama item
+            labelText1.setText(card.getCardName());
+            // Berat atau umur
+            labelText2.setText("Berat:");
+            // Berat atau umur sekarang
+            labelValue1.setText(Integer.toString(card.getWeight()));
+            // Berat atau umur untuk dipanen
+            labelValue2.setText("(" + Integer.toString(card.getHarvestWeight()) + ")");
+            // Item aktif
+            labelItemAktifValue.setText(card.getCardActive());
+            // set image card
+            Image image = new Image(getClass().getResource(card.getCardPath()).toExternalForm());
+            imageView.setImage(image);
+            // tombol panen
+            panen.setDisable(card.getWeight() < card.getHarvestWeight());
+        }
+        if (dataPasser.infoCard.getClass().getSimpleName().equals("Plant")) {
+            Plant card = (Plant) dataPasser.infoCard;
+            // Nama item
+            labelText1.setText(card.getCardName());
+            // Berat atau umur
+            labelText2.setText("Berat:");
+            // Berat atau umur sekarang
+            labelValue1.setText(Integer.toString(card.getAge()));
+            // Berat atau umur untuk dipanen
+            labelValue2.setText("(" + Integer.toString(card.getHarvestAge()) + ")");
+            // Item aktif
+            labelItemAktifValue.setText(card.getCardActive());
+            // set image card
+            Image image = new Image(getClass().getResource(card.getCardPath()).toExternalForm());
+            imageView.setImage(image);
+            // tombol panen
+            panen.setDisable(card.getAge() < card.getHarvestAge());
+        }
+        if (dataPasser.infoCard.getClass().getSimpleName().equals("Product")) {
+            Product card = (Product) dataPasser.infoCard;
+            // Nama item
+            labelText1.setText(card.getCardName());
+            // Berat atau umur
+            labelText2.setText("Berat:");
+            // Berat atau umur sekarang
+            labelValue1.setText(Integer.toString(card.getHarvestAge()));
+            // Berat atau umur untuk dipanen
+            labelValue2.setText("(" + Integer.toString(card.getHarvestAge()) + ")");
+            // Item aktif
+            labelItemAktifValue.setText(card.getCardActive());
+            // set image card
+            Image image = new Image(getClass().getResource(card.getCardPath()).toExternalForm());
+            imageView.setImage(image);
+            // tombol panen
+            panen.setDisable(card.getHarvestAge() < card.getHarvestAge());
+        }
     }
 }

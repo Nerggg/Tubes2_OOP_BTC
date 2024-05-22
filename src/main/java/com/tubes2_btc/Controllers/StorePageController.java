@@ -44,24 +44,30 @@ public class StorePageController {
     @FXML
     public void initialize() {
         // Initialize the list of products
-        List<Product> products = generateProducts();
+        List<Product> products = new ArrayList<>();
+        products.add(new Product(CardConstants.CARD_DAGING_KUDA, CardConstants.CARD_DAGING_KUDA_PATH, 1000, 10, 14, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_SIRIP_HIU, CardConstants.CARD_SIRIP_HIU_PATH, 2000, 5, 20, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_STROBERI, CardConstants.CARD_STROBERI_PATH, 1500, 3, 4, Product.PRODUCT_HERBIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_JAGUNG, CardConstants.CARD_JAGUNG_PATH, 500, 8, 3, Product.PRODUCT_HERBIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_SUSU, CardConstants.CARD_SUSU_PATH, 500, 8, 10, Product.PRODUCT_HERBIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_TELUR, CardConstants.CARD_TELUR_PATH, 500, 8, 5, Product.PRODUCT_HERBIVORE_FOOD));
+
         // Create store
         store = new Store(products);
         initializeStore(Toko, store.getProducts());
-        updatePaginationButtons();
     }
 
     private List<Product> generateProducts() {
         List<Product> products = new ArrayList<>();
-        products.add(new Product(CardConstants.CARD_SIRIP_HIU, CardConstants.CARD_SIRIP_HIU_PATH, 500, 12, Product.PRODUCT_CARNIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_SUSU, CardConstants.CARD_SUSU_PATH, 100, 4, Product.PRODUCT_CARNIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_DAGING_DOMBA, CardConstants.CARD_DAGING_DOMBA_PATH, 120, 6, Product.PRODUCT_CARNIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_DAGING_KUDA, CardConstants.CARD_DAGING_KUDA_PATH, 150, 8, Product.PRODUCT_CARNIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_TELUR, CardConstants.CARD_TELUR_PATH, 50, 2, Product.PRODUCT_CARNIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_DAGING_BERUANG, CardConstants.CARD_DAGING_BERUANG_PATH, 150, 8, Product.PRODUCT_CARNIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_JAGUNG, CardConstants.CARD_JAGUNG_PATH, 500, 8, Product.PRODUCT_HERBIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_LABU, CardConstants.CARD_LABU_PATH, 500, 8, Product.PRODUCT_HERBIVORE_FOOD));
-        products.add(new Product(CardConstants.CARD_STROBERI, CardConstants.CARD_STROBERI_PATH, 1500, 3, Product.PRODUCT_HERBIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_SIRIP_HIU, CardConstants.CARD_SIRIP_HIU_PATH, 500, 12, 20, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_SUSU, CardConstants.CARD_SUSU_PATH, 100, 4, 10, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_DAGING_DOMBA, CardConstants.CARD_DAGING_DOMBA_PATH, 120, 6, 12, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_DAGING_KUDA, CardConstants.CARD_DAGING_KUDA_PATH, 150, 8, 14, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_TELUR, CardConstants.CARD_TELUR_PATH, 50, 2, 5, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_DAGING_BERUANG, CardConstants.CARD_DAGING_BERUANG_PATH, 150, 8, 25, Product.PRODUCT_CARNIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_JAGUNG, CardConstants.CARD_JAGUNG_PATH, 500, 8, 3, Product.PRODUCT_HERBIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_LABU, CardConstants.CARD_LABU_PATH, 500, 8, 5, Product.PRODUCT_HERBIVORE_FOOD));
+        products.add(new Product(CardConstants.CARD_STROBERI, CardConstants.CARD_STROBERI_PATH, 1500, 3, 4, Product.PRODUCT_HERBIVORE_FOOD));
         return products;
     }
 

@@ -6,12 +6,14 @@ public class Product extends Card {
     
     private int sellPrice;
     private int addedWeight;
+    private int harvestAge;
     private String foodType;
 
-    public Product(String cardName, String cardPath, int sellPrice, int addedWeight, String foodType) {
+    public Product(String cardName, String cardPath, int sellPrice, int addedWeight, int harvestAge, String foodType) {
         super(cardName, cardPath);
         this.sellPrice = sellPrice;
         this.addedWeight = addedWeight;
+        this.harvestAge = harvestAge;
         this.foodType = foodType;
     }
 
@@ -21,5 +23,9 @@ public class Product extends Card {
 
     public int getAddedWeight(){
         return this.addedWeight;
+    }
+
+    public int getHarvestAge(){
+        return this.harvestAge;
     }
 }
