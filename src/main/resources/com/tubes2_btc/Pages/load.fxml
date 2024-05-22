@@ -38,7 +38,7 @@
                 </AnchorPane>
             </content>
         </TitledPane>
-        <Button layoutX="35.0" layoutY="264.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="531.0" text="Load">
+        <Button fx:id="loadButton" layoutX="35.0" layoutY="264.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="531.0" text="Load" onAction="#handleLoadButton">
             <font>
                 <Font size="14.0" />
             </font>
