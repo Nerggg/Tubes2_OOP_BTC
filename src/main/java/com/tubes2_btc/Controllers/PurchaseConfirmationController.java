@@ -56,8 +56,6 @@ public class PurchaseConfirmationController {
         dataPasser.mainPageController.updateActiveDeck();
         dataPasser.mainPageController.setGameDataGUI();
 
-//        StorePageController.refreshStorePage();
-
 
         // Close the popup
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

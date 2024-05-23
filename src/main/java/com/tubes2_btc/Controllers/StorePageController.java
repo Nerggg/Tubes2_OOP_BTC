@@ -241,13 +241,6 @@ public class StorePageController {
         nextButton.setDisable(currentPage >= totalPages - 1);
     }
 
-//    public static void refreshStorePage() {
-//        StorePageController storePageController = new StorePageController();
-//        storePageController.initializeStore(storePageController.Toko, storePageController.store.getProducts());
-//        storePageController.updatePaginationButtons();
-//    }
-
-
     public static void addNewProductToStore(Product product, int jumlah) {
         store.addProduct(product, jumlah);
     }

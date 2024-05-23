@@ -1015,28 +1015,30 @@ public class MainPageController {
 
     @FXML
     private void storeButtonHandler(ActionEvent event) {
-        DataPasser dataPasser = DataPasser.getInstance();
-        dataPasser.currentPlayer = currentPlayer;
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/store_page.fxml"));
-            Parent root = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(root));
+        if (currentTurn > 0){
+            DataPasser dataPasser = DataPasser.getInstance();
+            dataPasser.currentPlayer = currentPlayer;
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/store_page.fxml"));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.UNDECORATED);
+                stage.setScene(new Scene(root));
 
-            // Get the parent stage (assuming the button is within a stage)
-            Stage parentStage = (Stage) ((Parent) event.getSource()).getScene().getWindow();
+                // Get the parent stage (assuming the button is within a stage)
+                Stage parentStage = (Stage) ((Parent) event.getSource()).getScene().getWindow();
 
-            // Center the new stage in the parent stage
-            stage.setOnShown(e -> {
-                stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
-                stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
-            });
+                // Center the new stage in the parent stage
+                stage.setOnShown(e -> {
+                    stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
+                    stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
+                });
 
-            stage.showAndWait();
-        } catch (Exception e) {
-            e.printStackTrace();
+                stage.showAndWait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
