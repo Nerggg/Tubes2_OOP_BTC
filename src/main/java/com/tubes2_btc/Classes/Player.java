@@ -47,11 +47,11 @@ public class Player {
         Random random = new Random();
         
         for (int i = 0; i < 20; i++) {
-            // int rand = random.nextInt(50);
+            int rand = random.nextInt(50);
             
-            // if (rand < 25) rand = 0;
-            // else rand -= 24;
-            int rand = 0;
+            if (rand < 25) rand = 0;
+            else rand -= 24;
+            // int rand = 0;
 
             Card randomCard = Card.createCard(rand);
             farm.put(i, randomCard);
@@ -62,11 +62,11 @@ public class Player {
         Random random = new Random();
         
         for (int i = 0; i < 6; i++) {
-            // int rand = random.nextInt(50);
+            int rand = random.nextInt(50);
             
-            // if (rand < 25) rand = 0;
-            // else rand -= 24;
-            int rand = 0;
+            if (rand < 25) rand = 0;
+            else rand -= 24;
+            // int rand = 0;
 
             Card randomCard = Card.createCard(rand);
             activeDeck.put(i , randomCard);

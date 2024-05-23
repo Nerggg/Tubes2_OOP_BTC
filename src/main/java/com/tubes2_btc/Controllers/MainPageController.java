@@ -35,7 +35,8 @@ import org.controlsfx.control.action.Action;
 
 public class MainPageController {
     // Misc. variables
-    private int draggedCard;
+    private Card draggedCard;
+    private int draggedCardIndex;
     private boolean draggedIsFarm;
 
     // Setup variables
@@ -119,6 +120,97 @@ public class MainPageController {
         label2.setText(tempString);
     }
 
+    public void handleDragAndDrop(Card dragged, Card dropped, int draggedIndex, int droppedIndex, boolean draggedIsFarm, boolean droppedIsFarm) {
+        System.out.println("Dragged: " + dragged.getCardName() + "(" + draggedIndex + ")");
+        System.out.println("Dropped: " + dropped.getCardName() + "(" + droppedIndex + ")");
+        if (!draggedIsFarm && !droppedIsFarm) {
+            // Swap at active deck
+            Player p = (currentPlayer == 1) ? player1 : player2;
+
+            p.swapSlots(draggedIndex, droppedIndex, p.getActiveDeck(), p.getActiveDeck());
+
+            // Swap images and names
+            List<Node> activeDeckSlots = (currentPlayer == 1) ? activeDeckSlots_1 : activeDeckSlots_2;
+
+            Node slot_dragged = activeDeckSlots.get(draggedIndex);
+            Node slot_dropped = activeDeckSlots.get(droppedIndex);
+
+            swapNodes(slot_dragged, slot_dropped);
+        } else if (draggedIsFarm && !droppedIsFarm) {
+            if (currentPlayer == currentFarmView) {
+                // Swap at farm
+                Player p = (currentPlayer == 1) ? player1 : player2;
+
+                p.swapSlots(draggedIndex, droppedIndex, p.getFarm(), p.getActiveDeck());
+
+                // Swap images and names
+                List<Node> farmSlots = (currentPlayer == 1) ? farmSlots_1 : farmSlots_2;
+                List<Node> activeDeckSlots = (currentPlayer == 1) ? activeDeckSlots_1 : activeDeckSlots_2;
+
+                Node slot_dragged = farmSlots.get(draggedIndex);
+                Node slot_dropped = activeDeckSlots.get(droppedIndex);
+
+                swapNodes(slot_dragged, slot_dropped);
+            
+            }
+        } else if (draggedIsFarm && droppedIsFarm) {
+            if (currentPlayer == currentFarmView) {
+                // Swap at farm
+                Player p = (currentPlayer == 1) ? player1 : player2;
+
+                p.swapSlots(draggedIndex, droppedIndex, p.getFarm(), p.getFarm());
+
+                // Swap images and names
+                List<Node> farmSlots = (currentPlayer == 1) ? farmSlots_1 : farmSlots_2;
+
+                Node slot_dragged = farmSlots.get(draggedIndex);
+                Node slot_dropped = farmSlots.get(droppedIndex);
+
+                swapNodes(slot_dragged, slot_dropped);
+            }
+        } else if (!draggedIsFarm && droppedIsFarm) {
+            Player player = (currentPlayer == 1) ? player1 : player2;
+            Player opponent = (currentPlayer == 1) ? player2 : player1;
+            
+            if (currentPlayer != currentFarmView) {
+                // System.out.println("hi " + draggedCard.getCardName());
+                switch (draggedCard.getCardName()) {
+                    case CardConstants.CARD_DESTROY:
+                        System.out.println("Destroy");
+                        deleteCard(droppedIndex, true, opponent);
+                        deleteCard(draggedIndex, false, player);
+                        break;
+                    case CardConstants.CARD_DELAY:
+                        System.out.println("Delay");
+                        dropped.delay();
+                        deleteCard(draggedIndex, false, player);
+                        break;
+                }
+            } else {
+                // System.out.println("hello " + draggedCard.getCardName());
+                switch (draggedCard.getCardName()) {
+                    case CardConstants.CARD_ACCELERATE:
+                        System.out.println("Accel");
+                        dropped.accelerate();
+                        deleteCard(draggedIndex, false, player);
+                        break;
+                    case CardConstants.CARD_INSTANT_HARVEST:
+                        if (dropped instanceof Plant || dropped instanceof Animal) {
+                            System.out.println("Instant");
+                            deleteCard(draggedIndex, false, player);
+                            player.addToActiveDeck(dropped.harvest());
+                            updateActiveDeck();
+                        }
+                        break;
+                    case CardConstants.CARD_PROTECT:
+                        break;
+                    case CardConstants.CARD_TRAP:
+                        break;
+                }
+            }
+        }
+    }
+    
     public void initializeSlot(Node child, int i, boolean isFarm, List<Node> farmSlots, List<Node> activeDeckSlots, Player player) {
         DataPasser dataPasser = DataPasser.getInstance();
 
@@ -147,12 +239,22 @@ public class MainPageController {
             public void handle(MouseEvent mouseEvent) {
                 // Set currently dragged card
                 int underscoreIndex = child.getId().indexOf("_");
-                draggedCard = Integer.parseInt(child.getId().substring(underscoreIndex + 1));
+                draggedCardIndex = Integer.parseInt(child.getId().substring(underscoreIndex + 1));
 
                 String slot_type = child.getId().substring(0, underscoreIndex);
                 
                 if (slot_type.equals("Ladang"))    draggedIsFarm = true;
                 else                                        draggedIsFarm = false;
+
+                Player p;
+                if (!draggedIsFarm) {
+                    p = (currentPlayer == 1) ? player1 : player2;
+                } else {
+                    p = (currentFarmView == 1) ? player1 : player2;
+                
+                }
+
+                draggedCard = (draggedIsFarm) ? p.getFarm().get(draggedCardIndex) : p.getActiveDeck().get(draggedCardIndex);
 
                 // Event handler
                 Dragboard db = child.startDragAndDrop(TransferMode.ANY);
@@ -161,7 +263,7 @@ public class MainPageController {
                 content.putString(child.getId());
                 db.setContent(content);
 
-                System.out.println("Drag detected for: " + child.getId());
+                // System.out.println("Drag detected for: " + child.getId());
                 mouseEvent.consume();
 
                 // deleteCard(draggedCard, isFarm, player1);
@@ -185,7 +287,7 @@ public class MainPageController {
             public void handle(DragEvent dragEvent) {
                 // Get dropped card number
                 int underscoreIndex = child.getId().indexOf("_");
-                int droppedCard = Integer.parseInt(child.getId().substring(underscoreIndex + 1));
+                int droppedCardIndex = Integer.parseInt(child.getId().substring(underscoreIndex + 1));
 
                 String slot_type = child.getId().substring(0, underscoreIndex);
                 
@@ -193,29 +295,41 @@ public class MainPageController {
                 if (slot_type.equals("Ladang"))    droppedIsFarm = true;
                 else                                        droppedIsFarm = false;
 
-                // Swap farm slots
-                if (currentPlayer == currentFarmView) {
-                    Map<Integer, Card> cont1, cont2; 
-                    Player p = (currentFarmView == 1) ? player1 : player2;
-    
-                    cont1 = (draggedIsFarm) ? p.getFarm() : p.getActiveDeck();
-                    cont2 = (droppedIsFarm) ? p.getFarm() : p.getActiveDeck();
-    
-                    p.swapSlots(draggedCard, droppedCard, cont1, cont2);
-    
-                    // Swap images and names
-                    Node slot_dragged;
-                    if (draggedIsFarm)  slot_dragged = farmSlots.get(draggedCard);
-                    else                slot_dragged = activeDeckSlots.get(draggedCard);
-                    
-                    swapNodes(child, slot_dragged);
+                Player p;
+                if (!droppedIsFarm) {
+                    p = (currentPlayer == 1) ? player1 : player2;
+                } else {
+                    p = (currentFarmView == 1) ? player1 : player2;
                 }
+
+                Card droppedCard = (droppedIsFarm) ? p.getFarm().get(droppedCardIndex) : p.getActiveDeck().get(droppedCardIndex);
+
+                // Handle drag and drop event
+                handleDragAndDrop(draggedCard, droppedCard, draggedCardIndex, droppedCardIndex, draggedIsFarm, droppedIsFarm);
+
+                // // Swap farm slots
+                // if (currentPlayer == currentFarmView) {
+                //     Map<Integer, Card> cont1, cont2; 
+                //     Player p = (currentFarmView == 1) ? player1 : player2;
+    
+                //     cont1 = (draggedIsFarm) ? p.getFarm() : p.getActiveDeck();
+                //     cont2 = (droppedIsFarm) ? p.getFarm() : p.getActiveDeck();
+    
+                //     p.swapSlots(draggedCardIndex, droppedCardIndex, cont1, cont2);
+    
+                //     // Swap images and names
+                //     Node slot_dragged;
+                //     if (draggedIsFarm)  slot_dragged = farmSlots.get(draggedCardIndex);
+                //     else                slot_dragged = activeDeckSlots.get(draggedCardIndex);
+                    
+                //     swapNodes(child, slot_dragged);
+                // }
 
                 // Event handler 
                 Dragboard db = dragEvent.getDragboard();
                 boolean success = false;
                 if (db.hasString()) {
-                    System.out.println("Drag dropped for: " + child.getId());
+                    // System.out.println("Drag dropped for: " + child.getId());
                     success = true;
                 }
                 dragEvent.setDropCompleted(success);
@@ -227,8 +341,10 @@ public class MainPageController {
             child.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    if (player1.getFarm().get(i).getClass().getSimpleName().equals("Animal") || player1.getFarm().get(i).getClass().getSimpleName().equals("Plant") || player1.getFarm().get(i).getClass().getSimpleName().equals("Product")) {;
-                        dataPasser.infoCard = player1.getFarm().get(i);
+                    Player p = (currentFarmView == 1) ? player1 : player2;
+
+                    if (p.getFarm().get(i).getClass().getSimpleName().equals("Animal") || p.getFarm().get(i).getClass().getSimpleName().equals("Plant") || p.getFarm().get(i).getClass().getSimpleName().equals("Product")) {;
+                        dataPasser.infoCard = p.getFarm().get(i);
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/card-info.fxml"));
                             Parent root = fxmlLoader.load();
@@ -258,8 +374,10 @@ public class MainPageController {
             child.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    if (player1.getActiveDeck().get(i).getClass().getSimpleName().equals("Product")) {;
-                        dataPasser.infoCard = player1.getActiveDeck().get(i);
+                    Player p = (currentPlayer == 1) ? player1 : player2;
+                    
+                    if (p.getActiveDeck().get(i).getClass().getSimpleName().equals("Product")) {;
+                        dataPasser.infoCard = p.getActiveDeck().get(i);
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/deck-card-info.fxml"));
                             Parent root = fxmlLoader.load();
@@ -294,9 +412,9 @@ public class MainPageController {
 
         // ==== Delete card from player's farm or active deck ====
         if (isFarm) {
-            player.getFarm().remove(index);
+            player.getFarm().put(index, Card.createCard(Card.CARD_EMPTY_INDEX));
         } else {
-            player.getActiveDeck().remove(index);
+            player.getActiveDeck().put(index, Card.createCard(Card.CARD_EMPTY_INDEX));
         }
 
         // ==== Delete card GUI ====
@@ -335,6 +453,60 @@ public class MainPageController {
 
     void testFunction() {
         System.out.println("Anjay work letsgo");
+    }
+
+    void testPrintSlots() {
+        // System.out.println("Farm player 1");
+        // for (int i = 0; i < 20; i++) {
+        //     String name = player1.getFarm().get(i).getCardName();
+        //     if (name.equals("")) {
+        //         System.out.println("-");
+        //     } else {
+        //         System.out.println(name);
+        //     }
+        // }
+
+        // System.out.println("Active deck player 1");
+        // for (int i = 0; i < 6; i++) {
+        //     String name = player1.getActiveDeck().get(i).getCardName();
+        //     if (name.equals("")) {
+        //         System.out.println("-");
+        //     } else {
+        //         System.out.println(name);
+        //     }
+        // }
+
+        // System.out.println("Farm player 2");
+        // for (int i = 0; i < 20; i++) {
+        //     String name = player2.getFarm().get(i).getCardName();
+        //     if (name.equals("")) {
+        //         System.out.println("-");
+        //     } else {
+        //         System.out.println(name);
+        //     }
+        // }
+
+        // System.out.println("Active deck player 2");
+        // for (int i = 0; i < 6; i++) {
+        //     String name = player2.getActiveDeck().get(i).getCardName();
+        //     if (name.equals("")) {
+        //         System.out.println("-");
+        //     } else {
+        //         System.out.println(name);
+        //     }
+        // }
+
+        System.out.println("farmSlots1");
+        System.out.println(farmSlots_1.toString());
+
+        System.out.println("farmSlots2");
+        System.out.println(farmSlots_2.toString());
+
+        System.out.println("activeDeckSlots1");
+        System.out.println(activeDeckSlots_1.toString());
+
+        System.out.println("activeDeckSlots2");
+        System.out.println(activeDeckSlots_2.toString());
     }
 
     public void setFarmAt(int index, Card card, Player player) {
@@ -488,13 +660,6 @@ public class MainPageController {
 
         // Update game data GUI
         setGameDataGUI();
-
-        // Call shuffle card page
-        // Platform.runLater(() -> {
-        //     nextButtonHandler(null);
-        // });
-
-//        bearAttackHandler();
     }
 
     private void startTimer(int duration,Runnable onFinish) {
@@ -643,7 +808,8 @@ public class MainPageController {
                     for(int i =0;i<finalHeight;i++){
                         for(int j =0;j<finalWidth;j++){
                             System.out.println("Deleting card "+ (index+j));
-                            deleteCard(index+j,true,player1);
+                            Player p = (currentPlayer == 1) ? player1 : player2;
+                            deleteCard(index+j,true, p);
                         }
                         index += 5;
                     }
@@ -653,15 +819,17 @@ public class MainPageController {
                     for(int i =0;i<finalHeight;i++){
                         for(int j =0;j<finalWidth;j++){
                             System.out.println("Deleting card "+ (index+j));
-                            deleteCard(index+j,true,player1);
+                            Player p = (currentPlayer == 1) ? player1 : player2;
+                            deleteCard(index+j,true, p);
                         }
                         index += 5;
                     }
                 }
                 removeBearAttackArea();
                 removeTimer();
+                testPrintSlots();
             });
-            
+        
         }
     }
 

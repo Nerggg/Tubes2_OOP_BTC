@@ -4,9 +4,9 @@ public class Plant extends Card {
     private int age;
     private int harvestAge;
 
-    private String resultProduct;
+    private int resultProduct;
 
-    public Plant(String cardName, String cardPath, int age, int harvestAge, String resultProduct) {
+    public Plant(String cardName, String cardPath, int age, int harvestAge, int resultProduct) {
         super(cardName, cardPath);
         this.age = age;
         this.harvestAge = harvestAge;
@@ -22,5 +22,28 @@ public class Plant extends Card {
 
     public void setAge(int age) {
         this.age=age;
+    }
+
+    public int getWeightOrAge() {
+        return this.age;
+    }
+
+    public void setWeightOrAge(int weightOrAge) {
+        this.age = weightOrAge;
+    }
+
+    public void accelerate() {
+        this.age += 2;
+    }
+
+    public void delay() {
+        this.age += -2;
+        if (this.age < 0) {
+            this.age = 0;
+        }
+    }
+
+    public Card harvest() {
+        return createCard(resultProduct);
     }
 }

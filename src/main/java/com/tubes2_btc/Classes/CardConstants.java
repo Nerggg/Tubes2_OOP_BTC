@@ -129,24 +129,24 @@ public class CardConstants {
                 return new Card(CARD_EMPTY, "");
 
             case CARD_HIU_INDEX:
-                return new Animal(CARD_HIU, CARD_HIU_PATH, 0, 20, Animal.ANIMAL_KARNIVORA, CARD_SIRIP_HIU);
+                return new Animal(CARD_HIU, CARD_HIU_PATH, 0, 20, Animal.ANIMAL_KARNIVORA, CARD_SIRIP_HIU_INDEX);
             case CARD_SAPI_INDEX:
-                return new Animal(CARD_SAPI, CARD_SAPI_PATH, 0, 10, Animal.ANIMAL_HERBIVORA, CARD_SUSU);
+                return new Animal(CARD_SAPI, CARD_SAPI_PATH, 0, 10, Animal.ANIMAL_HERBIVORA, CARD_SUSU_INDEX);
             case CARD_DOMBA_INDEX:
-                return new Animal(CARD_DOMBA, CARD_DOMBA_PATH, 0, 12, Animal.ANIMAL_HERBIVORA, CARD_DAGING_DOMBA);
+                return new Animal(CARD_DOMBA, CARD_DOMBA_PATH, 0, 12, Animal.ANIMAL_HERBIVORA, CARD_DAGING_DOMBA_INDEX);
             case CARD_KUDA_INDEX:
-                return new Animal(CARD_KUDA, CARD_KUDA_PATH, 0, 14, Animal.ANIMAL_HERBIVORA, CARD_DAGING_KUDA);
+                return new Animal(CARD_KUDA, CARD_KUDA_PATH, 0, 14, Animal.ANIMAL_HERBIVORA, CARD_DAGING_KUDA_INDEX);
             case CARD_AYAM_INDEX:
-                return new Animal(CARD_AYAM, CARD_AYAM_PATH, 0, 5, Animal.ANIMAL_OMNIVORA, CARD_TELUR);
+                return new Animal(CARD_AYAM, CARD_AYAM_PATH, 0, 5, Animal.ANIMAL_OMNIVORA, CARD_TELUR_INDEX);
             case CARD_BERUANG_INDEX:
-                return new Animal(CARD_BERUANG, CARD_BERUANG_PATH, 0, 25, Animal.ANIMAL_OMNIVORA, CARD_DAGING_BERUANG);
+                return new Animal(CARD_BERUANG, CARD_BERUANG_PATH, 0, 25, Animal.ANIMAL_OMNIVORA, CARD_DAGING_BERUANG_INDEX);
 
             case CARD_BIJI_LABU_INDEX:
-                return new Plant(CARD_BIJI_LABU, CARD_BIJI_LABU_PATH, 0, 5, CARD_LABU);
+                return new Plant(CARD_BIJI_LABU, CARD_BIJI_LABU_PATH, 0, 5, CARD_LABU_INDEX);
             case CARD_BIJI_JAGUNG_INDEX:
-                return new Plant(CARD_BIJI_JAGUNG, CARD_BIJI_JAGUNG_PATH, 0, 3, CARD_JAGUNG);
+                return new Plant(CARD_BIJI_JAGUNG, CARD_BIJI_JAGUNG_PATH, 0, 3, CARD_JAGUNG_INDEX);
             case CARD_BIJI_STROBERI_INDEX:
-                return new Plant(CARD_BIJI_STROBERI, CARD_BIJI_STROBERI_PATH, 0, 4, CARD_STROBERI);
+                return new Plant(CARD_BIJI_STROBERI, CARD_BIJI_STROBERI_PATH, 0, 4, CARD_STROBERI_INDEX);
 
             case CARD_SIRIP_HIU_INDEX:
                 return new Product(CARD_SIRIP_HIU, CARD_SIRIP_HIU_PATH, 500, 12, 20, Product.PRODUCT_CARNIVORE_FOOD);

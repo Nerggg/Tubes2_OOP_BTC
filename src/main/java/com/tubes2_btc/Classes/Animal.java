@@ -9,9 +9,9 @@ public class Animal extends Card {
     private int harvestWeight;
     private String animalType;
 
-    private String resultProduct;
+    private int resultProduct;
 
-    public Animal(String cardName, String cardPath, int weight, int harvestWeight, String animalType, String resultProduct) {
+    public Animal(String cardName, String cardPath, int weight, int harvestWeight, String animalType, int resultProduct) {
         super(cardName, cardPath);
         this.weight = weight;
         this.harvestWeight = harvestWeight;
@@ -25,8 +25,35 @@ public class Animal extends Card {
     public int getHarvestWeight() {
         return this.harvestWeight;
     }
+
     public void setWeight(int weight){
         this.weight = weight;
     }
 
+    public String getAnimalType() {
+        return this.animalType;
+    }
+
+    public int getWeightOrAge() {
+        return this.weight;
+    }
+
+    public void setWeightOrAge(int weightOrAge) {
+        this.weight = weightOrAge;
+    }
+    
+    public void accelerate() {
+        this.weight += 8;
+    }
+
+    public void delay() {
+        this.weight += -5;
+        if (this.weight < 0) {
+            this.weight = 0;
+        }
+    }
+
+    public Card harvest() {
+        return createCard(resultProduct);
+    }
 }

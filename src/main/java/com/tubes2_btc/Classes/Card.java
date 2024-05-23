@@ -65,4 +65,23 @@ public class Card extends CardConstants {
         this.isTrapped = true;
     }
 
+    public int getWeightOrAge() {
+        return 69;
+    }
+
+    public void setWeightOrAge(int x) {
+        // Do nothing
+    }
+
+    public void accelerate() {
+        // Do nothing   
+    }
+
+    public void delay() {
+        // Do nothing
+    }
+
+    public Card harvest() {
+        return new Card(CARD_EMPTY, "");
+    }
 }

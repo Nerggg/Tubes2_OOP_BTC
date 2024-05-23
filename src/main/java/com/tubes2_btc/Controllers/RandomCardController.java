@@ -182,6 +182,7 @@ public class RandomCardController {
         dataPasser.mainPageController.setGameDataGUI();
 
         // Run bear attack
+        dataPasser.mainPageController.testPrintSlots();
         dataPasser.mainPageController.bearAttackHandler();
         
         // Close stage
