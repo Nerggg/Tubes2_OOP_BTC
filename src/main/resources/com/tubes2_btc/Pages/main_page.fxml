@@ -241,14 +241,14 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="677.0" layoutY="92.0" text="0 Gold">
+      <Label fx:id="Player1_Gold" layoutX="677.0" layoutY="92.0" text="0 Gold">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
       <Circle fill="#0f5132" layoutX="585.0" layoutY="52.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
       <Label layoutX="573.0" layoutY="37.0" text="Turn" textFill="WHITE" />
-      <Label layoutX="581.0" layoutY="52.0" text="X" textFill="WHITE" />
+      <Label fx:id="TurnNumber" layoutX="581.0" layoutY="52.0" text="X" textFill="WHITE" />
       <Button layoutX="653.0" layoutY="40.0" mnemonicParsing="false" onAction="#nextButtonHandler" prefHeight="36.0" prefWidth="75.0" text="Next">
          <font>
             <Font size="14.0" />
@@ -361,5 +361,10 @@
             <Button mnemonicParsing="false" onAction="#saveStateButtonHandler" prefHeight="26.0" prefWidth="140.0" text="Save State" GridPane.rowIndex="4" />
          </children>
       </GridPane>
+      <Label fx:id="Player2_Gold" layoutX="677.0" layoutY="119.0" text="0 Gold">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

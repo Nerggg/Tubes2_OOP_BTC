@@ -20,7 +20,7 @@ public class Player {
     private Map<Integer, Card> farm;
 
     public Player() {
-        this.guldenCount = 0;
+        this.guldenCount = new Random().nextInt(1000);
         this.deck = new ArrayList<>();
         this.activeDeck = new HashMap<>();
         this.farm = new HashMap<>();
@@ -55,6 +55,10 @@ public class Player {
             Card randomCard = Card.createCard(rand);
             activeDeck.put(i , randomCard);
         }
+    }
+
+    public int getGuldenCount() {
+        return guldenCount;
     }
 
     public Map<Integer, Card> getFarm() {

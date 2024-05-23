@@ -55,7 +55,7 @@ public class MainPageController {
     // Game state variables
     private int currentPlayer = 1;
     private int currentFarmView = 1;
-    private int currentTurn = 1;
+    private int currentTurn = 0;
 
     // Set game state procedure
     public void loadGameState(Player player1, Player player2, int currentTurn) {
@@ -407,6 +407,25 @@ public class MainPageController {
             }
         }
     }
+    
+    public void updateActiveDeck() {
+        // Get player
+        Player player = (currentFarmView == 1) ? player1 : player2;
+
+        // Update active deck slots
+        for (int i = 0; i < 20; i++) {
+            Card card = player.getActiveDeck().get(i);
+            if (card != null) {
+                setActiveDeckAt(i, card, player);
+            }
+        }
+    }
+
+    public void setGameDataGUI() {
+        TurnNumber.setText(Integer.toString(currentTurn));
+        Player1_Gold.setText(Integer.toString(player1.getGuldenCount()) + " Gold");
+        Player2_Gold.setText(Integer.toString(player2.getGuldenCount()) + " Gold");
+    }
 
     @FXML
     private AnchorPane Base;
@@ -416,6 +435,15 @@ public class MainPageController {
 
     @FXML
     private GridPane Deck;
+
+    @FXML
+    private Label TurnNumber;
+
+    @FXML
+    private Label Player1_Gold;
+
+    @FXML
+    private Label Player2_Gold;
 
     @FXML
     private Rectangle BearAttackArea;
@@ -452,6 +480,15 @@ public class MainPageController {
 
         // Update farm
         updateFarm();
+        updateActiveDeck();
+
+        // Update game data GUI
+        setGameDataGUI();
+
+        // Call shuffle card page
+        // Platform.runLater(() -> {
+        //     nextButtonHandler(null);
+        // });
 
 //        bearAttackHandler();
     }
@@ -677,6 +714,7 @@ public class MainPageController {
         this.TimerPane = timerPane;
         this.TimerLabel = timeLabel;
     }
+    
     // Pop Up Button Handler
     @FXML
     private void nextButtonHandler(ActionEvent event) {
@@ -694,7 +732,12 @@ public class MainPageController {
             stage.setScene(new Scene(root));
 
             // Get the parent stage (assuming the button is within a stage)
-            Stage parentStage = (Stage) ((Parent) event.getSource()).getScene().getWindow();
+            Stage parentStage;
+            if (event != null) {
+                parentStage = (Stage) ((Parent) event.getSource()).getScene().getWindow();
+            } else {
+                parentStage = (Stage) Base.getScene().getWindow();
+            }
 
             // Center the new stage in the parent stage
             stage.setOnShown(e -> {
