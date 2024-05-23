@@ -22,7 +22,7 @@ public class PurchaseConfirmationController {
     public void initialize() {
         DataPasser dataPasser = DataPasser.getInstance();
         productNameLabel.setText(dataPasser.labelTemp);
-        productPriceLabel.setText("Price: " + dataPasser.productPrice);
+        productPriceLabel.setText("Total Price: " + dataPasser.productPrice * dataPasser.productQuantity);
         productQuantityLabel.setText("Quantity: " + dataPasser.productQuantity);
     }
 

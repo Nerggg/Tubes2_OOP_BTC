@@ -39,14 +39,20 @@ public class StorePopUpController {
     @FXML
     private Button confirmButton;
 
+    @FXML
+    private Label priceLabel;
+
     private int quantity = 1;
     private int maxQuantity;
+    private int productPrice;
 
     @FXML
     public void initialize() {
         DataPasser dataPasser = DataPasser.getInstance();
         imageView.setImage(dataPasser.imageTemp);
         labelText1.setText(dataPasser.labelTemp);
+        productPrice = dataPasser.productPrice;
+        updatePriceLabel();
 
         Store store = StorePageController.getStore();
         maxQuantity = store.getProductCount(dataPasser.labelTemp);
@@ -59,6 +65,7 @@ public class StorePopUpController {
         if (quantity < maxQuantity) {
             quantity++;
             quantityLabel.setText(String.valueOf(quantity));
+            updatePriceLabel();
         }
     }
 
@@ -67,14 +74,19 @@ public class StorePopUpController {
         if (quantity > 1) {
             quantity--;
             quantityLabel.setText(String.valueOf(quantity));
+            updatePriceLabel();
         }
+    }
+
+    private void updatePriceLabel() {
+        int totalPrice = productPrice * quantity;
+        priceLabel.setText("Gd. " + totalPrice);
     }
 
     @FXML
     private void handleConfirm(ActionEvent event) {
         DataPasser dataPasser = DataPasser.getInstance();
-        dataPasser.productPrice = // Retrieve the product price from the store or dataPasser;
-                dataPasser.productQuantity = quantity;
+        dataPasser.productQuantity = quantity;
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/purchase-confirmation.fxml"));

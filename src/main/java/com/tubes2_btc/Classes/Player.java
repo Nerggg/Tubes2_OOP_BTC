@@ -115,6 +115,10 @@ public class Player {
         return PLAYER_ACTIVE_DECK_SLOTS - cardCount;
     }
 
+    public void setGuldenCount(int jumlah){
+        this.guldenCount = jumlah;
+    }
+
     public void setFarmAt(int index, Card card) {
         farm.put(index, card);
     }

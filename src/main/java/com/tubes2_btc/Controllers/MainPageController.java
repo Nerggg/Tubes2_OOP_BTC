@@ -793,6 +793,8 @@ public class MainPageController {
 
     @FXML
     private void storeButtonHandler(ActionEvent event) {
+        DataPasser dataPasser = DataPasser.getInstance();
+        dataPasser.currentPlayer = currentPlayer;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/store_page.fxml"));
             Parent root = fxmlLoader.load();

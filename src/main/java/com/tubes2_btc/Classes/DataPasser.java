@@ -38,6 +38,6 @@ public class DataPasser {
     public Store storeTemp;
     public Image imageTemp;
     public String labelTemp;
-    public double productPrice;
+    public int productPrice;
     public int productQuantity;
 }
