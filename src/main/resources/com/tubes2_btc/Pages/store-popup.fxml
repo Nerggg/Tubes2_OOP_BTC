@@ -13,20 +13,27 @@
       <ImageView fx:id="imageView" fitHeight="71.0" fitWidth="84.0" layoutX="383.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
       <Text fx:id="labelText1" layoutX="-4.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Label" textAlignment="CENTER" wrappingWidth="500.0" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="4.0">
          <font>
-            <Font size="25.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
       </Text>
-      <HBox alignment="CENTER" layoutX="0.0" layoutY="65.0" prefWidth="500.0">
+      <HBox alignment="CENTER" layoutX="0.0" layoutY="55.0" prefWidth="500.0">
          <Label fx:id="priceLabel" text="Gd." textAlignment="CENTER">
             <font>
                <Font size="14.0" />
             </font>
          </Label>
       </HBox>
+      <HBox alignment="CENTER" layoutX="0.0" layoutY="75.0" prefWidth="500.0">
+         <Label fx:id="descLabel" text="Gd." textAlignment="CENTER">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+      </HBox>
       <Button fx:id="kembali" layoutX="39.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleClickedKembali" text="Kembali" />
-      <Button fx:id="plusButton" layoutX="278.0" layoutY="93.0" mnemonicParsing="false" onAction="#handlePlus" text="+" />
-      <Button fx:id="minusButton" layoutX="200.0" layoutY="93.0" mnemonicParsing="false" onAction="#handleMinus" text="-" />
-      <Label fx:id="quantityLabel" layoutX="246.0" layoutY="97.0" text="0" />
-      <Button fx:id="confirmButton" layoutX="232.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleConfirm" text="Beli" />
+      <Button fx:id="plusButton" layoutX="277.0" layoutY="100.0" mnemonicParsing="false" onAction="#handlePlus" text="+" />
+      <Button fx:id="minusButton" layoutX="199.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleMinus" text="-" />
+      <Label fx:id="quantityLabel" layoutX="245.0" layoutY="104.0" text="0" />
+      <Button fx:id="confirmButton" layoutX="232.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleConfirm" text="Beli" />
    </children>
 </AnchorPane>

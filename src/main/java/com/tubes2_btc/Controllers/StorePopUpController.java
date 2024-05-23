@@ -1,6 +1,7 @@
 package com.tubes2_btc.Controllers;
 
 import com.tubes2_btc.Classes.DataPasser;
+import com.tubes2_btc.Classes.Player;
 import com.tubes2_btc.Classes.Store;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,9 +43,14 @@ public class StorePopUpController {
     @FXML
     private Label priceLabel;
 
+    @FXML
+    private Label descLabel;
+
     private int quantity = 1;
     private int maxQuantity;
     private int productPrice;
+    DataPasser dataPasser = DataPasser.getInstance();
+    private Player player = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
 
     @FXML
     public void initialize() {
@@ -52,12 +58,24 @@ public class StorePopUpController {
         imageView.setImage(dataPasser.imageTemp);
         labelText1.setText(dataPasser.labelTemp);
         productPrice = dataPasser.productPrice;
+        Player player = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
         updatePriceLabel();
 
         Store store = StorePageController.getStore();
         maxQuantity = store.getProductCount(dataPasser.labelTemp);
 
         quantityLabel.setText(String.valueOf(quantity));
+        if (productPrice > player.getGuldenCount()){
+            descLabel.setText("Gulden anda tidak cukup!");
+            descLabel.setStyle("-fx-text-fill: red;");
+            confirmButton.setDisable(true);
+        }
+        else{
+            descLabel.setText("Gulden anda setelah beli: Gd. " + String.valueOf(player.getGuldenCount() - productPrice));
+            descLabel.setStyle("-fx-text-fill: black;");
+            confirmButton.setDisable(false);
+        }
+
     }
 
     @FXML
@@ -80,6 +98,17 @@ public class StorePopUpController {
 
     private void updatePriceLabel() {
         int totalPrice = productPrice * quantity;
+        if (totalPrice > player.getGuldenCount()){
+            descLabel.setText("Gulden anda tidak cukup!");
+            descLabel.setStyle("-fx-text-fill: red;");
+            confirmButton.setDisable(true);
+        }
+        else{
+            descLabel.setText("Gulden anda setelah beli: Gd. " + String.valueOf(player.getGuldenCount() - totalPrice));
+            descLabel.setStyle("-fx-text-fill: black;");
+            confirmButton.setDisable(false);
+        }
+
         priceLabel.setText("Gd. " + totalPrice);
     }
 

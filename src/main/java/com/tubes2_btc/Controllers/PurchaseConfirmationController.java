@@ -19,11 +19,16 @@ public class PurchaseConfirmationController {
     private Label productQuantityLabel;
 
     @FXML
+    private Label changeLabel;
+
+    @FXML
     public void initialize() {
         DataPasser dataPasser = DataPasser.getInstance();
-        productNameLabel.setText(dataPasser.labelTemp);
-        productPriceLabel.setText("Total Price: " + dataPasser.productPrice * dataPasser.productQuantity);
-        productQuantityLabel.setText("Quantity: " + dataPasser.productQuantity);
+        int change = ((dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2).getGuldenCount() - dataPasser.productPrice * dataPasser.productQuantity;
+        productNameLabel.setText("Beli " + dataPasser.labelTemp + "?");
+        productPriceLabel.setText("Total Harga: Gd. " + dataPasser.productPrice * dataPasser.productQuantity);
+        productQuantityLabel.setText("Kuantitas: " + dataPasser.productQuantity);
+        changeLabel.setText("Uang anda setelah pembelian: Gd. " + change);
     }
 
     @FXML
