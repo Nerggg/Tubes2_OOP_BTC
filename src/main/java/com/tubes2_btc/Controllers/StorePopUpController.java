@@ -1,7 +1,6 @@
 package com.tubes2_btc.Controllers;
 
-import com.tubes2_btc.Classes.DataPasser;
-import com.tubes2_btc.Classes.Store;
+import com.tubes2_btc.Classes.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +14,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.util.Map;
 
 public class StorePopUpController {
 
@@ -39,26 +40,57 @@ public class StorePopUpController {
     @FXML
     private Button confirmButton;
 
+    @FXML
+    private Label priceLabel;
+
+    @FXML
+    private Label descLabel;
+
+    @FXML
+    private Label countActiveDeck;
+
     private int quantity = 1;
     private int maxQuantity;
+    private int productPrice;
+    DataPasser dataPasser = DataPasser.getInstance();
+    Player player = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
+    private int deckSize = 0;
+    private Map<Integer, Card> activeDeck;
+
 
     @FXML
     public void initialize() {
         DataPasser dataPasser = DataPasser.getInstance();
         imageView.setImage(dataPasser.imageTemp);
         labelText1.setText(dataPasser.labelTemp);
+        productPrice = dataPasser.productPrice;
+        player = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
+        activeDeck = player.getActiveDeck();
+
+        for (Card card : activeDeck.values()) {
+            if (card.IsEmpty()) {
+                deckSize++;
+            }
+        }
+        deckSize--;
+        System.out.println(deckSize);
+        updatePriceLabel();
 
         Store store = StorePageController.getStore();
         maxQuantity = store.getProductCount(dataPasser.labelTemp);
 
         quantityLabel.setText(String.valueOf(quantity));
+        updateLabelsAndButtons();
     }
 
     @FXML
     private void handlePlus(ActionEvent event) {
         if (quantity < maxQuantity) {
             quantity++;
+            deckSize--;
             quantityLabel.setText(String.valueOf(quantity));
+            updatePriceLabel();
+            updateLabelsAndButtons();
         }
     }
 
@@ -66,15 +98,48 @@ public class StorePopUpController {
     private void handleMinus(ActionEvent event) {
         if (quantity > 1) {
             quantity--;
+            deckSize++;
             quantityLabel.setText(String.valueOf(quantity));
+            updatePriceLabel();
+            updateLabelsAndButtons();
         }
     }
+
+    private void updatePriceLabel() {
+        int totalPrice = productPrice * quantity;
+        priceLabel.setText("Gd. " + totalPrice);
+    }
+
+    private void updateLabelsAndButtons() {
+        int totalPrice = productPrice * quantity;
+        boolean disableConfirmButton = false;
+
+        if (totalPrice > player.getGuldenCount()) {
+            descLabel.setText("Gulden anda tidak cukup!");
+            descLabel.setStyle("-fx-text-fill: red;");
+            disableConfirmButton = true;
+        } else {
+            descLabel.setText("Gulden anda setelah beli: Gd. " + (player.getGuldenCount() - totalPrice));
+            descLabel.setStyle("-fx-text-fill: black;");
+        }
+
+        if (deckSize < 0) {
+            countActiveDeck.setText("Deck aktif anda penuh!");
+            countActiveDeck.setStyle("-fx-text-fill: red;");
+            disableConfirmButton = true;
+        } else {
+            countActiveDeck.setText("Sisa deck aktif anda: " + (deckSize));
+            countActiveDeck.setStyle("-fx-text-fill: black;");
+        }
+
+        confirmButton.setDisable(disableConfirmButton);
+    }
+
 
     @FXML
     private void handleConfirm(ActionEvent event) {
         DataPasser dataPasser = DataPasser.getInstance();
-        dataPasser.productPrice = // Retrieve the product price from the store or dataPasser;
-                dataPasser.productQuantity = quantity;
+        dataPasser.productQuantity = quantity;
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/purchase-confirmation.fxml"));

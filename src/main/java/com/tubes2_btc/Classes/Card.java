@@ -24,6 +24,10 @@ public class Card extends CardConstants {
         this.isTrapped = false;
     }
 
+    public  boolean IsEmpty(){
+        return this.isEmpty;
+    }
+
     public String getCardName() {
         return this.CardName;
     }
@@ -35,18 +39,52 @@ public class Card extends CardConstants {
     public String getCardActive() {
         String temp = "";
         if (this.isAccelerated){
-            temp = temp + "Accelerated";
+            temp = temp + "Accelerated ";
         }
         if(this.isDelayed){
-            temp = temp + " Delayed";
+            temp = temp + "Delayed ";
         }
         if(this.isProtected){
-            temp = temp + " Protected";
+            temp = temp + "Protected ";
         }
         if(this.isTrapped){
-            temp = temp + " Trapped";
+            temp = temp + "Trapped ";
         }
         return temp;
+    }
+
+    public String getCardActive2() {
+        String temp = "";
+        if (this.isAccelerated){
+            temp = temp + "ACCELERATE ";
+        }
+        if(this.isDelayed){
+            temp = temp + "DELAY ";
+        }
+        if(this.isProtected){
+            temp = temp + "PROTECT ";
+        }
+        if(this.isTrapped){
+            temp = temp + "TRAP ";
+        }
+        return temp;
+    }
+
+    public int getCountCardActive() {
+        int count=0;
+        if (this.isAccelerated){
+            count++;
+        }
+        if(this.isDelayed){
+            count++;
+        }
+        if(this.isProtected){
+            count++;
+        }
+        if(this.isTrapped){
+            count++;
+        }
+        return count;
     }
 
     public void setAccelerated(){
@@ -99,5 +137,8 @@ public class Card extends CardConstants {
 
     public Card harvest() {
         return new Card(CARD_EMPTY, "");
+    }
+    public boolean isEmpty(){
+        return this.isEmpty;
     }
 }

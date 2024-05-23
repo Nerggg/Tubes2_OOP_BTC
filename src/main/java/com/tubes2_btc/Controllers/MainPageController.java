@@ -42,6 +42,7 @@ public class MainPageController {
     // Setup variables
     private Player player1 = new Player();
     private Player player2 = new Player();
+    private Store store = new Store(new ArrayList<>());
 
     // Set player 1
     public void setPlayer1(Player player1) {
@@ -59,10 +60,13 @@ public class MainPageController {
     private int currentTurn = 0;
 
     // Set game state procedure
-    public void loadGameState(Player player1, Player player2, int currentTurn) {
+    public void loadGameState(Player player1, Player player2, int currentTurn, Store store) {
         // Set players
         this.player1.copyFrom(player1);
         this.player2.copyFrom(player2);
+
+        // Set store
+        this.store = store;
 
         // Set current turn
         this.currentTurn = currentTurn;
@@ -77,6 +81,22 @@ public class MainPageController {
         updateFarm();
         updateActiveDeck();
         setGameDataGUI();
+    }
+
+    public Player getPlayer1(){
+        return this.player1;
+    }
+
+    public Player getPlayer2(){
+        return this.player2;
+    }
+
+    public int getCurrentTurn(){
+        return this.currentTurn;
+    }
+
+    public Store getStore(){
+        return this.store;
     }
     
     // GUI variables
@@ -995,6 +1015,8 @@ public class MainPageController {
 
     @FXML
     private void storeButtonHandler(ActionEvent event) {
+        DataPasser dataPasser = DataPasser.getInstance();
+        dataPasser.currentPlayer = currentPlayer;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/store_page.fxml"));
             Parent root = fxmlLoader.load();
@@ -1027,6 +1049,10 @@ public class MainPageController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(new Scene(root));
+
+            // Set main page controller
+            SaveStateController s = fxmlLoader.getController();
+            s.setMainPageController(this);
 
             // Get the parent stage (assuming the button is within a stage)
             Stage parentStage = (Stage) ((Parent) event.getSource()).getScene().getWindow();

@@ -1,9 +1,7 @@
 package com.tubes2_btc.Controllers;
 
-import com.tubes2_btc.Classes.CardConstants;
-import com.tubes2_btc.Classes.DataPasser;
-import com.tubes2_btc.Classes.Product;
-import com.tubes2_btc.Classes.Store;
+import com.tubes2_btc.Classes.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,19 +9,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.scene.effect.ColorAdjust;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,9 +32,6 @@ public class StorePageController {
     private Button kembali;
 
     @FXML
-    private AnchorPane main;
-
-    @FXML
     private GridPane Toko;
 
     @FXML
@@ -45,6 +39,9 @@ public class StorePageController {
 
     @FXML
     private Button nextButton;
+
+    @FXML
+    private Label playerMoneyLabel;
 
     private static Store store = new Store(generateProducts(), 8);
     private int currentPage = 0;
@@ -55,6 +52,13 @@ public class StorePageController {
         // Initialize the list of products
         initializeStore(Toko, this.store.getProducts());
         updatePaginationButtons();
+        updatePlayerMoneyLabel();
+    }
+
+    private void updatePlayerMoneyLabel() {
+        DataPasser dataPasser = DataPasser.getInstance();
+        Player currentPlayer = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
+        Platform.runLater(() -> playerMoneyLabel.setText("Gulden: " + String.valueOf(currentPlayer.getGuldenCount())));
     }
 
     public static void initializeStore() {
@@ -78,6 +82,11 @@ public class StorePageController {
     private void initializeStore(GridPane tokoPane, List<Product> products) {
         int productIndex = currentPage * ITEMS_PER_PAGE;
         int displayedItems = 0;
+
+        DataPasser dataPasser = DataPasser.getInstance();
+
+        Player currentPlayer = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
+        System.out.println(currentPlayer.getGuldenCount());
 
         for (Node node : tokoPane.getChildren()) {
             if (node instanceof Pane) {
@@ -134,6 +143,10 @@ public class StorePageController {
                             DataPasser dataPasser = DataPasser.getInstance();
                             dataPasser.imageTemp = new Image(getClass().getResource(product.getCardPath()).toExternalForm());
                             dataPasser.labelTemp = product.getCardName();
+                            dataPasser.productPrice = product.getSellPrice();
+                            dataPasser.productStoreQuantity = StorePageController.getStore().getProductCount(product.getCardName());
+                            dataPasser.productTemp = product;
+                            System.out.println(dataPasser.productStoreQuantity);
 
                             try {
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/store-popup.fxml"));
@@ -227,6 +240,13 @@ public class StorePageController {
         previousButton.setDisable(currentPage <= 0);
         nextButton.setDisable(currentPage >= totalPages - 1);
     }
+
+//    public static void refreshStorePage() {
+//        StorePageController storePageController = new StorePageController();
+//        storePageController.initializeStore(storePageController.Toko, storePageController.store.getProducts());
+//        storePageController.updatePaginationButtons();
+//    }
+
 
     public static void addNewProductToStore(Product product, int jumlah) {
         store.addProduct(product, jumlah);

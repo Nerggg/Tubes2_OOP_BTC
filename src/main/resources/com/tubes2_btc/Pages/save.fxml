@@ -6,7 +6,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.SaveStateController">
    <children>
-      <Button fx:id="kembali" layoutX="40.0" layoutY="51.0" mnemonicParsing="false" text="Kembali" onAction="#handleClicked">
+      <Button fx:id="kembali" layoutX="40.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleClicked" text="Kembali">
          <font>
             <Font size="14.0" />
          </font></Button>
@@ -25,21 +25,21 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="109.0" layoutY="197.0" prefHeight="25.0" prefWidth="463.0" />
-      <TitledPane animated="false" layoutX="109.0" layoutY="125.0" prefHeight="78.0" prefWidth="463.0" text="untitled">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="111.0" prefWidth="462.0">
+      <TitledPane fx:id="formatTitledPane" animated="false" expanded="false" layoutX="109.0" layoutY="125.0" prefHeight="78.0" prefWidth="463.0" text="-">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="111.0" prefWidth="462.0">
                <children>
-                  <Button layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="463.0" text="TXT" />
-                  <Button layoutY="27.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="463.0" text="Format lain nanti aja" />
+                  <Button fx:id="txtButton" layoutY="1.0" mnemonicParsing="false" onAction="#handleTxtButton" prefHeight="26.0" prefWidth="463.0" text="TXT" />
+                  <Button fx:id="jsonButton" layoutY="27.0" mnemonicParsing="false" onAction="#handleJsonButton" prefHeight="26.0" prefWidth="463.0" text="JSON" />
                </children>
             </AnchorPane>
-        </content>
+         </content>
       </TitledPane>
-      <Button layoutX="35.0" layoutY="264.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="531.0" text="Save">
+      <Button fx:id="saveButton" layoutX="35.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="30.0" prefWidth="531.0" text="Save">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
+      <Button fx:id="browseButton" layoutX="109.0" layoutY="198.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="463.0" text="Browse" />
    </children>
 </Pane>

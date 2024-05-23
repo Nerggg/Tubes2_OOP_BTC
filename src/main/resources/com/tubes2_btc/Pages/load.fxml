@@ -23,26 +23,25 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <Label layoutX="54.0" layoutY="200.0" text="Folder">
+        <Label layoutX="52.0" layoutY="212.0" text="Folder">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <TitledPane fx:id="formatTitledPane" animated="false" expanded="false" layoutX="109.0" layoutY="125.0" prefHeight="78.0" prefWidth="463.0" text="-">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="111.0" prefWidth="462.0">
-                    <children>
-                        <Button fx:id="txtButton" layoutY="1.0" mnemonicParsing="false" onAction="#handleTxtButton" prefHeight="26.0" prefWidth="463.0" text="TXT" />
-                        <Button fx:id="jsonButton" layoutY="27.0" mnemonicParsing="false" onAction="#handleJsonButton" prefHeight="26.0" prefWidth="463.0" text="JSON" />
-                    </children>
-                </AnchorPane>
-            </content>
-        </TitledPane>
-        <Button fx:id="loadButton" layoutX="35.0" layoutY="264.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="531.0" text="Load" onAction="#handleLoadButton">
+        <Button fx:id="loadButton" layoutX="35.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleLoadButton" prefHeight="30.0" prefWidth="531.0" text="Load">
             <font>
                 <Font size="14.0" />
             </font>
         </Button>
-        <Button fx:id="browseButton" layoutX="109.0" layoutY="198.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="463.0" text="Browse" />
+        <Button fx:id="browseButton" layoutX="107.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="463.0" text="Browse" />
+        <TitledPane fx:id="formatTitledPane" animated="false" expanded="false" layoutX="109.0" layoutY="125.0" prefHeight="84.0" prefWidth="463.0" text="TXT">
+            <content>
+                <AnchorPane fx:id="formatAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="50.0" prefWidth="462.0">
+                    <children>
+                        <Button fx:id="txtButton" layoutX="-1.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleTxtButton" prefHeight="26.0" prefWidth="463.0" text="TXT" />
+                    </children>
+                </AnchorPane>
+            </content>
+        </TitledPane>
     </children>
 </Pane>

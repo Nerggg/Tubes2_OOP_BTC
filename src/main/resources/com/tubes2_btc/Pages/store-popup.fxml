@@ -4,21 +4,45 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" styleClass="curved-pane-store" stylesheets="@../Styles/store_page.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.StorePopUpController">
    <children>
       <ImageView fx:id="imageView" fitHeight="71.0" fitWidth="84.0" layoutX="383.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="labelText1" layoutX="-4.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Label" textAlignment="CENTER" wrappingWidth="500.0" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="4.0">
+      <Text fx:id="labelText1" layoutX="-4.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Label" textAlignment="CENTER" wrappingWidth="500.0" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="4.0">
          <font>
-            <Font size="25.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
       </Text>
-      <Button fx:id="kembali" layoutX="38.0" layoutY="36.0" mnemonicParsing="false" onAction="#handleClickedKembali" text="Kembali" />
-      <Button fx:id="plusButton" layoutX="278.0" layoutY="93.0" mnemonicParsing="false" text="+" onAction="#handlePlus"/>
-      <Button fx:id="minusButton" layoutX="200.0" layoutY="93.0" mnemonicParsing="false" text="-" onAction="#handleMinus"/>
-      <Label fx:id="quantityLabel" layoutX="246.0" layoutY="97.0" text="0" />
-      <Button fx:id="confirmButton" layoutX="232.0" layoutY="141.0" mnemonicParsing="false" text="Beli" onAction="#handleConfirm"/>
+      <HBox alignment="CENTER" layoutX="0.0" layoutY="55.0" prefWidth="500.0">
+         <Label fx:id="priceLabel" text="Gd." textAlignment="CENTER">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="0.0" layoutY="75.0" prefWidth="500.0">
+         <Label fx:id="descLabel" text="Gd." textAlignment="CENTER">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+      </HBox>
+      <Button fx:id="kembali" layoutX="39.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleClickedKembali" text="Kembali" />
+      <Button fx:id="plusButton" layoutX="277.0" layoutY="100.0" mnemonicParsing="false" onAction="#handlePlus" text="+" />
+      <Button fx:id="minusButton" layoutX="199.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleMinus" text="-" />
+      <Label fx:id="quantityLabel" layoutX="245.0" layoutY="104.0" text="0" />
+      <Button fx:id="confirmButton" layoutX="232.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleConfirm" text="Beli" />
+      <HBox alignment="CENTER" layoutX="165.0" layoutY="26.0" prefWidth="500.0">
+         <children>
+            <Label fx:id="countActiveDeck" text="Gd." textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
