@@ -44,6 +44,7 @@ public class Animal extends Card {
     
     public void accelerate() {
         this.weight += 8;
+        this.isAccelerated = true;
     }
 
     public void delay() {
@@ -51,9 +52,25 @@ public class Animal extends Card {
         if (this.weight < 0) {
             this.weight = 0;
         }
+        this.isDelayed = true;
     }
 
     public Card harvest() {
         return createCard(resultProduct);
+    }
+
+    public boolean feed(Product product) {
+        if (this.animalType == Animal.ANIMAL_OMNIVORA) {
+            this.weight += product.getAddedWeight();
+            return true;
+        } else if (this.animalType == Animal.ANIMAL_KARNIVORA && product.getFoodType() == Product.PRODUCT_CARNIVORE_FOOD) {
+            this.weight += product.getAddedWeight();
+            return true;
+        } else if (this.animalType == Animal.ANIMAL_HERBIVORA && product.getFoodType() == Product.PRODUCT_HERBIVORE_FOOD) {
+            this.weight += product.getAddedWeight();
+            return true;
+        } else {
+            return false;
+        }
     }
 }

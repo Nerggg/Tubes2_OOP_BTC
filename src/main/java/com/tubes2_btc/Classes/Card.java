@@ -8,10 +8,10 @@ public class Card extends CardConstants {
     private boolean isEmpty;
 
     // Item flags
-    private boolean isAccelerated;
-    private boolean isDelayed;
-    private boolean isProtected;
-    private boolean isTrapped;
+    protected boolean isAccelerated;
+    protected boolean isDelayed;
+    protected boolean isProtected;
+    protected boolean isTrapped;
 
     public Card(String cardName, String cardPath) {
         this.CardName = cardName;
@@ -79,6 +79,22 @@ public class Card extends CardConstants {
 
     public void delay() {
         // Do nothing
+    }
+
+    public void protect() {
+        this.isProtected = true;
+    }
+
+    public void trap() {
+        this.isTrapped = true;
+    }
+
+    public boolean isProtected() {
+        return this.isProtected;
+    }
+
+    public boolean isTrapped() {
+        return this.isTrapped;
     }
 
     public Card harvest() {

@@ -34,6 +34,7 @@ public class Plant extends Card {
 
     public void accelerate() {
         this.age += 2;
+        this.isAccelerated = true;
     }
 
     public void delay() {
@@ -41,6 +42,7 @@ public class Plant extends Card {
         if (this.age < 0) {
             this.age = 0;
         }
+        this.isDelayed = true;
     }
 
     public Card harvest() {

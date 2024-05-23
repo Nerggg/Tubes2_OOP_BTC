@@ -28,4 +28,8 @@ public class Product extends Card {
     public int getHarvestAge(){
         return this.harvestAge;
     }
+
+    public String getFoodType() {
+        return this.foodType;
+    }
 }

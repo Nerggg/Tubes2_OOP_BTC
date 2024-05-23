@@ -121,8 +121,8 @@ public class MainPageController {
     }
 
     public void handleDragAndDrop(Card dragged, Card dropped, int draggedIndex, int droppedIndex, boolean draggedIsFarm, boolean droppedIsFarm) {
-        System.out.println("Dragged: " + dragged.getCardName() + "(" + draggedIndex + ")");
-        System.out.println("Dropped: " + dropped.getCardName() + "(" + droppedIndex + ")");
+        System.out.println("Dragged: " + dragged.getCardName() + " (" + draggedIndex + ")");
+        System.out.println("Dropped: " + dropped.getCardName() + " (" + droppedIndex + ")");
         if (!draggedIsFarm && !droppedIsFarm) {
             // Swap at active deck
             Player p = (currentPlayer == 1) ? player1 : player2;
@@ -173,38 +173,68 @@ public class MainPageController {
             Player opponent = (currentPlayer == 1) ? player2 : player1;
             
             if (currentPlayer != currentFarmView) {
-                // System.out.println("hi " + draggedCard.getCardName());
                 switch (draggedCard.getCardName()) {
                     case CardConstants.CARD_DESTROY:
-                        System.out.println("Destroy");
-                        deleteCard(droppedIndex, true, opponent);
-                        deleteCard(draggedIndex, false, player);
+                        if (dropped.getCardName() != CardConstants.CARD_EMPTY && !dropped.isProtected()) {
+                            deleteCard(droppedIndex, true, opponent);
+                            deleteCard(draggedIndex, false, player);
+                        }
                         break;
                     case CardConstants.CARD_DELAY:
-                        System.out.println("Delay");
-                        dropped.delay();
-                        deleteCard(draggedIndex, false, player);
+                        if (dropped.getCardName() != CardConstants.CARD_EMPTY) {
+                            dropped.delay();
+                            deleteCard(draggedIndex, false, player);
+                        }
                         break;
                 }
             } else {
-                // System.out.println("hello " + draggedCard.getCardName());
                 switch (draggedCard.getCardName()) {
                     case CardConstants.CARD_ACCELERATE:
-                        System.out.println("Accel");
-                        dropped.accelerate();
-                        deleteCard(draggedIndex, false, player);
+                        if (dropped.getCardName() != CardConstants.CARD_EMPTY) {
+                            dropped.accelerate();
+                            deleteCard(draggedIndex, false, player);
+                        }
                         break;
                     case CardConstants.CARD_INSTANT_HARVEST:
                         if (dropped instanceof Plant || dropped instanceof Animal) {
-                            System.out.println("Instant");
                             deleteCard(draggedIndex, false, player);
+                            deleteCard(droppedIndex, true, player);
                             player.addToActiveDeck(dropped.harvest());
                             updateActiveDeck();
                         }
                         break;
                     case CardConstants.CARD_PROTECT:
+                        if (dropped.getCardName() != CardConstants.CARD_EMPTY) {
+                            deleteCard(draggedIndex, false, player);
+                            dropped.protect();
+                        }
                         break;
                     case CardConstants.CARD_TRAP:
+                        if (dropped.getCardName() != CardConstants.CARD_EMPTY) {
+                            deleteCard(draggedIndex, false, player);
+                            dropped.trap();
+                        }
+                        break;
+                    default:
+                        if (dragged instanceof Product) {
+                            if (dropped instanceof Animal) {
+                                if (((Animal) dropped).feed((Product) dragged)) {
+                                    deleteCard(draggedIndex, false, player);
+                                }
+                            }
+                        } else if (dragged instanceof Animal || dragged instanceof Plant) {
+                            // Swap from deck to farm
+                            player.swapSlots(draggedIndex, droppedIndex, player.getActiveDeck(), player.getFarm());
+
+                            // Swap images and names
+                            List<Node> farmSlots = (currentPlayer == 1) ? farmSlots_1 : farmSlots_2;
+                            List<Node> activeDeckSlots = (currentPlayer == 1) ? activeDeckSlots_1 : activeDeckSlots_2;
+
+                            Node slot_dragged = activeDeckSlots.get(draggedIndex);
+                            Node slot_dropped = farmSlots.get(droppedIndex);
+
+                            swapNodes(slot_dragged, slot_dropped);
+                        }
                         break;
                 }
             }
@@ -818,9 +848,13 @@ public class MainPageController {
                     System.out.println(index);
                     for(int i =0;i<finalHeight;i++){
                         for(int j =0;j<finalWidth;j++){
-                            System.out.println("Deleting card "+ (index+j));
                             Player p = (currentPlayer == 1) ? player1 : player2;
-                            deleteCard(index+j,true, p);
+                            
+                            if (!p.getFarm().get(index+j).isProtected()) {
+                                System.out.println(p.getFarm().get(index+j).getCardName() + " " + p.getFarm().get(index+j).isProtected());
+                                System.out.println("Deleting card "+ (index+j));
+                                deleteCard(index+j,true, p);
+                            }
                         }
                         index += 5;
                     }
@@ -833,7 +867,7 @@ public class MainPageController {
         }
     }
 
-     public Rectangle addDynamicRectangle(double width, double height, double x, double y) {
+    public Rectangle addDynamicRectangle(double width, double height, double x, double y) {
         Rectangle rectangle = new Rectangle();
         double x_value = x * 105 + 25;
         double y_value = y * 117 + 5;
