@@ -24,6 +24,10 @@ public class Card extends CardConstants {
         this.isTrapped = false;
     }
 
+    public  boolean IsEmpty(){
+        return this.isEmpty;
+    }
+
     public String getCardName() {
         return this.CardName;
     }

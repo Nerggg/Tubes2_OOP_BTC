@@ -1,8 +1,6 @@
 package com.tubes2_btc.Controllers;
 
-import com.tubes2_btc.Classes.DataPasser;
-import com.tubes2_btc.Classes.Player;
-import com.tubes2_btc.Classes.Store;
+import com.tubes2_btc.Classes.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +14,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.util.Map;
 
 public class StorePopUpController {
 
@@ -46,11 +46,17 @@ public class StorePopUpController {
     @FXML
     private Label descLabel;
 
+    @FXML
+    private Label countActiveDeck;
+
     private int quantity = 1;
     private int maxQuantity;
     private int productPrice;
     DataPasser dataPasser = DataPasser.getInstance();
-    private Player player = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
+    Player player = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
+    private int deckSize = 0;
+    private Map<Integer, Card> activeDeck;
+
 
     @FXML
     public void initialize() {
@@ -58,32 +64,33 @@ public class StorePopUpController {
         imageView.setImage(dataPasser.imageTemp);
         labelText1.setText(dataPasser.labelTemp);
         productPrice = dataPasser.productPrice;
-        Player player = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
+        player = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
+        activeDeck = player.getActiveDeck();
+
+        for (Card card : activeDeck.values()) {
+            if (card.IsEmpty()) {
+                deckSize++;
+            }
+        }
+        deckSize--;
+        System.out.println(deckSize);
         updatePriceLabel();
 
         Store store = StorePageController.getStore();
         maxQuantity = store.getProductCount(dataPasser.labelTemp);
 
         quantityLabel.setText(String.valueOf(quantity));
-        if (productPrice > player.getGuldenCount()){
-            descLabel.setText("Gulden anda tidak cukup!");
-            descLabel.setStyle("-fx-text-fill: red;");
-            confirmButton.setDisable(true);
-        }
-        else{
-            descLabel.setText("Gulden anda setelah beli: Gd. " + String.valueOf(player.getGuldenCount() - productPrice));
-            descLabel.setStyle("-fx-text-fill: black;");
-            confirmButton.setDisable(false);
-        }
-
+        updateLabelsAndButtons();
     }
 
     @FXML
     private void handlePlus(ActionEvent event) {
         if (quantity < maxQuantity) {
             quantity++;
+            deckSize--;
             quantityLabel.setText(String.valueOf(quantity));
             updatePriceLabel();
+            updateLabelsAndButtons();
         }
     }
 
@@ -91,25 +98,41 @@ public class StorePopUpController {
     private void handleMinus(ActionEvent event) {
         if (quantity > 1) {
             quantity--;
+            deckSize++;
             quantityLabel.setText(String.valueOf(quantity));
             updatePriceLabel();
+            updateLabelsAndButtons();
         }
     }
 
     private void updatePriceLabel() {
         int totalPrice = productPrice * quantity;
-        if (totalPrice > player.getGuldenCount()){
+        priceLabel.setText("Gd. " + totalPrice);
+    }
+
+    private void updateLabelsAndButtons() {
+        int totalPrice = productPrice * quantity;
+        boolean disableConfirmButton = false;
+
+        if (totalPrice > player.getGuldenCount()) {
             descLabel.setText("Gulden anda tidak cukup!");
             descLabel.setStyle("-fx-text-fill: red;");
-            confirmButton.setDisable(true);
-        }
-        else{
-            descLabel.setText("Gulden anda setelah beli: Gd. " + String.valueOf(player.getGuldenCount() - totalPrice));
+            disableConfirmButton = true;
+        } else {
+            descLabel.setText("Gulden anda setelah beli: Gd. " + (player.getGuldenCount() - totalPrice));
             descLabel.setStyle("-fx-text-fill: black;");
-            confirmButton.setDisable(false);
         }
 
-        priceLabel.setText("Gd. " + totalPrice);
+        if (deckSize < 0) {
+            countActiveDeck.setText("Deck aktif anda penuh!");
+            countActiveDeck.setStyle("-fx-text-fill: red;");
+            disableConfirmButton = true;
+        } else {
+            countActiveDeck.setText("Sisa deck aktif anda: " + (deckSize));
+            countActiveDeck.setStyle("-fx-text-fill: black;");
+        }
+
+        confirmButton.setDisable(disableConfirmButton);
     }
 
     @FXML
