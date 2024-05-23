@@ -49,4 +49,20 @@ public class Card extends CardConstants {
         return temp;
     }
 
+    public void setAccelerated(){
+        this.isAccelerated = true;
+    }
+
+    public void setDelayed(){
+        this.isDelayed = true;
+    }
+
+    public void setProtected(){
+        this.isProtected = true;
+    }
+
+    public void setTrapped(){
+        this.isTrapped = true;
+    }
+
 }

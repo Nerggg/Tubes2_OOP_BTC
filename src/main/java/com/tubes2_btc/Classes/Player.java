@@ -29,6 +29,13 @@ public class Player {
         InitializeDeck();
     }
 
+    public Player(int guldenCount, List<Card> deck, Map<Integer, Card> activeDeck, Map<Integer, Card> farm) {
+        this.guldenCount = guldenCount;
+        this.deck = deck;
+        this.activeDeck = activeDeck;
+        this.farm = farm;
+    }
+
     public void initializeFarm() {
         Random random = new Random();
         
