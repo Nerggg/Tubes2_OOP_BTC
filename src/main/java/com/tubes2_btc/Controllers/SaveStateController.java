@@ -317,14 +317,22 @@ public class SaveStateController {
                 fileWriter.write(Integer.toString(mainPageController.getCurrentTurn()));
                 fileWriter.write("\n");
                 Store store = mainPageController.getStore();
-                fileWriter.write(Integer.toString(store.getProducts().size()));
-                fileWriter.write("\n");
                 List<Product> products = store.getProducts();
+                int count = 0;
                 for (Product product : products) {
-                    fileWriter.write(cardMap.get(product.getCardName()));
-                    fileWriter.write(" ");
-                    fileWriter.write(Integer.toString(store.getProductCount(product.getCardName())));
-                    fileWriter.write("\n");
+                    if (store.getProductCount(product.getCardName())!=0){
+                        count++;
+                    }
+                }
+                fileWriter.write(Integer.toString(count));
+                fileWriter.write("\n");
+                for (Product product : products) {
+                    if (store.getProductCount(product.getCardName())!=0){
+                        fileWriter.write(cardMap.get(product.getCardName()));
+                        fileWriter.write(" ");
+                        fileWriter.write(Integer.toString(store.getProductCount(product.getCardName())));
+                        fileWriter.write("\n");
+                    }
                 }
 
             } catch (IOException e) {
