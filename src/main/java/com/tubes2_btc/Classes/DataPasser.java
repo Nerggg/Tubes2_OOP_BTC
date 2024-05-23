@@ -5,7 +5,7 @@ import java.util.List;
 
 public class DataPasser {
     // DataPasser is a singleton class that is used to pass data between activities
-    
+
     // DataPasser attributes and methods
     private static DataPasser instance;
 
@@ -33,4 +33,6 @@ public class DataPasser {
     public Store storeTemp;
     public Image imageTemp;
     public String labelTemp;
+    public double productPrice;
+    public int productQuantity;
 }
