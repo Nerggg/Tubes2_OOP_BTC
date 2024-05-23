@@ -1,20 +1,30 @@
 package com.tubes2_btc.Controllers;
 
 import com.tubes2_btc.Classes.*;
+import com.tubes2_btc.Interfaces.FormatHandler;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.event.ActionEvent;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.*;
+import java.util.concurrent.Flow;
+import java.util.jar.JarEntry;
+import java.util.jar.JarInputStream;
 
 public class LoadStateController {
 
@@ -31,13 +41,14 @@ public class LoadStateController {
     private Button loadButton;
 
     @FXML
-    private Button jsonButton;
+    private AnchorPane formatAnchorPane;
 
     @FXML
     private Button browseButton;
 
     private Player player1;
     private Player player2;
+    private String format;
     private int turn;
     private Store store;
     private DirectoryChooser directoryChooser;
@@ -60,12 +71,14 @@ public class LoadStateController {
     @FXML
     public void handleTxtButton() {
         formatTitledPane.setText("TXT");
+        format = ".txt";
         formatTitledPane.setExpanded(false);
     }
 
     @FXML
     public void handleJsonButton() {
         formatTitledPane.setText("JSON");
+        format = ".json";
         formatTitledPane.setExpanded(false);
     }
 
@@ -86,15 +99,12 @@ public class LoadStateController {
         if (selectedDirectory != null) {
             System.out.println("Folder yang dipilih: " + selectedDirectory.getAbsolutePath());
 
-            String format = formatTitledPane.getText();
-
             File[] files = selectedDirectory.listFiles();
             if (files != null) {
                 System.out.println("Daftar file dalam folder:");
                 for (File file : files) {
-                    if (file.isFile()) { // Memastikan file (bukan direktori)
-                        if (("TXT".equals(format) && file.getName().endsWith(".txt")) ||
-                                ("JSON".equals(format) && file.getName().endsWith(".json"))) {
+                    if (file.isFile()) {  // Memastikan file (bukan direktori)
+                        if (file.getName().endsWith(format)) {
                             System.out.println(file.getName());
                             System.out.println("Isi File:");
                             readAndPrintFile(file);
@@ -102,7 +112,7 @@ public class LoadStateController {
                     }
                 }
                 if (mainPageController != null) {
-                    mainPageController.loadGameState(player1, player2, turn);
+                    mainPageController.loadGameState(player1, player2, turn, store);
                 } else {
                     System.err.println("mainPageController is null");
                 }
@@ -116,7 +126,7 @@ public class LoadStateController {
 
     private void readAndPrintFile(File file) {
         createMap();
-        if (file.getName().equals("gamestate.txt")) {
+        if (file.getName().equals("gamestate" + format)) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 turn = Integer.parseInt(reader.readLine());
                 int numOfItems = Integer.parseInt(reader.readLine().trim());
@@ -141,7 +151,7 @@ public class LoadStateController {
             }
         }
 
-        if (file.getName().equals("player1.txt")) {
+        if(file.getName().equals("player1" + format)) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 int gulden = Integer.parseInt(reader.readLine().trim());
                 int jumlahDeck = Integer.parseInt(reader.readLine().trim());
@@ -260,7 +270,7 @@ public class LoadStateController {
             }
         }
 
-        if (file.getName().equals("player2.txt")) {
+        if(file.getName().equals("player2" + format)) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 int gulden = Integer.parseInt(reader.readLine().trim());
                 int jumlahDeck = Integer.parseInt(reader.readLine().trim());
@@ -414,6 +424,65 @@ public class LoadStateController {
         for (Product product : store.getProducts()) {
             System.out.println("Nama Produk: " + product.getCardName() + ", Jumlah: "
                     + store.getProductCount(product.getCardName()));
+        }
+    }
+
+    private void addFormatButton(FormatHandler handler) {
+        Button newButton = new Button(handler.getFormatExtension());
+        newButton.setLayoutY(txtButton.getLayoutY() + txtButton.getPrefHeight() + 2);
+        newButton.setPrefHeight(26);
+        newButton.setPrefWidth(463);
+        newButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                formatTitledPane.setText(handler.getFormatExtension());
+                format = "." + handler.getFormatExtension().toLowerCase();
+                formatTitledPane.setExpanded(false);
+            }
+        });
+        formatAnchorPane.getChildren().add(newButton);
+    }
+
+    public void loadFormatHandlerFromJar(File jarFile) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+        try (JarInputStream jarInputStream = new JarInputStream(new FileInputStream(jarFile))) {
+            JarEntry jarEntry;
+            URL[] urls = { new URL("jar:file:" + jarFile.getAbsolutePath() + "!/") };
+            URLClassLoader classLoader = new URLClassLoader(urls);
+
+            while ((jarEntry = jarInputStream.getNextJarEntry()) != null) {
+                if (jarEntry.getName().endsWith(".class")) {
+                    String className = jarEntry.getName().replace('/', '.').replace(".class", "");
+                    try {
+                        System.out.println("nama kelasnya " + className);
+                        Class<?> loadedClass = classLoader.loadClass(className);
+                        if (FormatHandler.class.isAssignableFrom(loadedClass)) {
+                            try {
+                                Constructor<?> constructor = loadedClass.getDeclaredConstructor();
+                                System.out.println("Constructor found: " + constructor);
+                                FormatHandler handler = (FormatHandler) constructor.newInstance();
+                                addFormatButton(handler);
+                            } catch (NoSuchMethodException e) {
+                                System.out.println("Class " + className + " does not have a default constructor.");
+                            }
+                        }
+                    } catch (ClassNotFoundException e) {
+                        System.out.println("Class " + className + " not found.");
+                    }
+                }
+            }
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void initialize() throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+        formatTitledPane.setText("TXT");
+        format = ".txt";
+        DataPasser dataPasser = DataPasser.getInstance();
+//        dataPasser.loadState = this;
+        if (dataPasser.jarFile != null) {
+            loadFormatHandlerFromJar(dataPasser.jarFile);
         }
     }
 

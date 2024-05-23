@@ -2,6 +2,8 @@ package com.tubes2_btc.Classes;
 
 import com.tubes2_btc.Controllers.*;
 import javafx.scene.image.Image;
+
+import java.io.File;
 import java.util.List;
 
 public class DataPasser {
@@ -40,4 +42,7 @@ public class DataPasser {
     public String labelTemp;
     public int productPrice;
     public int productQuantity;
+
+    // Plugin Stuffs
+    public File jarFile;
 }
