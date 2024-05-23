@@ -33,8 +33,7 @@ public class PurchaseConfirmationController {
 
     @FXML
     private void handleConfirmPurchase(ActionEvent event) {
-        // Implement your logic for confirming the purchase here
-        // For example, deduct the price from the user's balance, update the inventory, etc.
+
 
         // Close the popup
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
