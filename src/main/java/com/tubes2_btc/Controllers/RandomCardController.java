@@ -179,6 +179,7 @@ public class RandomCardController {
             player.addToActiveDeck(card);
         }
         dataPasser.mainPageController.updateActiveDeck();
+        dataPasser.mainPageController.setGameDataGUI();
         
         // Close stage
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

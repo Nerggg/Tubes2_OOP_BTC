@@ -171,30 +171,18 @@ public class LoadStateController {
                     if (parts.length == 2) {
                         String lokasi = parts[0];
                         String cardNameDeck = parts[1];
-                        int idx = 0;
-                        if (lokasi.charAt(0) == 'A') {
-                            String numberPart = lokasi.substring(1);
-                            idx = Integer.parseInt(numberPart);
-                            idx--;
+                        int idx;
+
+                        switch (lokasi.charAt(0)) {
+                            case 'A': idx = 0; break;
+                            case 'B': idx = 1; break;
+                            case 'C': idx = 2; break;
+                            case 'D': idx = 3; break;
+                            case 'E': idx = 4; break;
+                            case 'F': idx = 5; break;
+                            default: idx = 0; break; 
                         }
-                        if (lokasi.charAt(0) == 'B') {
-                            String numberPart = lokasi.substring(1);
-                            idx = Integer.parseInt(numberPart);
-                            idx = idx + 5;
-                            idx--;
-                        }
-                        if (lokasi.charAt(0) == 'C') {
-                            String numberPart = lokasi.substring(1);
-                            idx = Integer.parseInt(numberPart);
-                            idx = idx + 10;
-                            idx--;
-                        }
-                        if (lokasi.charAt(0) == 'D') {
-                            String numberPart = lokasi.substring(1);
-                            idx = Integer.parseInt(numberPart);
-                            idx = idx + 15;
-                            idx--;
-                        }
+
                         Card randomCard = Card.createCard(storeMap.get(cardNameDeck));
                         activeDeck.put(idx, randomCard);
                     }
@@ -210,29 +198,17 @@ public class LoadStateController {
                     String[] parts = line.split("\\s+");
                     String lokasi = parts[0];
                     String cardNameDeck = parts[1];
-                    int idx = 0;
-                    if (lokasi.charAt(0) == 'A') {
-                        String numberPart = lokasi.substring(1);
-                        idx = Integer.parseInt(numberPart);
-                        idx--;
-                    }
-                    if (lokasi.charAt(0) == 'B') {
-                        String numberPart = lokasi.substring(1);
-                        idx = Integer.parseInt(numberPart);
-                        idx = idx + 5;
-                        idx--;
-                    }
-                    if (lokasi.charAt(0) == 'C') {
-                        String numberPart = lokasi.substring(1);
-                        idx = Integer.parseInt(numberPart);
-                        idx = idx + 10;
-                        idx--;
-                    }
-                    if (lokasi.charAt(0) == 'D') {
-                        String numberPart = lokasi.substring(1);
-                        idx = Integer.parseInt(numberPart);
-                        idx = idx + 15;
-                        idx--;
+                    
+                    String numberPart = lokasi.substring(1);
+                    int idx = (Integer.parseInt(numberPart) - 1) * 5;
+
+                    switch (lokasi.charAt(0)) {
+                        case 'A': idx = idx + 0; break;
+                        case 'B': idx = idx + 1; break;
+                        case 'C': idx = idx + 2; break;
+                        case 'D': idx = idx + 3; break;
+                        case 'E': idx = idx + 4; break;
+                        default: idx = idx + 0; break;
                     }
 
                     if (Card.createCard(storeMap.get(cardNameDeck)).getClass().getSimpleName().equals("Plant")) {
@@ -314,30 +290,18 @@ public class LoadStateController {
                     if (parts.length == 2) {
                         String lokasi = parts[0];
                         String cardNameDeck = parts[1];
-                        int idx = 0;
-                        if (lokasi.charAt(0) == 'A') {
-                            String numberPart = lokasi.substring(1);
-                            idx = Integer.parseInt(numberPart);
-                            idx--;
+                        int idx;
+                        
+                        switch (lokasi.charAt(0)) {
+                            case 'A': idx = 0; break;
+                            case 'B': idx = 1; break;
+                            case 'C': idx = 2; break;
+                            case 'D': idx = 3; break;
+                            case 'E': idx = 4; break;
+                            case 'F': idx = 5; break;
+                            default: idx = 0; break; 
                         }
-                        if (lokasi.charAt(0) == 'B') {
-                            String numberPart = lokasi.substring(1);
-                            idx = Integer.parseInt(numberPart);
-                            idx = idx + 5;
-                            idx--;
-                        }
-                        if (lokasi.charAt(0) == 'C') {
-                            String numberPart = lokasi.substring(1);
-                            idx = Integer.parseInt(numberPart);
-                            idx = idx + 10;
-                            idx--;
-                        }
-                        if (lokasi.charAt(0) == 'D') {
-                            String numberPart = lokasi.substring(1);
-                            idx = Integer.parseInt(numberPart);
-                            idx = idx + 15;
-                            idx--;
-                        }
+
                         Card randomCard = Card.createCard(storeMap.get(cardNameDeck));
                         activeDeck.put(idx, randomCard);
                     }
@@ -353,30 +317,19 @@ public class LoadStateController {
                     String[] parts = line.split("\\s+");
                     String lokasi = parts[0];
                     String cardNameDeck = parts[1];
-                    int idx = 0;
-                    if (lokasi.charAt(0) == 'A') {
-                        String numberPart = lokasi.substring(1);
-                        idx = Integer.parseInt(numberPart);
-                        idx--;
+
+                    String numberPart = lokasi.substring(1);
+                    int idx = (Integer.parseInt(numberPart) - 1) * 5;
+
+                    switch (lokasi.charAt(0)) {
+                        case 'A': idx = idx + 0; break;
+                        case 'B': idx = idx + 1; break;
+                        case 'C': idx = idx + 2; break;
+                        case 'D': idx = idx + 3; break;
+                        case 'E': idx = idx + 4; break;
+                        default: idx = idx + 0; break;
                     }
-                    if (lokasi.charAt(0) == 'B') {
-                        String numberPart = lokasi.substring(1);
-                        idx = Integer.parseInt(numberPart);
-                        idx = idx + 5;
-                        idx--;
-                    }
-                    if (lokasi.charAt(0) == 'C') {
-                        String numberPart = lokasi.substring(1);
-                        idx = Integer.parseInt(numberPart);
-                        idx = idx + 10;
-                        idx--;
-                    }
-                    if (lokasi.charAt(0) == 'D') {
-                        String numberPart = lokasi.substring(1);
-                        idx = Integer.parseInt(numberPart);
-                        idx = idx + 15;
-                        idx--;
-                    }
+
                     if (Card.createCard(storeMap.get(cardNameDeck)).getClass().getSimpleName().equals("Plant")) {
                         Plant randomCard = (Plant) Card.createCard(storeMap.get(cardNameDeck));
                         randomCard.setAge(Integer.parseInt(parts[2]));

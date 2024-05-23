@@ -60,8 +60,8 @@ public class MainPageController {
     // Set game state procedure
     public void loadGameState(Player player1, Player player2, int currentTurn) {
         // Set players
-        this.player1 = player1;
-        this.player2 = player2;
+        this.player1.copyFrom(player1);
+        this.player2.copyFrom(player2);
 
         // Set current turn
         this.currentTurn = currentTurn;
@@ -74,6 +74,8 @@ public class MainPageController {
 
         // Update farm
         updateFarm();
+        updateActiveDeck();
+        setGameDataGUI();
     }
     
     // GUI variables
@@ -721,6 +723,15 @@ public class MainPageController {
     @FXML
     private void nextButtonHandler(ActionEvent event) {
         try {
+            // Set game state variables
+            currentTurn++;
+            currentPlayer = (currentTurn % 2 == 1) ? 1 : 2;
+            currentFarmView = currentPlayer;
+
+            // Update cards
+            updateFarm();
+            updateActiveDeck();
+
             // Set data passer
             DataPasser dataPasser = DataPasser.getInstance();
             dataPasser.currentPlayer = currentPlayer;

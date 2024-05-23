@@ -36,6 +36,13 @@ public class Player {
         this.farm = farm;
     }
 
+    public void copyFrom(Player player) {
+        this.guldenCount = player.getGuldenCount();
+        this.deck = player.deck;
+        this.activeDeck = player.activeDeck;
+        this.farm = player.farm;
+    }
+
     public void initializeFarm() {
         Random random = new Random();
         
