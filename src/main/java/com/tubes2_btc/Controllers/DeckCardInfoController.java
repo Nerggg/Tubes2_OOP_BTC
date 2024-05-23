@@ -1,16 +1,19 @@
 package com.tubes2_btc.Controllers;
-import com.tubes2_btc.Classes.*;
 
+import com.tubes2_btc.Classes.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.net.URL;
+import javafx.stage.StageStyle;
 
 public class DeckCardInfoController {
 
@@ -41,6 +44,8 @@ public class DeckCardInfoController {
     @FXML
     private Text labelItemAktifValue;
 
+    private Product currentProduct;
+
     @FXML
     private void handleClickedKembali(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -49,28 +54,45 @@ public class DeckCardInfoController {
 
     @FXML
     private void handleClickedJual(ActionEvent event) {
-        // Logika untuk menangani tombol "Panen" ditekan
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/sell-confirmation.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Pass the product information to the sell confirmation controller
+            SellConfirmationController controller = fxmlLoader.getController();
+            controller.setProduct(currentProduct);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root));
+
+            Stage parentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setOnShown(e -> {
+                stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
+                stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
+            });
+
+            stage.showAndWait();
+            stage.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         System.out.println("Tombol 'Jual' ditekan.");
-        // Misalnya, menjalankan logika panen atau memperbarui data
     }
 
     @FXML
     public void initialize() {
         DataPasser dataPasser = DataPasser.getInstance();
         if (dataPasser.infoCard.getClass().getSimpleName().equals("Product")) {
-            Product card = (Product) dataPasser.infoCard;
-            // Nama item
-            labelText1.setText(card.getCardName());
-            // Berat atau umur
+            currentProduct = (Product) dataPasser.infoCard;
+            labelText1.setText(currentProduct.getCardName());
             labelText2.setText("Berat:");
-            // Berat atau umur sekarang
-            labelValue1.setText(Integer.toString(card.getHarvestAge()));
-            // Berat atau umur untuk dipanen
-            labelValue2.setText("(" + Integer.toString(card.getHarvestAge()) + ")");
-            // Item aktif
-            labelItemAktifValue.setText(card.getCardActive());
-            // set image card
-            Image image = new Image(getClass().getResource(card.getCardPath()).toExternalForm());
+            labelValue1.setText(Integer.toString(currentProduct.getHarvestAge()));
+            labelValue2.setText("(" + Integer.toString(currentProduct.getHarvestAge()) + ")");
+            labelItemAktifValue.setText(currentProduct.getCardActive());
+            Image image = new Image(getClass().getResource(currentProduct.getCardPath()).toExternalForm());
             imageView.setImage(image);
         }
     }

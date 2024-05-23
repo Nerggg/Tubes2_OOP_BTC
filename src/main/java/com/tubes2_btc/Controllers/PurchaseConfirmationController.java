@@ -48,9 +48,8 @@ public class PurchaseConfirmationController {
         System.out.println(("Sisa uang: " + player.getGuldenCount()));
 
         StorePageController.getStore().setProductCounts(dataPasser.productTemp.getCardName(), dataPasser.productStoreQuantity);
-        Card barangBelian = new Card(dataPasser.productTemp.getCardName(), dataPasser.productTemp.getCardPath());
         for (int i = 0; i < dataPasser.productQuantity; i++){
-            player.addToActiveDeck(barangBelian);
+            player.addToActiveDeck(dataPasser.productTemp);
         }
 
         dataPasser.mainPageController.updateActiveDeck();

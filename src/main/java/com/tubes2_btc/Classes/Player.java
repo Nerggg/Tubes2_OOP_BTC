@@ -148,4 +148,15 @@ public class Player {
     public int getDeckSize(){
         return this.deck.size();
     }
+
+    public void removeFromActiveDeck(Product product) {
+        Integer keyToRemove = null;
+        for (Map.Entry<Integer, Card> entry : activeDeck.entrySet()) {
+            if (entry.getValue().equals(product)) {
+                entry.setValue(Card.createCard(0));
+                break;
+            }
+        }
+    }
+    
 }
