@@ -37,9 +37,6 @@ public class SaveStateController {
     @FXML
     private TitledPane formatTitledPane;
 
-    private Player player1;
-    private Player player2;
-
     private static Map<String, String> cardMap = new HashMap<>();
     private String selectedFormat = "";
     private File selectedDirectory;
@@ -99,217 +96,12 @@ public class SaveStateController {
         File fileGameState = new File(selectedDirectory, "gamestate." + selectedFormat.toLowerCase());
 
         cardMap = createMap();
-        if (filePlayer1 != null) {
-            try (FileWriter fileWriter = new FileWriter(filePlayer1)) {
-                player1 = mainPageController.getPlayer1();
-                fileWriter.write(Integer.toString(player1.getGuldenCount()));
-                fileWriter.write("\n");
-                fileWriter.write(Integer.toString(player1.getDeckSize()));
-                fileWriter.write("\n");
-                Map<Integer, Card> activeDeck = player1.getActiveDeck();
-                int count=0;
-                for (Map.Entry<Integer, Card> entry : activeDeck.entrySet()) {
-                    Card card = entry.getValue();
-                    if (card.isEmpty() == false) {
-                        count++;
-                    }
-                }
-                fileWriter.write(Integer.toString(count));
-                fileWriter.write("\n");
-                for (Map.Entry<Integer, Card> entry : activeDeck.entrySet()) {
-                    Integer index = entry.getKey();
-                    Card card = entry.getValue();
-                    if (card.isEmpty() == false) {
-                        switch (index % 5) {
-                            case 0:
-                                fileWriter.write('A');
-                                break;
-                            case 1:
-                                fileWriter.write('B');
-                                break;
-                            case 2:
-                                fileWriter.write('C');
-                                break;
-                            case 3:
-                                fileWriter.write('D');
-                                break;
-                            case 4:
-                                fileWriter.write('E');
-                                break;
-                            default:
-                                fileWriter.write('A');
-                                break;
-                        }
-                        fileWriter.write("0");
-                        fileWriter.write(Integer.toString((index / 5) + 1));
-                        fileWriter.write(" ");
-                        fileWriter.write(cardMap.get(card.getCardName()));
-                        fileWriter.write("\n");
-                    }
-                }
-
-                Map<Integer, Card> farm = player1.getFarm();
-                count=0;
-                for (Map.Entry<Integer, Card> entry : farm.entrySet()) {
-                    Card card = entry.getValue();
-                    if (card.isEmpty() == false) {
-                        count++;
-                    }
-                }
-                fileWriter.write(Integer.toString(count));
-                fileWriter.write("\n");
-                for (Map.Entry<Integer, Card> entry : farm.entrySet()) {
-                    Integer index = entry.getKey();
-                    Card card = entry.getValue();
-                    if (card.isEmpty() == false) {
-                        switch (index % 5) {
-                            case 0:
-                                fileWriter.write('A');
-                                break;
-                            case 1:
-                                fileWriter.write('B');
-                                break;
-                            case 2:
-                                fileWriter.write('C');
-                                break;
-                            case 3:
-                                fileWriter.write('D');
-                                break;
-                            case 4:
-                                fileWriter.write('E');
-                                break;
-                            default:
-                                fileWriter.write('A');
-                                break;
-                        }
-                        fileWriter.write("0");
-                        fileWriter.write(Integer.toString((index / 5) + 1));
-                        fileWriter.write(" ");
-                        fileWriter.write(cardMap.get(card.getCardName()));
-                        fileWriter.write(" ");
-                        if (card.getClass().getSimpleName().equals("Plant")) {
-                            Plant randomCard = (Plant) card;
-                            fileWriter.write(Integer.toString(randomCard.getAge()));
-                        } else {
-                            Animal randomCard = (Animal) card;
-                            fileWriter.write(Integer.toString(randomCard.getWeight()));
-                        }
-                        fileWriter.write(" ");
-                        fileWriter.write(Integer.toString(card.getCountCardActive()));
-                        fileWriter.write(" ");
-                        fileWriter.write(card.getCardActive2());
-                        fileWriter.write("\n");
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (filePlayer1!=null){
+            savePlayer(mainPageController.getPlayer1(), filePlayer1);
         }
-        if (filePlayer2 != null) {
-            try (FileWriter fileWriter = new FileWriter(filePlayer2)) {
-                player2 = mainPageController.getPlayer2();
-                fileWriter.write(Integer.toString(player2.getGuldenCount()));
-                fileWriter.write("\n");
-                fileWriter.write(Integer.toString(player2.getDeckSize()));
-                fileWriter.write("\n");
-                Map<Integer, Card> activeDeck = player2.getActiveDeck();
-                int count=0;
-                for (Map.Entry<Integer, Card> entry : activeDeck.entrySet()) {
-                    Card card = entry.getValue();
-                    if (card.isEmpty() == false) {
-                        count++;
-                    }
-                }
-                fileWriter.write(Integer.toString(count));
-                fileWriter.write("\n");
-                for (Map.Entry<Integer, Card> entry : activeDeck.entrySet()) {
-                    Integer index = entry.getKey();
-                    Card card = entry.getValue();
-                    if (card.isEmpty() == false) {
-                        switch (index % 5) {
-                            case 0:
-                                fileWriter.write('A');
-                                break;
-                            case 1:
-                                fileWriter.write('B');
-                                break;
-                            case 2:
-                                fileWriter.write('C');
-                                break;
-                            case 3:
-                                fileWriter.write('D');
-                                break;
-                            case 4:
-                                fileWriter.write('E');
-                                break;
-                            default:
-                                fileWriter.write('A');
-                                break;
-                        }
-                        fileWriter.write("0");
-                        fileWriter.write(Integer.toString((index / 5) + 1));
-                        fileWriter.write(" ");
-                        fileWriter.write(cardMap.get(card.getCardName()));
-                        fileWriter.write("\n");
-                    }
-                }
 
-                Map<Integer, Card> farm = player2.getFarm();
-                count=0;
-                for (Map.Entry<Integer, Card> entry : farm.entrySet()) {
-                    Card card = entry.getValue();
-                    if (card.isEmpty() == false) {
-                        count++;
-                    }
-                }
-                fileWriter.write(Integer.toString(count));
-                fileWriter.write("\n");
-                for (Map.Entry<Integer, Card> entry : farm.entrySet()) {
-                    Integer index = entry.getKey();
-                    Card card = entry.getValue();
-                    if (card.isEmpty() == false) {
-                        switch (index % 5) {
-                            case 0:
-                                fileWriter.write('A');
-                                break;
-                            case 1:
-                                fileWriter.write('B');
-                                break;
-                            case 2:
-                                fileWriter.write('C');
-                                break;
-                            case 3:
-                                fileWriter.write('D');
-                                break;
-                            case 4:
-                                fileWriter.write('E');
-                                break;
-                            default:
-                                fileWriter.write('A');
-                                break;
-                        }
-                        fileWriter.write("0");
-                        fileWriter.write(Integer.toString((index / 5) + 1));
-                        fileWriter.write(" ");
-                        fileWriter.write(cardMap.get(card.getCardName()));
-                        fileWriter.write(" ");
-                        if (card.getClass().getSimpleName().equals("Plant")) {
-                            Plant randomCard = (Plant) card;
-                            fileWriter.write(Integer.toString(randomCard.getAge()));
-                        } else {
-                            Animal randomCard = (Animal) card;
-                            fileWriter.write(Integer.toString(randomCard.getWeight()));
-                        }
-                        fileWriter.write(" ");
-                        fileWriter.write(Integer.toString(card.getCountCardActive()));
-                        fileWriter.write(" ");
-                        fileWriter.write(card.getCardActive2());
-                        fileWriter.write("\n");
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (filePlayer2!=null){
+            savePlayer(mainPageController.getPlayer2(), filePlayer2);
         }
 
         if (fileGameState != null) {
@@ -370,4 +162,109 @@ public class SaveStateController {
         return cardMap;
     }
 
+    public void savePlayer(Player player, File file){
+        try (FileWriter fileWriter = new FileWriter(file)) {
+            fileWriter.write(Integer.toString(player.getGuldenCount()));
+            fileWriter.write("\n");
+            fileWriter.write(Integer.toString(player.getDeckSize()));
+            fileWriter.write("\n");
+            Map<Integer, Card> activeDeck = player.getActiveDeck();
+            int count=0;
+            for (Map.Entry<Integer, Card> entry : activeDeck.entrySet()) {
+                Card card = entry.getValue();
+                if (card.isEmpty() == false) {
+                    count++;
+                }
+            }
+            fileWriter.write(Integer.toString(count));
+            fileWriter.write("\n");
+            for (Map.Entry<Integer, Card> entry : activeDeck.entrySet()) {
+                Integer index = entry.getKey();
+                Card card = entry.getValue();
+                if (card.isEmpty() == false) {
+                    switch (index % 5) {
+                        case 0:
+                            fileWriter.write('A');
+                            break;
+                        case 1:
+                            fileWriter.write('B');
+                            break;
+                        case 2:
+                            fileWriter.write('C');
+                            break;
+                        case 3:
+                            fileWriter.write('D');
+                            break;
+                        case 4:
+                            fileWriter.write('E');
+                            break;
+                        default:
+                            fileWriter.write('A');
+                            break;
+                    }
+                    fileWriter.write("0");
+                    fileWriter.write(Integer.toString((index / 5) + 1));
+                    fileWriter.write(" ");
+                    fileWriter.write(cardMap.get(card.getCardName()));
+                    fileWriter.write("\n");
+                }
+            }
+
+            Map<Integer, Card> farm = player.getFarm();
+            count=0;
+            for (Map.Entry<Integer, Card> entry : farm.entrySet()) {
+                Card card = entry.getValue();
+                if (card.isEmpty() == false) {
+                    count++;
+                }
+            }
+            fileWriter.write(Integer.toString(count));
+            fileWriter.write("\n");
+            for (Map.Entry<Integer, Card> entry : farm.entrySet()) {
+                Integer index = entry.getKey();
+                Card card = entry.getValue();
+                if (card.isEmpty() == false) {
+                    switch (index % 5) {
+                        case 0:
+                            fileWriter.write('A');
+                            break;
+                        case 1:
+                            fileWriter.write('B');
+                            break;
+                        case 2:
+                            fileWriter.write('C');
+                            break;
+                        case 3:
+                            fileWriter.write('D');
+                            break;
+                        case 4:
+                            fileWriter.write('E');
+                            break;
+                        default:
+                            fileWriter.write('A');
+                            break;
+                    }
+                    fileWriter.write("0");
+                    fileWriter.write(Integer.toString((index / 5) + 1));
+                    fileWriter.write(" ");
+                    fileWriter.write(cardMap.get(card.getCardName()));
+                    fileWriter.write(" ");
+                    if (card.getClass().getSimpleName().equals("Plant")) {
+                        Plant randomCard = (Plant) card;
+                        fileWriter.write(Integer.toString(randomCard.getAge()));
+                    } else {
+                        Animal randomCard = (Animal) card;
+                        fileWriter.write(Integer.toString(randomCard.getWeight()));
+                    }
+                    fileWriter.write(" ");
+                    fileWriter.write(Integer.toString(card.getCountCardActive()));
+                    fileWriter.write(" ");
+                    fileWriter.write(card.getCardActive2());
+                    fileWriter.write("\n");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
