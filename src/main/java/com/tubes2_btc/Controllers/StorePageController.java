@@ -86,6 +86,7 @@ public class StorePageController {
         DataPasser dataPasser = DataPasser.getInstance();
 
         Player currentPlayer = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
+        System.out.println(currentPlayer.getGuldenCount());
 
         for (Node node : tokoPane.getChildren()) {
             if (node instanceof Pane) {
@@ -143,6 +144,9 @@ public class StorePageController {
                             dataPasser.imageTemp = new Image(getClass().getResource(product.getCardPath()).toExternalForm());
                             dataPasser.labelTemp = product.getCardName();
                             dataPasser.productPrice = product.getSellPrice();
+                            dataPasser.productStoreQuantity = StorePageController.getStore().getProductCount(product.getCardName());
+                            dataPasser.productTemp = product;
+                            System.out.println(dataPasser.productStoreQuantity);
 
                             try {
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/store-popup.fxml"));
@@ -236,6 +240,13 @@ public class StorePageController {
         previousButton.setDisable(currentPage <= 0);
         nextButton.setDisable(currentPage >= totalPages - 1);
     }
+
+//    public static void refreshStorePage() {
+//        StorePageController storePageController = new StorePageController();
+//        storePageController.initializeStore(storePageController.Toko, storePageController.store.getProducts());
+//        storePageController.updatePaginationButtons();
+//    }
+
 
     public static void addNewProductToStore(Product product, int jumlah) {
         store.addProduct(product, jumlah);
