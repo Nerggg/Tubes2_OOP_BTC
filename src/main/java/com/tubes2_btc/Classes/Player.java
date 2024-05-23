@@ -144,4 +144,8 @@ public class Player {
             }
         }
     }
+
+    public int getDeckSize(){
+        return this.deck.size();
+    }
 }

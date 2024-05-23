@@ -77,6 +77,14 @@ public class MainPageController {
         updateActiveDeck();
         setGameDataGUI();
     }
+
+    public Player getPlayer1(){
+        return this.player1;
+    }
+
+    public Player getPlayer2(){
+        return this.player2;
+    }
     
     // GUI variables
     private List<Node> farmSlots_1 = new ArrayList<>();
@@ -827,6 +835,10 @@ public class MainPageController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(new Scene(root));
+
+            // Set main page controller
+            SaveStateController s = fxmlLoader.getController();
+            s.setMainPageController(this);
 
             // Get the parent stage (assuming the button is within a stage)
             Stage parentStage = (Stage) ((Parent) event.getSource()).getScene().getWindow();
