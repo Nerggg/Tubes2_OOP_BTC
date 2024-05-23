@@ -4,13 +4,13 @@ import com.tubes2_btc.Classes.CardConstants;
 import com.tubes2_btc.Classes.DataPasser;
 import com.tubes2_btc.Classes.Product;
 import com.tubes2_btc.Classes.Store;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -20,11 +20,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.event.ActionEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.effect.ColorAdjust;
 import javafx.stage.StageStyle;
+import javafx.scene.effect.ColorAdjust;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -59,14 +58,8 @@ public class StorePageController {
     }
 
     public static void initializeStore() {
-//        if (store == null) {
-//            // Initialize the list of products
-//            List<Product> products = generateProducts();
-//            // Create store
-//            store = new Store(products, 8);
-//        }
+        // Method for initializing the store if needed
     }
-
 
     private static List<Product> generateProducts() {
         List<Product> products = new ArrayList<>();
@@ -105,7 +98,6 @@ public class StorePageController {
                         if (imageUrl != null) {
                             Image imageNew = new Image(imageUrl.toExternalForm());
                             imageView.setImage(imageNew);
-                            imageView.setId("productImage");
                         } else {
                             System.err.println("Gambar tidak ditemukan: " + product.getCardPath());
                         }
@@ -140,8 +132,8 @@ public class StorePageController {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
                             DataPasser dataPasser = DataPasser.getInstance();
-//                            dataPasser.imageTemp =
-//                            dataPasser.labelTemp =
+                            dataPasser.imageTemp = new Image(getClass().getResource(product.getCardPath()).toExternalForm());
+                            dataPasser.labelTemp = product.getCardName();
 
                             try {
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/store-popup.fxml"));
@@ -175,6 +167,33 @@ public class StorePageController {
                 }
             }
         }
+    }
+
+    private void resetPane(Pane pane) {
+        VBox imagePane = (VBox) pane.lookup("#imagePane");
+        VBox detailsPane = (VBox) pane.lookup("#detailsPane");
+
+        ImageView imageView = (ImageView) imagePane.lookup("#image");
+        Label productLabel = (Label) imagePane.lookup("#labelNama");
+        Label priceLabel = (Label) detailsPane.lookup("#labelHarga");
+        Label quantityLabel = (Label) detailsPane.lookup("#labelJumlah");
+
+        if (imageView != null) {
+            imageView.setImage(null);
+        }
+        if (productLabel != null) {
+            productLabel.setText("");
+        }
+        if (priceLabel != null) {
+            priceLabel.setText("");
+        }
+        if (quantityLabel != null) {
+            quantityLabel.setText("");
+        }
+
+        pane.setEffect(null);
+        pane.setDisable(false);
+        pane.setVisible(true);
     }
 
     @FXML
@@ -217,7 +236,7 @@ public class StorePageController {
         store.addProduct(product, jumlah);
     }
 
-    public static void resetAllDataStore(){
+    public static void resetAllDataStore() {
         store.setZeroCounts();
     }
 
@@ -225,4 +244,3 @@ public class StorePageController {
         return store;
     }
 }
-    
