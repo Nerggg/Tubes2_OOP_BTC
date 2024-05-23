@@ -260,7 +260,7 @@ public class MainPageController {
             }
         }
     }
-    
+
     public void initializeSlot(Node child, int i, boolean isFarm, List<Node> farmSlots, List<Node> activeDeckSlots, Player player) {
         DataPasser dataPasser = DataPasser.getInstance();
 
@@ -278,9 +278,9 @@ public class MainPageController {
         }
 
         // Push to farm slots
-        if (isFarm) 
+        if (isFarm)
             farmSlots.add(child);
-        else 
+        else
             activeDeckSlots.add(child);
 
         // Set farm slot event handlers
@@ -292,7 +292,7 @@ public class MainPageController {
                 draggedCardIndex = Integer.parseInt(child.getId().substring(underscoreIndex + 1));
 
                 String slot_type = child.getId().substring(0, underscoreIndex);
-                
+
                 if (slot_type.equals("Ladang"))    draggedIsFarm = true;
                 else                                        draggedIsFarm = false;
 
@@ -301,7 +301,7 @@ public class MainPageController {
                     p = (currentPlayer == 1) ? player1 : player2;
                 } else {
                     p = (currentFarmView == 1) ? player1 : player2;
-                
+
                 }
 
                 draggedCard = (draggedIsFarm) ? p.getFarm().get(draggedCardIndex) : p.getActiveDeck().get(draggedCardIndex);
@@ -340,7 +340,7 @@ public class MainPageController {
                 int droppedCardIndex = Integer.parseInt(child.getId().substring(underscoreIndex + 1));
 
                 String slot_type = child.getId().substring(0, underscoreIndex);
-                
+
                 boolean droppedIsFarm;
                 if (slot_type.equals("Ladang"))    droppedIsFarm = true;
                 else                                        droppedIsFarm = false;
@@ -359,23 +359,23 @@ public class MainPageController {
 
                 // // Swap farm slots
                 // if (currentPlayer == currentFarmView) {
-                //     Map<Integer, Card> cont1, cont2; 
+                //     Map<Integer, Card> cont1, cont2;
                 //     Player p = (currentFarmView == 1) ? player1 : player2;
-    
+
                 //     cont1 = (draggedIsFarm) ? p.getFarm() : p.getActiveDeck();
                 //     cont2 = (droppedIsFarm) ? p.getFarm() : p.getActiveDeck();
-    
+
                 //     p.swapSlots(draggedCardIndex, droppedCardIndex, cont1, cont2);
-    
+
                 //     // Swap images and names
                 //     Node slot_dragged;
                 //     if (draggedIsFarm)  slot_dragged = farmSlots.get(draggedCardIndex);
                 //     else                slot_dragged = activeDeckSlots.get(draggedCardIndex);
-                    
+
                 //     swapNodes(child, slot_dragged);
                 // }
 
-                // Event handler 
+                // Event handler
                 Dragboard db = dragEvent.getDragboard();
                 boolean success = false;
                 if (db.hasString()) {
@@ -395,6 +395,7 @@ public class MainPageController {
 
                     if (p.getFarm().get(i).getClass().getSimpleName().equals("Animal") || p.getFarm().get(i).getClass().getSimpleName().equals("Plant") || p.getFarm().get(i).getClass().getSimpleName().equals("Product")) {;
                         dataPasser.infoCard = p.getFarm().get(i);
+                        dataPasser.indexCard = i;
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/card-info.fxml"));
                             Parent root = fxmlLoader.load();
@@ -425,7 +426,7 @@ public class MainPageController {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     Player p = (currentPlayer == 1) ? player1 : player2;
-                    
+
                     if (p.getActiveDeck().get(i).getClass().getSimpleName().equals("Product")) {;
                         dataPasser.infoCard = p.getActiveDeck().get(i);
                         try {

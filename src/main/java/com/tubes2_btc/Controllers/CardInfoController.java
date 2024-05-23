@@ -11,6 +11,10 @@ import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CardInfoController {
 
@@ -49,10 +53,61 @@ public class CardInfoController {
 
     @FXML
     private void handleClickedPanen(ActionEvent event) {
-        // Logika untuk menangani tombol "Panen" ditekan
+
+        List<Integer> key = new ArrayList<>();
+        List<Integer> value = new ArrayList<>();
+
+        key.add(Card.CARD_HIU_INDEX);
+        value.add(Card.CARD_SIRIP_HIU_INDEX);
+        key.add(Card.CARD_SAPI_INDEX);
+        value.add(Card.CARD_SUSU_INDEX);
+        key.add(Card.CARD_DOMBA_INDEX);
+        value.add(Card.CARD_DAGING_DOMBA_INDEX);
+        key.add(Card.CARD_KUDA_INDEX);
+        value.add(Card.CARD_DAGING_KUDA_INDEX);
+        key.add(Card.CARD_AYAM_INDEX);
+        value.add(Card.CARD_TELUR_INDEX);
+        key.add(Card.CARD_BERUANG_INDEX);
+        value.add(Card.CARD_DAGING_BERUANG_INDEX);
+        key.add(Card.CARD_BIJI_JAGUNG_INDEX);
+        value.add(Card.CARD_BIJI_JAGUNG_INDEX);
+        key.add(Card.CARD_BIJI_LABU_INDEX);
+        value.add(Card.CARD_BIJI_LABU_INDEX);
+        key.add(Card.CARD_BIJI_STROBERI_INDEX);
+        value.add(Card.CARD_BIJI_STROBERI_INDEX);
+
+
+        DataPasser dataPasser = DataPasser.getInstance();
+
+        Card produk = dataPasser.infoCard;
+
+        Player player = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
+
+
+        int indexHasil = dataPasser.indexCard;
+
+        int target = 0;
+        for (int i = 0; i < key.size(); i++) {
+            if (Card.createCard(key.get(i)).getCardName().equals(produk.getCardName())){
+                System.out.println("found");
+                target = value.get(i);
+                break;
+            }
+        }
+
+        System.out.println(Card.createCard(target).getCardName());
+        player.setFarmAt(indexHasil, Card.createCard(target));
         System.out.println("Tombol 'Panen' ditekan.");
-        // Misalnya, menjalankan logika panen atau memperbarui data
+        dataPasser.mainPageController.updateActiveDeck();
+        dataPasser.mainPageController.updateFarm();
+        dataPasser.mainPageController.setGameDataGUI();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
+
+
+
 
     @FXML
     public void initialize() {

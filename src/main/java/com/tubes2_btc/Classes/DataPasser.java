@@ -35,6 +35,7 @@ public class DataPasser {
 
     // Info Card Temporary Variable
     public Card infoCard;
+    public int indexCard;
 
     // Store Temporary Variable
     public Store storeTemp;
