@@ -477,6 +477,8 @@ public class LoadStateController {
 
     @FXML
     public void initialize() throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+        formatTitledPane.setText("TXT");
+        format = ".txt";
         DataPasser dataPasser = DataPasser.getInstance();
 //        dataPasser.loadState = this;
         if (dataPasser.jarFile != null) {
