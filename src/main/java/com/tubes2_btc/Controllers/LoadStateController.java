@@ -89,7 +89,6 @@ public class LoadStateController {
         selectedDirectory = directoryChooser.showDialog(browseButton.getScene().getWindow());
         if (selectedDirectory != null) {
             System.out.println("Folder yang dipilih: " + ((File) selectedDirectory).getAbsolutePath());
-            // Lakukan operasi lain yang diperlukan dengan folder yang dipilih
         } else {
             System.out.println("Tidak ada folder yang dipilih.");
         }
@@ -103,10 +102,8 @@ public class LoadStateController {
             if (files != null) {
                 System.out.println("Daftar file dalam folder:");
                 for (File file : files) {
-                    if (file.isFile()) {  // Memastikan file (bukan direktori)
+                    if (file.isFile()) {  
                         if (file.getName().endsWith(format)) {
-                            System.out.println(file.getName());
-                            System.out.println("Isi File:");
                             readAndPrintFile(file);
                         }
                     }
@@ -152,241 +149,11 @@ public class LoadStateController {
         }
 
         if(file.getName().equals("player1" + format)) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                int gulden = Integer.parseInt(reader.readLine().trim());
-                int jumlahDeck = Integer.parseInt(reader.readLine().trim());
-
-                List<Card> deck = new ArrayList<>();
-                Random random = new Random();
-                for (int i = 0; i < jumlahDeck; i++) {
-                    int rand = random.nextInt(50);
-
-                    if (rand < 25)
-                        rand = 0;
-                    else
-                        rand -= 24;
-
-                    Card randomCard = Card.createCard(rand);
-                    deck.add(randomCard);
-                }
-
-                Map<Integer, Card> activeDeck = new HashMap<>();
-                for (int i = 0; i < 6; i++) {
-                    activeDeck.put(i, Card.createCard(0));
-                }
-                int jumlahDeckAktif = Integer.parseInt(reader.readLine().trim());
-                for (int i = 0; i < jumlahDeckAktif; i++) {
-                    String line = reader.readLine();
-                    String[] parts = line.split("\\s+");
-                    if (parts.length == 2) {
-                        String lokasi = parts[0];
-                        String cardNameDeck = parts[1];
-                        int idx;
-
-                        switch (lokasi.charAt(0)) {
-                            case 'A': idx = 0; break;
-                            case 'B': idx = 1; break;
-                            case 'C': idx = 2; break;
-                            case 'D': idx = 3; break;
-                            case 'E': idx = 4; break;
-                            case 'F': idx = 5; break;
-                            default: idx = 0; break; 
-                        }
-
-                        Card randomCard = Card.createCard(storeMap.get(cardNameDeck));
-                        activeDeck.put(idx, randomCard);
-                    }
-                }
-
-                Map<Integer, Card> farm = new HashMap<>();
-                for (int i = 0; i < 20; i++) {
-                    farm.put(i, Card.createCard(0));
-                }
-                int jumlahDeckDiLadang = Integer.parseInt(reader.readLine().trim());
-                for (int i = 0; i < jumlahDeckDiLadang; i++) {
-                    String line = reader.readLine();
-                    String[] parts = line.split("\\s+");
-                    String lokasi = parts[0];
-                    String cardNameDeck = parts[1];
-                    
-                    String numberPart = lokasi.substring(1);
-                    int idx = (Integer.parseInt(numberPart) - 1) * 5;
-
-                    switch (lokasi.charAt(0)) {
-                        case 'A': idx = idx + 0; break;
-                        case 'B': idx = idx + 1; break;
-                        case 'C': idx = idx + 2; break;
-                        case 'D': idx = idx + 3; break;
-                        case 'E': idx = idx + 4; break;
-                        default: idx = idx + 0; break;
-                    }
-
-                    if (Card.createCard(storeMap.get(cardNameDeck)).getClass().getSimpleName().equals("Plant")) {
-                        Plant randomCard = (Plant) Card.createCard(storeMap.get(cardNameDeck));
-                        randomCard.setAge(Integer.parseInt(parts[2]));
-                        int jumlahCardActive = Integer.parseInt(parts[3]);
-                        for (int j = 1; j <= jumlahCardActive; j++) {
-                            String cardActive = parts[3 + j];
-                            if (cardActive.equals("ACCELERATE")) {
-                                randomCard.setAccelerated();
-                            }
-                            if (cardActive.equals("DELAY")) {
-                                randomCard.setDelayed();
-                            }
-                            if (cardActive.equals("PROTECT")) {
-                                randomCard.setProtected();
-                            }
-                            if (cardActive.equals("TRAPPED")) {
-                                randomCard.setTrapped();
-                            }
-                        }
-                        farm.put(idx, randomCard);
-                    } else {
-                        Animal randomCard = (Animal) Card.createCard(storeMap.get(cardNameDeck));
-                        randomCard.setWeight(Integer.parseInt(parts[2]));
-                        int jumlahCardActive = Integer.parseInt(parts[3]);
-                        for (int j = 1; j <= jumlahCardActive; j++) {
-                            String cardActive = parts[3 + j];
-                            if (cardActive.equals("ACCELERATE")) {
-                                randomCard.setAccelerated();
-                            }
-                            if (cardActive.equals("DELAY")) {
-                                randomCard.setDelayed();
-                            }
-                            if (cardActive.equals("PROTECT")) {
-                                randomCard.setProtected();
-                            }
-                            if (cardActive.equals("TRAPPED")) {
-                                randomCard.setTrapped();
-                            }
-                        }
-                        farm.put(idx, randomCard);
-                    }
-
-                }
-                player1 = new Player(gulden, deck, activeDeck, farm);
-            } catch (IOException e) {
-                System.out.println("Error saat membaca file: " + e.getMessage());
-            }
+            player1 = loadPlayer(file);
         }
 
         if(file.getName().equals("player2" + format)) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                int gulden = Integer.parseInt(reader.readLine().trim());
-                int jumlahDeck = Integer.parseInt(reader.readLine().trim());
-
-                List<Card> deck = new ArrayList<>();
-                Random random = new Random();
-                for (int i = 0; i < jumlahDeck; i++) {
-                    int rand = random.nextInt(50);
-
-                    if (rand < 25)
-                        rand = 0;
-                    else
-                        rand -= 24;
-
-                    Card randomCard = Card.createCard(rand);
-                    deck.add(randomCard);
-                }
-
-                Map<Integer, Card> activeDeck = new HashMap<>();
-                for (int i = 0; i < 6; i++) {
-                    activeDeck.put(i, Card.createCard(0));
-                }
-                int jumlahDeckAktif = Integer.parseInt(reader.readLine().trim());
-                for (int i = 0; i < jumlahDeckAktif; i++) {
-                    String line = reader.readLine();
-                    String[] parts = line.split("\\s+");
-                    if (parts.length == 2) {
-                        String lokasi = parts[0];
-                        String cardNameDeck = parts[1];
-                        int idx;
-                        
-                        switch (lokasi.charAt(0)) {
-                            case 'A': idx = 0; break;
-                            case 'B': idx = 1; break;
-                            case 'C': idx = 2; break;
-                            case 'D': idx = 3; break;
-                            case 'E': idx = 4; break;
-                            case 'F': idx = 5; break;
-                            default: idx = 0; break; 
-                        }
-
-                        Card randomCard = Card.createCard(storeMap.get(cardNameDeck));
-                        activeDeck.put(idx, randomCard);
-                    }
-                }
-
-                Map<Integer, Card> farm = new HashMap<>();
-                for (int i = 0; i < 20; i++) {
-                    farm.put(i, Card.createCard(0));
-                }
-                int jumlahDeckDiLadang = Integer.parseInt(reader.readLine().trim());
-                for (int i = 0; i < jumlahDeckDiLadang; i++) {
-                    String line = reader.readLine();
-                    String[] parts = line.split("\\s+");
-                    String lokasi = parts[0];
-                    String cardNameDeck = parts[1];
-
-                    String numberPart = lokasi.substring(1);
-                    int idx = (Integer.parseInt(numberPart) - 1) * 5;
-
-                    switch (lokasi.charAt(0)) {
-                        case 'A': idx = idx + 0; break;
-                        case 'B': idx = idx + 1; break;
-                        case 'C': idx = idx + 2; break;
-                        case 'D': idx = idx + 3; break;
-                        case 'E': idx = idx + 4; break;
-                        default: idx = idx + 0; break;
-                    }
-
-                    if (Card.createCard(storeMap.get(cardNameDeck)).getClass().getSimpleName().equals("Plant")) {
-                        Plant randomCard = (Plant) Card.createCard(storeMap.get(cardNameDeck));
-                        randomCard.setAge(Integer.parseInt(parts[2]));
-                        int jumlahCardActive = Integer.parseInt(parts[3]);
-                        for (int j = 1; j <= jumlahCardActive; j++) {
-                            String cardActive = parts[3 + j];
-                            if (cardActive.equals("ACCELERATE")) {
-                                randomCard.setAccelerated();
-                            }
-                            if (cardActive.equals("DELAY")) {
-                                randomCard.setDelayed();
-                            }
-                            if (cardActive.equals("PROTECT")) {
-                                randomCard.setProtected();
-                            }
-                            if (cardActive.equals("TRAPPED")) {
-                                randomCard.setTrapped();
-                            }
-                        }
-                        farm.put(idx, randomCard);
-                    } else {
-                        Animal randomCard = (Animal) Card.createCard(storeMap.get(cardNameDeck));
-                        randomCard.setWeight(Integer.parseInt(parts[2]));
-                        int jumlahCardActive = Integer.parseInt(parts[3]);
-                        for (int j = 1; j <= jumlahCardActive; j++) {
-                            String cardActive = parts[3 + j];
-                            if (cardActive.equals("ACCELERATE")) {
-                                randomCard.setAccelerated();
-                            }
-                            if (cardActive.equals("DELAY")) {
-                                randomCard.setDelayed();
-                            }
-                            if (cardActive.equals("PROTECT")) {
-                                randomCard.setProtected();
-                            }
-                            if (cardActive.equals("TRAPPED")) {
-                                randomCard.setTrapped();
-                            }
-                        }
-                        farm.put(idx, randomCard);
-                    }
-
-                }
-                player2 = new Player(gulden, deck, activeDeck, farm);
-            } catch (IOException e) {
-                System.out.println("Error saat membaca file: " + e.getMessage());
-            }
+            player2 = loadPlayer(file);
         }
     }
 
@@ -486,4 +253,123 @@ public class LoadStateController {
         }
     }
 
+    public Player loadPlayer(File file){
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            int gulden = Integer.parseInt(reader.readLine().trim());
+            int jumlahDeck = Integer.parseInt(reader.readLine().trim());
+
+            List<Card> deck = new ArrayList<>();
+            Random random = new Random();
+            for (int i = 0; i < jumlahDeck; i++) {
+                int rand = random.nextInt(50);
+
+                if (rand < 25)
+                    rand = 0;
+                else
+                    rand -= 24;
+
+                Card randomCard = Card.createCard(rand);
+                deck.add(randomCard);
+            }
+
+            Map<Integer, Card> activeDeck = new HashMap<>();
+            for (int i = 0; i < 6; i++) {
+                activeDeck.put(i, Card.createCard(0));
+            }
+            int jumlahDeckAktif = Integer.parseInt(reader.readLine().trim());
+            for (int i = 0; i < jumlahDeckAktif; i++) {
+                String line = reader.readLine();
+                String[] parts = line.split("\\s+");
+                if (parts.length == 2) {
+                    String lokasi = parts[0];
+                    String cardNameDeck = parts[1];
+                    int idx;
+                    
+                    switch (lokasi.charAt(0)) {
+                        case 'A': idx = 0; break;
+                        case 'B': idx = 1; break;
+                        case 'C': idx = 2; break;
+                        case 'D': idx = 3; break;
+                        case 'E': idx = 4; break;
+                        case 'F': idx = 5; break;
+                        default: idx = 0; break; 
+                    }
+
+                    Card randomCard = Card.createCard(storeMap.get(cardNameDeck));
+                    activeDeck.put(idx, randomCard);
+                }
+            }
+
+            Map<Integer, Card> farm = new HashMap<>();
+            for (int i = 0; i < 20; i++) {
+                farm.put(i, Card.createCard(0));
+            }
+            int jumlahDeckDiLadang = Integer.parseInt(reader.readLine().trim());
+            for (int i = 0; i < jumlahDeckDiLadang; i++) {
+                String line = reader.readLine();
+                String[] parts = line.split("\\s+");
+                String lokasi = parts[0];
+                String cardNameDeck = parts[1];
+
+                String numberPart = lokasi.substring(1);
+                int idx = (Integer.parseInt(numberPart) - 1) * 5;
+
+                switch (lokasi.charAt(0)) {
+                    case 'A': idx = idx + 0; break;
+                    case 'B': idx = idx + 1; break;
+                    case 'C': idx = idx + 2; break;
+                    case 'D': idx = idx + 3; break;
+                    case 'E': idx = idx + 4; break;
+                    default: idx = idx + 0; break;
+                }
+
+                if (Card.createCard(storeMap.get(cardNameDeck)).getClass().getSimpleName().equals("Plant")) {
+                    Plant randomCard = (Plant) Card.createCard(storeMap.get(cardNameDeck));
+                    randomCard.setAge(Integer.parseInt(parts[2]));
+                    int jumlahCardActive = Integer.parseInt(parts[3]);
+                    for (int j = 1; j <= jumlahCardActive; j++) {
+                        String cardActive = parts[3 + j];
+                        if (cardActive.equals("ACCELERATE")) {
+                            randomCard.setAccelerated();
+                        }
+                        if (cardActive.equals("DELAY")) {
+                            randomCard.setDelayed();
+                        }
+                        if (cardActive.equals("PROTECT")) {
+                            randomCard.setProtected();
+                        }
+                        if (cardActive.equals("TRAPPED")) {
+                            randomCard.setTrapped();
+                        }
+                    }
+                    farm.put(idx, randomCard);
+                } else {
+                    Animal randomCard = (Animal) Card.createCard(storeMap.get(cardNameDeck));
+                    randomCard.setWeight(Integer.parseInt(parts[2]));
+                    int jumlahCardActive = Integer.parseInt(parts[3]);
+                    for (int j = 1; j <= jumlahCardActive; j++) {
+                        String cardActive = parts[3 + j];
+                        if (cardActive.equals("ACCELERATE")) {
+                            randomCard.setAccelerated();
+                        }
+                        if (cardActive.equals("DELAY")) {
+                            randomCard.setDelayed();
+                        }
+                        if (cardActive.equals("PROTECT")) {
+                            randomCard.setProtected();
+                        }
+                        if (cardActive.equals("TRAPPED")) {
+                            randomCard.setTrapped();
+                        }
+                    }
+                    farm.put(idx, randomCard);
+                }
+
+            }
+            return new Player(gulden, deck, activeDeck, farm);
+        } catch (IOException e) {
+            System.out.println("Error saat membaca file: " + e.getMessage());
+            return new Player();
+        }
+    }
 }
