@@ -43,7 +43,7 @@ public class StorePageController {
     @FXML
     private Label playerMoneyLabel;
 
-    private static Store store = new Store(generateProducts(), 8);
+    private static Store store = new Store(generateProducts(), 0);
     private int currentPage = 0;
     private static final int ITEMS_PER_PAGE = 6;
 
