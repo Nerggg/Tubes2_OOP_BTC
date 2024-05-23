@@ -41,6 +41,7 @@ public class MainPageController {
     // Setup variables
     private Player player1 = new Player();
     private Player player2 = new Player();
+    private Store store = new Store(new ArrayList<>());
 
     // Set player 1
     public void setPlayer1(Player player1) {
@@ -58,10 +59,13 @@ public class MainPageController {
     private int currentTurn = 0;
 
     // Set game state procedure
-    public void loadGameState(Player player1, Player player2, int currentTurn) {
+    public void loadGameState(Player player1, Player player2, int currentTurn, Store store) {
         // Set players
         this.player1.copyFrom(player1);
         this.player2.copyFrom(player2);
+
+        // Set store
+        this.store = store;
 
         // Set current turn
         this.currentTurn = currentTurn;
@@ -84,6 +88,14 @@ public class MainPageController {
 
     public Player getPlayer2(){
         return this.player2;
+    }
+
+    public int getCurrentTurn(){
+        return this.currentTurn;
+    }
+
+    public Store getStore(){
+        return this.store;
     }
     
     // GUI variables

@@ -102,7 +102,7 @@ public class LoadStateController {
                     }
                 }
                 if (mainPageController != null) {
-                    mainPageController.loadGameState(player1, player2, turn);
+                    mainPageController.loadGameState(player1, player2, turn, store);
                 } else {
                     System.err.println("mainPageController is null");
                 }

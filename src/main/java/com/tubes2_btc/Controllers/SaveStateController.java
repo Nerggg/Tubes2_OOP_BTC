@@ -1,10 +1,6 @@
 package com.tubes2_btc.Controllers;
 
-import com.tubes2_btc.Classes.Animal;
-import com.tubes2_btc.Classes.Card;
-import com.tubes2_btc.Classes.Plant;
-import com.tubes2_btc.Classes.Player;
-import com.tubes2_btc.Classes.Store;
+import com.tubes2_btc.Classes.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -18,6 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SaveStateController {
@@ -42,8 +39,6 @@ public class SaveStateController {
 
     private Player player1;
     private Player player2;
-    private int turn;
-    private Store store;
 
     private static Map<String, String> cardMap = new HashMap<>();
     private String selectedFormat = "";
@@ -312,6 +307,26 @@ public class SaveStateController {
                         fileWriter.write("\n");
                     }
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (fileGameState != null) {
+            try (FileWriter fileWriter = new FileWriter(fileGameState)) {
+                fileWriter.write(Integer.toString(mainPageController.getCurrentTurn()));
+                fileWriter.write("\n");
+                Store store = mainPageController.getStore();
+                fileWriter.write(Integer.toString(store.getProducts().size()));
+                fileWriter.write("\n");
+                List<Product> products = store.getProducts();
+                for (Product product : products) {
+                    fileWriter.write(cardMap.get(product.getCardName()));
+                    fileWriter.write(" ");
+                    fileWriter.write(Integer.toString(store.getProductCount(product.getCardName())));
+                    fileWriter.write("\n");
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
