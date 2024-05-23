@@ -189,35 +189,68 @@ public class MainPageController {
             }
         });
 
-        child.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (player1.getFarm().get(i).getClass().getSimpleName().equals("Animal") || player1.getFarm().get(i).getClass().getSimpleName().equals("Plant") || player1.getFarm().get(i).getClass().getSimpleName().equals("Product")) {;
-                    dataPasser.infoCard = player1.getFarm().get(i);
-                    try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/card-info.fxml"));
-                        Parent root = fxmlLoader.load();
-                        Stage stage = new Stage();
-                        stage.initModality(Modality.APPLICATION_MODAL);
-                        stage.initStyle(StageStyle.UNDECORATED);
-                        stage.setScene(new Scene(root));
+        if (isFarm) {
+            child.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player1.getFarm().get(i).getClass().getSimpleName().equals("Animal") || player1.getFarm().get(i).getClass().getSimpleName().equals("Plant") || player1.getFarm().get(i).getClass().getSimpleName().equals("Product")) {;
+                        dataPasser.infoCard = player1.getFarm().get(i);
+                        try {
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/card-info.fxml"));
+                            Parent root = fxmlLoader.load();
+                            Stage stage = new Stage();
+                            stage.initModality(Modality.APPLICATION_MODAL);
+                            stage.initStyle(StageStyle.UNDECORATED);
+                            stage.setScene(new Scene(root));
 
-                        // Get the parent stage (assuming the button is within a stage)
-                        Stage parentStage = (Stage) ((Parent) mouseEvent.getSource()).getScene().getWindow();
+                            // Get the parent stage (assuming the button is within a stage)
+                            Stage parentStage = (Stage) ((Parent) mouseEvent.getSource()).getScene().getWindow();
 
-                        // Center the new stage in the parent stage
-                        stage.setOnShown(e -> {
-                            stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
-                            stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
-                        });
+                            // Center the new stage in the parent stage
+                            stage.setOnShown(e -> {
+                                stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
+                                stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
+                            });
 
-                        stage.showAndWait();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                            stage.showAndWait();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
+        else {
+            child.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (player1.getActiveDeck().get(i).getClass().getSimpleName().equals("Product")) {;
+                        dataPasser.infoCard = player1.getActiveDeck().get(i);
+                        try {
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/deck-card-info.fxml"));
+                            Parent root = fxmlLoader.load();
+                            Stage stage = new Stage();
+                            stage.initModality(Modality.APPLICATION_MODAL);
+                            stage.initStyle(StageStyle.UNDECORATED);
+                            stage.setScene(new Scene(root));
+
+                            // Get the parent stage (assuming the button is within a stage)
+                            Stage parentStage = (Stage) ((Parent) mouseEvent.getSource()).getScene().getWindow();
+
+                            // Center the new stage in the parent stage
+                            stage.setOnShown(e -> {
+                                stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
+                                stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
+                            });
+
+                            stage.showAndWait();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+        }
     }
 
     public void deleteCard(int index, boolean isFarm, Player player) {
