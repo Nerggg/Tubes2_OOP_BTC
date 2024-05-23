@@ -57,6 +57,9 @@ public class RandomCardController {
     private Card card3;
     private Card card4;
 
+    private int chosenCards;
+    private int maxChosenCards;
+
     private final Random random = new Random();
 
     // Main page controller
@@ -68,13 +71,21 @@ public class RandomCardController {
 
     @FXML
     private void initialize() {
+        // Get data passer
+        DataPasser dataPasser = DataPasser.getInstance();
+
+        // Set data
+        chosenCards = 0;
+        maxChosenCards = (dataPasser.currentPlayer == 1) ? dataPasser.player1.getActiveDeckFreeSlots() : dataPasser.player2.getActiveDeckFreeSlots();
+
+        // Set change cards
         changeImages();
         randomizeButton.setOnAction(event -> changeImages());
     }
 
     private void changeImages() {
-        // Get DataPasser
-        DataPasser dataPasser = DataPasser.getInstance();
+        // Reset card chosen count
+        chosenCards = 0;
 
         // ======== Get random cards ========
         // Card 1
@@ -159,6 +170,17 @@ public class RandomCardController {
         for (Card card : cardList) {
             System.out.print(card.getCardName()+",");
         }
+
+        // Add cards to deck
+        DataPasser dataPasser = DataPasser.getInstance();
+        Player player = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
+
+        for (Card card : cardList) {
+            player.addToActiveDeck(card);
+        }
+        dataPasser.mainPageController.updateActiveDeck();
+        
+        // Close stage
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
         return cardList;
@@ -173,10 +195,16 @@ public class RandomCardController {
         if (currentBackground != null && currentBackground.getFills().get(0).getFill().equals(Color.web("#4BB543"))) {
             // Change to light gray color (#D9D9D9)
             clickedPane.setBackground(new Background(new BackgroundFill(Color.web("#D9D9D9"), CornerRadii.EMPTY, null)));
-        } else {
+
+            chosenCards--;
+        } else if (currentBackground != null && currentBackground.getFills().get(0).getFill().equals(Color.web("#D9D9D9")) && chosenCards < maxChosenCards) {
             // Change to green color (#4BB543)
             clickedPane.setBackground(new Background(new BackgroundFill(Color.web("#4BB543"), CornerRadii.EMPTY, null)));
+
+            chosenCards++;
         }
+        System.out.println(chosenCards + " / " + maxChosenCards);
+
         for (Card card : cardList) {
             System.out.print(card.getCardName());
         }

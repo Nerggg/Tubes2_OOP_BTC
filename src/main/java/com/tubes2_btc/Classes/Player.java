@@ -80,11 +80,23 @@ public class Player {
     }
 
     public int getFarmFreeSlots() {
-        return PLAYER_FARM_SLOTS - farm.size();
+        int cardCount = 0;
+
+        for (Card c : farm.values()) {
+            if (c.getCardName() != CardConstants.CARD_EMPTY) cardCount++;
+        }
+
+        return PLAYER_FARM_SLOTS - cardCount;
     }
 
     public int getActiveDeckFreeSlots() {
-        return PLAYER_ACTIVE_DECK_SLOTS - activeDeck.size();
+        int cardCount = 0;
+
+        for (Card c : activeDeck.values()) {
+            if (c.getCardName() != CardConstants.CARD_EMPTY) cardCount++;
+        }
+
+        return PLAYER_ACTIVE_DECK_SLOTS - cardCount;
     }
 
     public void setFarmAt(int index, Card card) {
@@ -93,5 +105,23 @@ public class Player {
 
     public void setActiveDeckAt(int index, Card card) {
         activeDeck.put(index, card);
+    }
+
+    public void addToFarm(Card card) {
+        for (int i = 0; i < PLAYER_FARM_SLOTS; i++) {
+            if (farm.get(i).getCardName() == CardConstants.CARD_EMPTY) {
+                farm.put(i, card);
+                break;
+            }
+        }
+    }
+
+    public void addToActiveDeck(Card card) {
+        for (int i = 0; i < PLAYER_ACTIVE_DECK_SLOTS; i++) {
+            if (activeDeck.get(i).getCardName() == CardConstants.CARD_EMPTY) {
+                activeDeck.put(i, card);
+                break;
+            }
+        }
     }
 }

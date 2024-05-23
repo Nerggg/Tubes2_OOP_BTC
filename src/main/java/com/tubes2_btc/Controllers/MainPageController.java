@@ -460,6 +460,8 @@ public class MainPageController {
         DataPasser dataPasser = DataPasser.getInstance();
         dataPasser.player1 = player1;
         dataPasser.player2 = player2;
+        dataPasser.currentPlayer = currentPlayer;
+        dataPasser.mainPageController = this;
 
         // Initialize farm and active deck
         int i = 0;
@@ -719,6 +721,11 @@ public class MainPageController {
     @FXML
     private void nextButtonHandler(ActionEvent event) {
         try {
+            // Set data passer
+            DataPasser dataPasser = DataPasser.getInstance();
+            dataPasser.currentPlayer = currentPlayer;
+
+            // Load FXML
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/random-card.fxml"));
             Parent root = fxmlLoader.load();
             
