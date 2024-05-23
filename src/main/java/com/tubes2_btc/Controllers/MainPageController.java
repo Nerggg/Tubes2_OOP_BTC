@@ -38,13 +38,45 @@ public class MainPageController {
     private int draggedCard;
     private boolean draggedIsFarm;
 
+    // Setup variables
     private Player player1 = new Player();
     private Player player2 = new Player();
 
+    // Set player 1
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
+    }
+
+    // Set player 2
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
+    }
+
+    // Game state variables
     private int currentPlayer = 1;
     private int currentFarmView = 1;
-    private int currentTurn = 1;    
+    private int currentTurn = 1;
 
+    // Set game state procedure
+    public void loadGameState(Player player1, Player player2, int currentTurn) {
+        // Set players
+        this.player1 = player1;
+        this.player2 = player2;
+
+        // Set current turn
+        this.currentTurn = currentTurn;
+
+        // Set current player
+        this.currentPlayer = (currentTurn % 2 == 1) ? 1 : 2;
+
+        // Set current farm view
+        this.currentFarmView = this.currentPlayer;
+
+        // Update farm
+        updateFarm();
+    }
+    
+    // GUI variables
     private List<Node> farmSlots_1 = new ArrayList<>();
     private List<Node> farmSlots_2 = new ArrayList<>();
 
@@ -720,6 +752,11 @@ public class MainPageController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/load.fxml"));
             Parent root = fxmlLoader.load();
+
+            // Set main page controller
+            LoadStateController l = fxmlLoader.getController();
+            l.setMainPageController(this);
+
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UNDECORATED);

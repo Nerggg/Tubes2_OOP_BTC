@@ -49,6 +49,13 @@ public class LoadStateController {
     File selectedDirectory;
     private static Map<String, Integer> storeMap = new HashMap<>();
 
+    // Main page controller
+    private MainPageController mainPageController;
+
+    public void setMainPageController(MainPageController mainPageController) {
+        this.mainPageController = mainPageController;
+    }
+
     @FXML
     private void handleClicked(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
