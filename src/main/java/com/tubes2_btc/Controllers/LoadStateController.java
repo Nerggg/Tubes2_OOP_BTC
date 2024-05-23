@@ -161,6 +161,9 @@ public class LoadStateController {
                 }
 
                 Map<Integer, Card> activeDeck = new HashMap<>();
+                for (int i = 0; i < 6; i++) {
+                    activeDeck.put(i, Card.createCard(0));
+                }
                 int jumlahDeckAktif = Integer.parseInt(reader.readLine().trim());
                 for (int i = 0; i < jumlahDeckAktif; i++) {
                     String line = reader.readLine();
@@ -198,6 +201,9 @@ public class LoadStateController {
                 }
 
                 Map<Integer, Card> farm = new HashMap<>();
+                for (int i = 0; i < 20; i++) {
+                    farm.put(i, Card.createCard(0));
+                }
                 int jumlahDeckDiLadang = Integer.parseInt(reader.readLine().trim());
                 for (int i = 0; i < jumlahDeckDiLadang; i++) {
                     String line = reader.readLine();
@@ -298,6 +304,9 @@ public class LoadStateController {
                 }
 
                 Map<Integer, Card> activeDeck = new HashMap<>();
+                for (int i = 0; i < 6; i++) {
+                    activeDeck.put(i, Card.createCard(0));
+                }
                 int jumlahDeckAktif = Integer.parseInt(reader.readLine().trim());
                 for (int i = 0; i < jumlahDeckAktif; i++) {
                     String line = reader.readLine();
@@ -335,6 +344,9 @@ public class LoadStateController {
                 }
 
                 Map<Integer, Card> farm = new HashMap<>();
+                for (int i = 0; i < 20; i++) {
+                    farm.put(i, Card.createCard(0));
+                }
                 int jumlahDeckDiLadang = Integer.parseInt(reader.readLine().trim());
                 for (int i = 0; i < jumlahDeckDiLadang; i++) {
                     String line = reader.readLine();
