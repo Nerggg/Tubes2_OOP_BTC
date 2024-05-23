@@ -180,6 +180,9 @@ public class RandomCardController {
         }
         dataPasser.mainPageController.updateActiveDeck();
         dataPasser.mainPageController.setGameDataGUI();
+
+        // Run bear attack
+        dataPasser.mainPageController.bearAttackHandler();
         
         // Close stage
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
