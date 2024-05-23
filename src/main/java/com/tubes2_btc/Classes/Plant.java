@@ -19,4 +19,8 @@ public class Plant extends Card {
     public int getHarvestAge() {
         return this.harvestAge;
     }
+
+    public void setAge(int age) {
+        this.age=age;
+    }
 }

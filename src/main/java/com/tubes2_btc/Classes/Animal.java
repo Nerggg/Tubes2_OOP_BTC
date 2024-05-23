@@ -25,5 +25,8 @@ public class Animal extends Card {
     public int getHarvestWeight() {
         return this.harvestWeight;
     }
+    public void setWeight(int weight){
+        this.weight = weight;
+    }
 
 }
