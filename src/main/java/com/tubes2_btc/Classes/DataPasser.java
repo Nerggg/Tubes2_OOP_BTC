@@ -40,8 +40,10 @@ public class DataPasser {
     public Store storeTemp;
     public Image imageTemp;
     public String labelTemp;
+    public Product productTemp;
     public int productPrice;
     public int productQuantity;
+    public int productStoreQuantity;
 
     // Plugin Stuffs
     public File jarFile;

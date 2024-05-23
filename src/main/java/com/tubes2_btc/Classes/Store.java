@@ -70,13 +70,13 @@ public class Store {
         productCounts.put(CardConstants.CARD_STROBERI, 0);
     }
 
-    public void reduceProductCount(String productName, int quantity) {
-        Product product = getProductByName(productName);
-        if (product != null) {
-            int currentCount = product.getCount();
-            product.setCount(currentCount - quantity);
-        }
-    }
+//    public void reduceProductCount(String productName, int quantity) {
+//        Product product = getProductByName(productName);
+//        if (product != null) {
+//            int currentCount = product.getCount();
+//            product.setCount(currentCount - quantity);
+//        }
+//    }
 
     private Product getProductByName(String productName) {
         for (Product product : products) {

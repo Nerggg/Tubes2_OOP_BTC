@@ -135,6 +135,7 @@ public class StorePopUpController {
         confirmButton.setDisable(disableConfirmButton);
     }
 
+
     @FXML
     private void handleConfirm(ActionEvent event) {
         DataPasser dataPasser = DataPasser.getInstance();
