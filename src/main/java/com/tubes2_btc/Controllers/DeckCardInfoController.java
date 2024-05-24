@@ -80,8 +80,8 @@ public class DeckCardInfoController {
         } catch (Exception e) {
             e.printStackTrace();
         }finally{
-            Stage stages = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stages.close();
+            Stage sellStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            sellStage.close();
         }
 
         System.out.println("Tombol 'Jual' ditekan.");
