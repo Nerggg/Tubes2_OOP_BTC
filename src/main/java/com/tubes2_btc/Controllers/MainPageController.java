@@ -397,7 +397,8 @@ public class MainPageController {
                 public void handle(MouseEvent mouseEvent) {
                     Player p = (currentFarmView == 1) ? player1 : player2;
 
-                    if (p.getFarm().get(i).getClass().getSimpleName().equals("Animal") || p.getFarm().get(i).getClass().getSimpleName().equals("Plant") || p.getFarm().get(i).getClass().getSimpleName().equals("Product")) {;
+                    // if (p.getFarm().get(i).getClass().getSimpleName().equals("Animal") || p.getFarm().get(i).getClass().getSimpleName().equals("Plant") || p.getFarm().get(i).getClass().getSimpleName().equals("Product")) {;
+                    if (p.getFarm().get(i).getClass().getSimpleName().equals("Animal") || p.getFarm().get(i).getClass().getSimpleName().equals("Plant")) {;
                         dataPasser.infoCard = p.getFarm().get(i);
                         dataPasser.indexCard = i;
                         try {
