@@ -12,11 +12,13 @@ import com.tubes2_btc.Classes.Player;
 import com.tubes2_btc.Classes.Product;
 import com.tubes2_btc.Classes.Store;
 
+import javafx.animation.PathTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,6 +35,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.control.Button;
@@ -41,6 +44,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import javafx.scene.media.Media;
+import javafx.util.Duration;
 
 
 public class MainPageController {
@@ -686,7 +690,7 @@ public class MainPageController {
     private Label DeckCount;
 
     @FXML
-    private Rectangle BearAttackArea;
+    private Group BearAttackArea;
 
     @FXML
     private Pane TimerPane;
@@ -1011,7 +1015,8 @@ public class MainPageController {
         }
     }
 
-    public Rectangle addDynamicRectangle(double width, double height, double x, double y) {
+    public Group addDynamicRectangle(double width, double height, double x, double y) {
+        Group group = new Group();
         Rectangle rectangle = new Rectangle();
         double x_value = x * 105 + 25;
         double y_value = y * 117 + 5;
@@ -1027,7 +1032,26 @@ public class MainPageController {
         rectangle.setY(y_value);
         rectangle.setMouseTransparent(true);
         Base.getChildren().add(rectangle);
-        return rectangle;
+
+        Ellipse ellipse = new Ellipse(x_value + width / 2, y_value + height / 2, width / 2, height / 2);
+        ellipse.setFill(Color.TRANSPARENT);
+        ellipse.setStroke(Color.TRANSPARENT);
+
+        Image image = new Image(
+                getClass().getResource("/com/tubes2_btc/Pages/Images/AddOns/mclaren.png").toExternalForm());
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(100);
+        imageView.setFitHeight(100);
+
+        group.getChildren().addAll(rectangle, imageView);
+        Base.getChildren().add(group);
+
+        PathTransition pathTransition = new PathTransition(Duration.seconds(1), ellipse, imageView);
+        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        pathTransition.setCycleCount(PathTransition.INDEFINITE);
+        pathTransition.play();
+
+        return group;
     }
 
     public void addDynamicTimer() {
