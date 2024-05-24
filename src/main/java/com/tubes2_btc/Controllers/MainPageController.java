@@ -652,6 +652,12 @@ public class MainPageController {
     }
 
     public void setGameDataGUI() {
+        if (currentTurn == 0){
+            storeButton.setDisable(true);
+        }
+        else{
+            storeButton.setDisable(false);
+        }
         TurnNumber.setText(Integer.toString(currentTurn));
         Player1_Gold.setText(Integer.toString(player1.getGuldenCount()) + " Gold");
         Player2_Gold.setText(Integer.toString(player2.getGuldenCount()) + " Gold");
@@ -695,9 +701,25 @@ public class MainPageController {
 
     private MediaPlayer mediaPlayer;
 
+    @FXML
+    private Button storeButton;
+
+    @FXML
+    private Button myFarm;
+
+    @FXML
+    private Button enemyFarm;
+
+    @FXML
+    private Button saveButton;
 
     @FXML
     public void initialize() {
+        myFarm.setDisable(true);
+        enemyFarm.setDisable(true);
+        saveButton.setDisable(true);
+        NextButton.setText("START!");
+        storeButton.setDisable(true);
         playBackgroundMusic("src/main/resources/com/tubes2_btc/Pages/Sound/main.m4a");
         // Set player data to DataPasser
         DataPasser dataPasser = DataPasser.getInstance();
@@ -1021,7 +1043,11 @@ public class MainPageController {
     
     // Pop Up Button Handler
     @FXML
-    private void nextButtonHandler(ActionEvent event) { 
+    private void nextButtonHandler(ActionEvent event) {
+        myFarm.setDisable(false);
+        enemyFarm.setDisable(false);
+        saveButton.setDisable(false);
+        NextButton.setText("NEXT");
         if (currentTurn + 1 == 21) {
             DataPasser dataPasser = DataPasser.getInstance();
             dataPasser.player1Gold = player1.getGuldenCount() + " Gulden";

@@ -4,6 +4,18 @@
     -fx-border-radius: 10px;
     -fx-border-color: #000000;
     -fx-border-width: 1px;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-effect: null;
+    -fx-transition: -fx-scale-x 0.2s, -fx-scale-y 0.2s, -fx-background-color 0.2s, -fx-effect 0.2s;
+}
+
+.curved-pane-card:hover {
+    -fx-background-color: #8888aa; /* Slightly darker background on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 4); /* Add shadow effect */
+    -fx-scale-x: 1.05; /* Slightly enlarge the element */
+    -fx-scale-y: 1.05; /* Slightly enlarge the element */
+    -fx-cursor: hand;
 }
 
 .curved-pane-gambar {
@@ -15,7 +27,18 @@
 }
 
 .curved-pane-store {
+    -fx-background-color: #face6e; /* Background color */
+    -fx-border-color: #000000; /* Border color */
+    -fx-border-radius: 10px; /* Rounded corners */
+    -fx-border-width: 4px; /* Border width */
+    -fx-padding: 10px; /* Padding inside the pane */
+    -fx-background-radius: 10px; /* Matching background radius */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.3, 0, 5); /* Soft drop shadow */
+}
+
+.button:hover {
     -fx-border-color: #000000;
-    -fx-border-radius: 10px;
-    -fx-border-width: 4px;
+    -fx-border-radius: 2px;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
 }
