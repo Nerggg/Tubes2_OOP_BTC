@@ -33,7 +33,7 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Label fx:id="win" layoutX="265.0" layoutY="247.0" style="-fx-font-weight: 800;" text="Label" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="win" alignment="CENTER" contentDisplay="CENTER" layoutX="110.0" layoutY="242.0" prefHeight="40.0" prefWidth="381.0" style="-fx-font-weight: 800;" text="Label" textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font size="28.0" />
          </font>
