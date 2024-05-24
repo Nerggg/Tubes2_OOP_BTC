@@ -12,7 +12,10 @@ import com.tubes2_btc.Classes.Player;
 import com.tubes2_btc.Classes.Product;
 import com.tubes2_btc.Classes.Store;
 
+import javafx.animation.KeyFrame;
 import javafx.animation.PathTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -33,6 +36,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
@@ -821,6 +825,35 @@ public class MainPageController {
         if(this.BearAttackArea != null){
             this.Base.getChildren().remove(this.BearAttackArea);
         }
+
+        Image image = new Image(getClass().getResource("/com/tubes2_btc/Pages/Images/AddOns/ronald.png").toExternalForm()); // Change the path accordingly
+
+        // Step 2: Create ImageView with the loaded image
+        ImageView imageView = new ImageView(image);
+
+        // Set initial scale to 0 (invisible)
+        imageView.setScaleX(0);
+        imageView.setScaleY(0);
+
+        Base.getChildren().add(imageView);
+
+        // Step 4: Create ScaleTransition to scale the image from 0 to 1 over 1 second
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(1), imageView);
+        scaleTransition.setFromX(0);
+        scaleTransition.setFromY(0);
+        scaleTransition.setToX(1.5);
+        scaleTransition.setToY(1.5);
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), e -> {
+            Base.getChildren().remove(imageView);
+        }));
+        timeline.setCycleCount(1); // Jalankan hanya sekali
+        
+        // Jalankan ScaleTransition
+        scaleTransition.play();
+        
+        // Jalankan Timeline setelah ScaleTransition selesai
+        timeline.play();
     }
 
     public synchronized void  manipulateFarm(int draggedIndex, int droppedIndex, boolean draggedIsFarm,String task,Player player){
