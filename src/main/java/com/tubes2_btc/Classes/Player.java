@@ -20,13 +20,14 @@ public class Player {
     private Map<Integer, Card> farm;
 
     public Player() {
-        this.guldenCount = new Random().nextInt(1000);
+        this.guldenCount = 0;
         this.deck = new ArrayList<>();
         this.activeDeck = new HashMap<>();
         this.farm = new HashMap<>();
 
         initializeFarm();
         InitializeDeck();
+        initializeNonActiveDeck(40);
     }
 
     public Player(int guldenCount, List<Card> deck, Map<Integer, Card> activeDeck, Map<Integer, Card> farm) {
@@ -47,11 +48,11 @@ public class Player {
         Random random = new Random();
         
         for (int i = 0; i < 20; i++) {
-            int rand = random.nextInt(50);
+            // int rand = random.nextInt(50);
             
-            if (rand < 25) rand = 0;
-            else rand -= 24;
-            // int rand = 0;
+            // if (rand < 25) rand = 0;
+            // else rand -= 24;
+            int rand = 0;
 
             Card randomCard = Card.createCard(rand);
             farm.put(i, randomCard);
@@ -62,15 +63,30 @@ public class Player {
         Random random = new Random();
         
         for (int i = 0; i < 6; i++) {
-            int rand = random.nextInt(50);
+            // int rand = random.nextInt(50);
             
-            if (rand < 25) rand = 0;
-            else rand -= 24;
-            // int rand = 0;
+            // if (rand < 25) rand = 0;
+            // else rand -= 24;
+            int rand = 0;
 
             Card randomCard = Card.createCard(rand);
             activeDeck.put(i , randomCard);
         }
+    }
+
+    public void initializeNonActiveDeck(int count) {
+        Random random = new Random();
+        
+        for (int i = 0; i < count; i++) {
+            int rand = random.nextInt(1, 25);
+
+            Card randomCard = Card.createCard(rand);
+            deck.add(randomCard);
+        }
+    }
+
+    public int getDeckCount() {
+        return deck.size();
     }
 
     public int getGuldenCount() {
@@ -83,6 +99,10 @@ public class Player {
 
     public Map<Integer, Card> getActiveDeck() {
         return activeDeck;
+    }
+
+    public List<Card> getDeck() {
+        return deck;
     }
 
     public void swapSlots(int index1, int index2, Map<Integer, Card> cont1, Map<Integer, Card> cont2) {

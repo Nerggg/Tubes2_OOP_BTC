@@ -261,12 +261,7 @@ public class LoadStateController {
             List<Card> deck = new ArrayList<>();
             Random random = new Random();
             for (int i = 0; i < jumlahDeck; i++) {
-                int rand = random.nextInt(50);
-
-                if (rand < 25)
-                    rand = 0;
-                else
-                    rand -= 24;
+                int rand = random.nextInt(1, 25);
 
                 Card randomCard = Card.createCard(rand);
                 deck.add(randomCard);

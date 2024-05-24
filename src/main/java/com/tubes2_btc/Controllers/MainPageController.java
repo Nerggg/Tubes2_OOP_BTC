@@ -654,6 +654,9 @@ public class MainPageController {
         TurnNumber.setText(Integer.toString(currentTurn));
         Player1_Gold.setText(Integer.toString(player1.getGuldenCount()) + " Gold");
         Player2_Gold.setText(Integer.toString(player2.getGuldenCount()) + " Gold");
+        
+        Player p = (currentPlayer == 1) ? player1 : player2;
+        DeckCount.setText(Integer.toString(p.getDeckCount()) + "/40");
     }
 
     @FXML
@@ -673,6 +676,9 @@ public class MainPageController {
 
     @FXML
     private Label Player2_Gold;
+
+    @FXML
+    private Label DeckCount;
 
     @FXML
     private Rectangle BearAttackArea;
@@ -990,6 +996,7 @@ public class MainPageController {
             // Update cards
             updateFarm();
             updateActiveDeck();
+            setGameDataGUI();
 
             // Set data passer
             DataPasser dataPasser = DataPasser.getInstance();

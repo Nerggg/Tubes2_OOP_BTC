@@ -52,13 +52,21 @@ public class RandomCardController {
 
     private List<Card> cardList = new ArrayList<>();
     private Iterator<Card> iterator = cardList.iterator();
+    
     private Card card1;
     private Card card2;
     private Card card3;
     private Card card4;
+    private boolean card1_Available = false;
+    private boolean card2_Available = false;
+    private boolean card3_Available = false;
+    private boolean card4_Available = false;
+    private List<Integer> cardIndexList = new ArrayList<>();
 
     private int chosenCards;
     private int maxChosenCards;
+    private int deckCount;
+    private List<Card> deck;
 
     private final Random random = new Random();
 
@@ -77,6 +85,8 @@ public class RandomCardController {
         // Set data
         chosenCards = 0;
         maxChosenCards = (dataPasser.currentPlayer == 1) ? dataPasser.player1.getActiveDeckFreeSlots() : dataPasser.player2.getActiveDeckFreeSlots();
+        deckCount = (dataPasser.currentPlayer == 1) ? dataPasser.player1.getDeckCount() : dataPasser.player2.getDeckCount();
+        deck = (dataPasser.currentPlayer == 1) ? dataPasser.player1.getDeck() : dataPasser.player2.getDeck();
 
         // Set change cards
         changeImages();
@@ -86,6 +96,7 @@ public class RandomCardController {
     private void changeImages() {
         // Reset card chosen count
         chosenCards = 0;
+        cardIndexList.clear();
 
         // ======== Get random cards ========
         // Card 1
@@ -94,77 +105,100 @@ public class RandomCardController {
         stackPane3.setBackground(new Background(new BackgroundFill(Color.web("#D9D9D9"), CornerRadii.EMPTY, null)));
         stackPane4.setBackground(new Background(new BackgroundFill(Color.web("#D9D9D9"), CornerRadii.EMPTY, null)));
 
-        int random1 = random.nextInt(1, 25);
-        card1 = CardConstants.createCard(random1);
+        if (deckCount >= 1) {
+            card1_Available = true;
 
-        URL imageUrl1 = getClass().getResource(card1.getCardPath());
-        if (imageUrl1 != null) {
-            Image imageNew1 = new Image(imageUrl1.toExternalForm());
-            imageView1.setImage(imageNew1);
-            label1.setText(card1.getCardName());
+            int random1 = random.nextInt(deckCount);
+            card1 = deck.get(random1);
+            cardIndexList.add(random1);
+    
+            URL imageUrl1 = getClass().getResource(card1.getCardPath());
+            if (imageUrl1 != null) {
+                Image imageNew1 = new Image(imageUrl1.toExternalForm());
+                imageView1.setImage(imageNew1);
+                label1.setText(card1.getCardName());
+            }
         }
-        // mainPageController.setFarmAt(0, card1, dataPasser.player1);
 
         // Card 2
-        int random2 = random.nextInt(1, 25);
-        card2 = CardConstants.createCard(random2);
+        if (deckCount >= 2) {
+            card2_Available = true;
 
-        URL imageUrl2 = getClass().getResource(card2.getCardPath());
-        if (imageUrl2 != null){
-            Image imageNew2 = new Image(imageUrl2.toExternalForm());
-            imageView2.setImage(imageNew2);
-            label2.setText(card2.getCardName());
+            int random2;
+            do {
+                random2 = random.nextInt(deckCount);
+            } while (cardIndexList.contains(random2));
+            card2 = deck.get(random2);
+            cardIndexList.add(random2);
+    
+            URL imageUrl2 = getClass().getResource(card2.getCardPath());
+            if (imageUrl2 != null){
+                Image imageNew2 = new Image(imageUrl2.toExternalForm());
+                imageView2.setImage(imageNew2);
+                label2.setText(card2.getCardName());
+            }
         }
-        // mainPageController.setFarmAt(1, card2, dataPasser.player1);
 
         // Card 3
-        int random3 = random.nextInt(1, 25);
-        card3 = CardConstants.createCard(random3);
+        if (deckCount >= 3) {
+            card3_Available = true;
 
-        URL imageUrl3 = getClass().getResource(card3.getCardPath());
-        if (imageUrl3 != null){
-            Image imageNew3 = new Image(imageUrl3.toExternalForm());
-            imageView3.setImage(imageNew3);
-            label3.setText(card3.getCardName());
+            int random3;
+            do {
+                random3 = random.nextInt(deckCount);
+            } while (cardIndexList.contains(random3));
+            card3 = deck.get(random3);
+            cardIndexList.add(random3);
+    
+            URL imageUrl3 = getClass().getResource(card3.getCardPath());
+            if (imageUrl3 != null){
+                Image imageNew3 = new Image(imageUrl3.toExternalForm());
+                imageView3.setImage(imageNew3);
+                label3.setText(card3.getCardName());
+            }
         }
-        // mainPageController.setFarmAt(2, card3, dataPasser.player1);
 
         // Card 4
-        int random4 = random.nextInt(1, 25);
-        card4 = CardConstants.createCard(random4);
+        if (deckCount >= 4) {
+            card4_Available = true;
 
-        URL imageUrl4 = getClass().getResource(card4.getCardPath());
-        if (imageUrl4 != null){
-            Image imageNew4 = new Image(imageUrl4.toExternalForm());
-            imageView4.setImage(imageNew4);
-            label4.setText(card4.getCardName());
+            int random4;
+            do {
+                random4 = random.nextInt(deckCount);
+            } while (cardIndexList.contains(random4));
+            card4 = deck.get(random4);
+            cardIndexList.add(random4);
+
+            URL imageUrl4 = getClass().getResource(card4.getCardPath());
+            if (imageUrl4 != null){
+                Image imageNew4 = new Image(imageUrl4.toExternalForm());
+                imageView4.setImage(imageNew4);
+                label4.setText(card4.getCardName());
+            }
         }
-        // mainPageController.setFarmAt(3, card4, dataPasser.player1);
-//        imageView2.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
-//        imageView3.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
-//        imageView4.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
+
+        // imageView2.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
+        // imageView3.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
+        // imageView4.setImage(new Image(paths[random.nextInt(0, paths.length-1)]));
     }
 
     @FXML
     private List<Card> handleClicked(ActionEvent event) {
-        if (mainPageController != null) {
-            mainPageController.testFunction();;
-        }
         Background currentBackground1 = stackPane1.getBackground();
         Background currentBackground2 = stackPane2.getBackground();
         Background currentBackground3 = stackPane3.getBackground();
         Background currentBackground4 = stackPane4.getBackground();
 
-        if (currentBackground1 != null && currentBackground1.getFills().get(0).getFill().equals(Color.web("#4BB543"))) {
+        if (currentBackground1 != null && currentBackground1.getFills().get(0).getFill().equals(Color.web("#4BB543")) && card1_Available) {
             cardList.add(card1);
         }
-        if (currentBackground2 != null && currentBackground2.getFills().get(0).getFill().equals(Color.web("#4BB543"))) {
+        if (currentBackground2 != null && currentBackground2.getFills().get(0).getFill().equals(Color.web("#4BB543")) && card2_Available) {
             cardList.add(card2);
         }
-        if (currentBackground3 != null && currentBackground3.getFills().get(0).getFill().equals(Color.web("#4BB543"))) {
+        if (currentBackground3 != null && currentBackground3.getFills().get(0).getFill().equals(Color.web("#4BB543")) && card3_Available) {
             cardList.add(card3);
         }
-        if (currentBackground4 != null && currentBackground4.getFills().get(0).getFill().equals(Color.web("#4BB543"))) {
+        if (currentBackground4 != null && currentBackground4.getFills().get(0).getFill().equals(Color.web("#4BB543")) && card4_Available) {
             cardList.add(card4);
         }
         for (Card card : cardList) {
@@ -177,6 +211,7 @@ public class RandomCardController {
 
         for (Card card : cardList) {
             player.addToActiveDeck(card);
+            player.getDeck().remove(card);
         }
         dataPasser.mainPageController.updateActiveDeck();
         dataPasser.mainPageController.setGameDataGUI();
