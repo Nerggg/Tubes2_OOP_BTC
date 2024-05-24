@@ -174,9 +174,9 @@ public class MainPageController {
             if (currentPlayer == currentFarmView) {
                 // Swap at farm
                 Player p = (currentPlayer == 1) ? player1 : player2;
-
+                
                 p.swapSlots(draggedIndex, droppedIndex, p.getFarm(), p.getActiveDeck());
-
+                
                 // Swap images and names
                 List<Node> farmSlots = (currentPlayer == 1) ? farmSlots_1 : farmSlots_2;
                 List<Node> activeDeckSlots = (currentPlayer == 1) ? activeDeckSlots_1 : activeDeckSlots_2;
@@ -931,6 +931,9 @@ public class MainPageController {
                             Player p = (currentPlayer == 1) ? player1 : player2;
                             if(p.getFarm().get(index+j).isTrapped()){
                                 System.out.println("Trap effect activated! Manta Manta Mantap!");
+                                Card bearCard = Card.createCard(CardConstants.CARD_BERUANG_INDEX);
+                                p.addToActiveDeck(bearCard);
+                                updateActiveDeck();
                                 removeBearAttackArea();
                                 removeTimer();
                                 NextButton.setDisable(false);
@@ -947,6 +950,9 @@ public class MainPageController {
                             Player p = (currentPlayer == 1) ? player1 : player2;
                             if(p.getFarm().get(index+j).isTrapped()){
                                 System.out.println("Trap effect activated! Manta Manta Mantap!");
+                                Card bearCard = Card.createCard(CardConstants.CARD_BERUANG_INDEX);
+                                p.addToActiveDeck(bearCard);
+                                updateActiveDeck();
                                 removeBearAttackArea();
                                 removeTimer();
                                 NextButton.setDisable(false);
