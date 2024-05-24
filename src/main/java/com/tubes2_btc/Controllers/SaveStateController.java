@@ -252,9 +252,11 @@ public class SaveStateController {
                     if (card.getClass().getSimpleName().equals("Plant")) {
                         Plant randomCard = (Plant) card;
                         fileWriter.write(Integer.toString(randomCard.getAge()));
-                    } else {
+                    } else if (card.getClass().getSimpleName().equals("Animal")){
                         Animal randomCard = (Animal) card;
                         fileWriter.write(Integer.toString(randomCard.getWeight()));
+                    } else {
+                        fileWriter.write(Integer.toString(0));
                     }
                     fileWriter.write(" ");
                     fileWriter.write(Integer.toString(card.getCountCardActive()));

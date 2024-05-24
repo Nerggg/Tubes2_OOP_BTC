@@ -343,7 +343,7 @@ public class LoadStateController {
                         }
                     }
                     farm.put(idx, randomCard);
-                } else {
+                } else if (Card.createCard(storeMap.get(cardNameDeck)).getClass().getSimpleName().equals("Animal")){
                     Animal randomCard = (Animal) Card.createCard(storeMap.get(cardNameDeck));
                     randomCard.setWeight(Integer.parseInt(parts[2]));
                     int jumlahCardActive = Integer.parseInt(parts[3]);
@@ -362,6 +362,10 @@ public class LoadStateController {
                             randomCard.setTrapped();
                         }
                     }
+                    farm.put(idx, randomCard);
+                }
+                else {
+                    Card randomCard = Card.createCard(storeMap.get(cardNameDeck));
                     farm.put(idx, randomCard);
                 }
 
