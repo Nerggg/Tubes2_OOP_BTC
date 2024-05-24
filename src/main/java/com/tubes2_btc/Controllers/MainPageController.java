@@ -1072,7 +1072,7 @@ public class MainPageController {
         enemyFarm.setDisable(false);
         saveButton.setDisable(false);
         NextButton.setText("NEXT");
-        if (currentTurn + 1 == 2) {
+        if (currentTurn + 1 == 1) {
             DataPasser dataPasser = DataPasser.getInstance();
             dataPasser.player1Gold = player1.getGuldenCount() + " Gulden";
             dataPasser.player2Gold = player2.getGuldenCount() + " Gulden";
