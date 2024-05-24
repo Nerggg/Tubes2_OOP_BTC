@@ -165,22 +165,22 @@ public class MainPageController {
 
             swapNodes(slot_dragged, slot_dropped);
         } else if (draggedIsFarm && !droppedIsFarm) {
-            if (currentPlayer == currentFarmView) {
-                // Swap at farm
-                Player p = (currentPlayer == 1) ? player1 : player2;
+            // if (currentPlayer == currentFarmView) {
+            //     // Swap at farm
+            //     Player p = (currentPlayer == 1) ? player1 : player2;
 
-                p.swapSlots(draggedIndex, droppedIndex, p.getFarm(), p.getActiveDeck());
+            //     p.swapSlots(draggedIndex, droppedIndex, p.getFarm(), p.getActiveDeck());
 
-                // Swap images and names
-                List<Node> farmSlots = (currentPlayer == 1) ? farmSlots_1 : farmSlots_2;
-                List<Node> activeDeckSlots = (currentPlayer == 1) ? activeDeckSlots_1 : activeDeckSlots_2;
+            //     // Swap images and names
+            //     List<Node> farmSlots = (currentPlayer == 1) ? farmSlots_1 : farmSlots_2;
+            //     List<Node> activeDeckSlots = (currentPlayer == 1) ? activeDeckSlots_1 : activeDeckSlots_2;
 
-                Node slot_dragged = farmSlots.get(draggedIndex);
-                Node slot_dropped = activeDeckSlots.get(droppedIndex);
+            //     Node slot_dragged = farmSlots.get(draggedIndex);
+            //     Node slot_dropped = activeDeckSlots.get(droppedIndex);
 
-                swapNodes(slot_dragged, slot_dropped);
+            //     swapNodes(slot_dragged, slot_dropped);
             
-            }
+            // }
         } else if (draggedIsFarm && droppedIsFarm) {
             if (currentPlayer == currentFarmView) {
                 // Swap at farm
@@ -591,13 +591,27 @@ public class MainPageController {
             }
         }
 
+        // Handler for when plant is ready to harvest
+        boolean plantReadyForHarvest = false;
+        if (card instanceof Plant) {
+            Plant plant = (Plant) card;
+            if (plant.getAge() >= plant.getHarvestAge()) {
+                plantReadyForHarvest = true;
+            }
+        }
+
         if (imageView != null) {
             Image image = new Image(getClass().getResource(card.getCardPath()).toExternalForm());
+            if (plantReadyForHarvest) image = new Image(getClass().getResource(card.harvest().getCardPath()).toExternalForm());
             imageView.setImage(image);
         }
 
         if (label != null) {
-            label.setText(card.getCardName());
+            if (plantReadyForHarvest) {
+                label.setText(card.harvest().getCardName());
+            } else {
+                label.setText(card.getCardName());
+            }
         }
     }
 
