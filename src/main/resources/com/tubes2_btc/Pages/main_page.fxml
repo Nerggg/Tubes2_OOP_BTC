@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,8 +13,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Base" stylesheets="@../Styles/store_page.css" prefHeight="604.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.MainPageController">
+<AnchorPane fx:id="Base" prefHeight="604.0" prefWidth="775.0" stylesheets="@../Styles/store_page.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.MainPageController">
    <children>
+      <ImageView fitHeight="604.0" fitWidth="930.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/AddOns/banyakBatu.jpg" />
+         </image>
+      </ImageView>
       <GridPane fx:id="Ladang" alignment="CENTER" layoutX="21.0" layoutY="8.0" prefHeight="461.0" prefWidth="518.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -353,12 +359,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="myFarm" mnemonicParsing="false" onAction="#myFarmHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="my farm" textFill="WHITE" />
-            <Button fx:id="enemyFarm" mnemonicParsing="false" onAction="#opponentFarmHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="enemy's farm" textFill="WHITE" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#loadPluginButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="load plugin" textFill="WHITE" GridPane.rowIndex="5" />
-            <Button fx:id="storeButton" mnemonicParsing="false" onAction="#storeButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="store" textFill="WHITE" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#loadStateButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="load state" textFill="WHITE" GridPane.rowIndex="3" />
-            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveStateButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="save state" textFill="WHITE" GridPane.rowIndex="4" />
+            <Button fx:id="myFarm" mnemonicParsing="false" onAction="#myFarmHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="🗿 my farm 🗿" textFill="WHITE" />
+            <Button fx:id="enemyFarm" mnemonicParsing="false" onAction="#opponentFarmHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="🗿 enemy's farm 🗿" textFill="WHITE" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#loadPluginButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="🗿 load plugin 🗿" textFill="WHITE" GridPane.rowIndex="5" />
+            <Button fx:id="storeButton" mnemonicParsing="false" onAction="#storeButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="🗿 store 🗿" textFill="WHITE" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#loadStateButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="🗿 load state 🗿" textFill="WHITE" GridPane.rowIndex="3" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveStateButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="🗿 save state 🗿" textFill="WHITE" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <Label fx:id="Player2_Gold" layoutX="677.0" layoutY="119.0" style="-fx-font-weight: 700;" text="0 Gold">

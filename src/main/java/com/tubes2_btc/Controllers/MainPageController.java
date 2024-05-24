@@ -641,7 +641,7 @@ public class MainPageController {
     public void updateActiveDeck() {
         // Get player
         Player player = (currentFarmView == 1) ? player1 : player2;
-
+    
         // Update active deck slots
         for (int i = 0; i < 20; i++) {
             Card card = player.getActiveDeck().get(i);
@@ -1060,7 +1060,7 @@ public class MainPageController {
         enemyFarm.setDisable(false);
         saveButton.setDisable(false);
         NextButton.setText("NEXT");
-        if (currentTurn + 1 == 21) {
+        if (currentTurn + 1 == 2) {
             DataPasser dataPasser = DataPasser.getInstance();
             dataPasser.player1Gold = player1.getGuldenCount() + " Gulden";
             dataPasser.player2Gold = player2.getGuldenCount() + " Gulden";
