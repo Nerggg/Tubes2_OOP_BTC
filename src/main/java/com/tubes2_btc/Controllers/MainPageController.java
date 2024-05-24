@@ -151,6 +151,7 @@ public class MainPageController {
     }
     
     public void handleDragAndDrop(Card dragged, Card dropped, int draggedIndex, int droppedIndex, boolean draggedIsFarm, boolean droppedIsFarm) {
+        playMcLarenLuWarnaApaBos();
         System.out.println("Dragged: " + dragged.getCardName() + " (" + draggedIndex + ")");
         System.out.println("Dropped: " + dropped.getCardName() + " (" + droppedIndex + ")");
         if (!draggedIsFarm && !droppedIsFarm) {
@@ -333,6 +334,7 @@ public class MainPageController {
         });
 
         child.setOnDragDropped(new EventHandler<DragEvent>() {
+            
             @Override
             public void handle(DragEvent dragEvent) {
                 // Get dropped card number
@@ -696,6 +698,7 @@ public class MainPageController {
     private Button NextButton;
 
     private MediaPlayer mediaPlayer;
+    private MediaPlayer mclarenPlayer;
 
     @FXML
     private Button storeButton;
@@ -755,8 +758,21 @@ public class MainPageController {
             Media media = new Media(resourcePath);
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Set to repeat indefinitely
-            mediaPlayer.setVolume(0.5); // Set volume to 50%
+            mediaPlayer.setVolume(0.1); // Set volume to 50%
             mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void playMcLarenLuWarnaApaBos() {
+        try {
+            String resourcePath = getClass().getResource("/com/tubes2_btc/Pages/Sound/mclaren.m4a").toString();
+            Media media = new Media(resourcePath);
+            mclarenPlayer = new MediaPlayer(media);
+            mclarenPlayer.setRate(1.1);
+            mclarenPlayer.setVolume(1); 
+            mclarenPlayer.play();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -820,13 +836,13 @@ public class MainPageController {
         Random rand = new Random();
         // determine whether to let the bear out or no
         // because i use bool, the chance of a bear attack happen is 50%
-        boolean attack = true;
+        boolean attack =  rand.nextBoolean();
         // determine whether the subgrid would be 3x2 or 2x3
         boolean isHorizontal = rand.nextBoolean();
         int width=0,height=0,x=0,y=0;
         if(attack){
             System.out.println("The bear is out! Watch yo ass!");
-            int duration =5;
+            int duration = 30 + rand.nextInt(0,31);
             int area = rand.nextInt(1,6);
             NextButton.setDisable(true);
             switch(area){
