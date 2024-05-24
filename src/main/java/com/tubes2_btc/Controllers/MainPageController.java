@@ -1,6 +1,4 @@
 package com.tubes2_btc.Controllers;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,7 +20,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -44,7 +41,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 
 public class MainPageController {
@@ -1175,7 +1171,7 @@ public class MainPageController {
             DataPasser dataPasser = DataPasser.getInstance();
             dataPasser.currentPlayer = currentPlayer;
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/store_page.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/store-page.fxml"));
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
