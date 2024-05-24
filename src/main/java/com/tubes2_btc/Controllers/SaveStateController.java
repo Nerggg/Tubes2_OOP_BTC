@@ -104,9 +104,9 @@ public class SaveStateController {
             return;
         }
 
-        File filePlayer1 = new File(selectedDirectory, "player1." + selectedFormat.toLowerCase());
-        File filePlayer2 = new File(selectedDirectory, "player2." + selectedFormat.toLowerCase());
-        File fileGameState = new File(selectedDirectory, "gamestate." + selectedFormat.toLowerCase());
+        File filePlayer1 = new File(selectedDirectory, "player1" + selectedFormat.toLowerCase());
+        File filePlayer2 = new File(selectedDirectory, "player2" + selectedFormat.toLowerCase());
+        File fileGameState = new File(selectedDirectory, "gamestate" + selectedFormat.toLowerCase());
 
         cardMap = createMap();
         if (filePlayer1!=null){
