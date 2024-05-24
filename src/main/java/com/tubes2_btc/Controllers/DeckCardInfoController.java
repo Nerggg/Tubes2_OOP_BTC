@@ -1,6 +1,9 @@
 package com.tubes2_btc.Controllers;
 
-import com.tubes2_btc.Classes.*;
+import com.tubes2_btc.Classes.DataPasser;
+import com.tubes2_btc.Classes.Product;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javafx.event.ActionEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -72,11 +74,14 @@ public class DeckCardInfoController {
                 stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
                 stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
             });
-
+            
             stage.showAndWait();
             stage.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            Stage stages = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stages.close();
         }
 
         System.out.println("Tombol 'Jual' ditekan.");
