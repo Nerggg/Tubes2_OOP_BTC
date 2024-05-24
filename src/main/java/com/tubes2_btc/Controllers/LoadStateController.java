@@ -26,6 +26,8 @@ import java.util.concurrent.Flow;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
+import static com.tubes2_btc.Classes.CardConstants.CARD_BERUANG_INDEX;
+
 public class LoadStateController {
 
     @FXML
@@ -262,7 +264,9 @@ public class LoadStateController {
             Random random = new Random();
             for (int i = 0; i < jumlahDeck; i++) {
                 int rand = random.nextInt(1, 25);
-
+                while (rand == CARD_BERUANG_INDEX){
+                    rand = random.nextInt(1, 25);
+                }
                 Card randomCard = Card.createCard(rand);
                 deck.add(randomCard);
             }
