@@ -147,7 +147,7 @@ public class MainPageController {
         label1.setText(label2.getText());
         label2.setText(tempString);
     }
-
+    
     public void handleDragAndDrop(Card dragged, Card dropped, int draggedIndex, int droppedIndex, boolean draggedIsFarm, boolean droppedIsFarm) {
         System.out.println("Dragged: " + dragged.getCardName() + " (" + draggedIndex + ")");
         System.out.println("Dropped: " + dropped.getCardName() + " (" + droppedIndex + ")");
@@ -185,16 +185,7 @@ public class MainPageController {
             if (currentPlayer == currentFarmView) {
                 // Swap at farm
                 Player p = (currentPlayer == 1) ? player1 : player2;
-
-                p.swapSlots(draggedIndex, droppedIndex, p.getFarm(), p.getFarm());
-
-                // Swap images and names
-                List<Node> farmSlots = (currentPlayer == 1) ? farmSlots_1 : farmSlots_2;
-
-                Node slot_dragged = farmSlots.get(draggedIndex);
-                Node slot_dropped = farmSlots.get(droppedIndex);
-
-                swapNodes(slot_dragged, slot_dropped);
+                manipulateFarm(draggedIndex, droppedIndex, draggedIsFarm, "move", p);
             }
         } else if (!draggedIsFarm && droppedIsFarm) {
             Player player = (currentPlayer == 1) ? player1 : player2;
@@ -743,8 +734,7 @@ public class MainPageController {
                     e.printStackTrace();
                 }
             }
-        Platform.runLater(onFinish);
-
+            Platform.runLater(onFinish);
         });
         timerThread.setDaemon(true);
         timerThread.start();
@@ -768,6 +758,19 @@ public class MainPageController {
         }
         if(this.BearAttackArea != null){
             this.Base.getChildren().remove(this.BearAttackArea);
+        }
+    }
+
+    public synchronized void  manipulateFarm(int draggedIndex, int droppedIndex, boolean draggedIsFarm,String task,Player player){
+        if(task.compareTo("delete") == 0){
+            deleteCard(droppedIndex, draggedIsFarm, player);
+        }
+        else if(task.compareTo("move") == 0){
+            player.swapSlots(draggedIndex, droppedIndex, player.getFarm(), player.getFarm());
+            List<Node> farmSlots = (currentPlayer == 1) ? farmSlots_1 : farmSlots_2;
+            Node slot_dragged = farmSlots.get(draggedIndex);
+            Node slot_dropped = farmSlots.get(droppedIndex);
+            swapNodes(slot_dragged, slot_dropped);
         }
     }
 
@@ -916,7 +919,7 @@ public class MainPageController {
                         for(int j =0;j<finalWidth;j++){
                             System.out.println("Deleting card "+ (index+j));
                             Player p = (currentPlayer == 1) ? player1 : player2;
-                            deleteCard(index+j,true, p);
+                            manipulateFarm(0, index+j, true, "delete",p);
                         }
                         index += 5;
                     }
@@ -930,7 +933,7 @@ public class MainPageController {
                             if (!p.getFarm().get(index+j).isProtected()) {
                                 System.out.println(p.getFarm().get(index+j).getCardName() + " " + p.getFarm().get(index+j).isProtected());
                                 System.out.println("Deleting card "+ (index+j));
-                                deleteCard(index+j,true, p);
+                                manipulateFarm(0, index+j, true, "delete",p);
                             }
                         }
                         index += 5;
