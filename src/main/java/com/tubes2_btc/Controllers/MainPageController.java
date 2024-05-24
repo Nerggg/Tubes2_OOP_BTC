@@ -720,7 +720,7 @@ public class MainPageController {
         saveButton.setDisable(true);
         NextButton.setText("START!");
         storeButton.setDisable(true);
-        playBackgroundMusic("src/main/resources/com/tubes2_btc/Pages/Sound/main.m4a");
+        playBackgroundMusic("/com/tubes2_btc/Pages/Sound/main.m4a");
         // Set player data to DataPasser
         DataPasser dataPasser = DataPasser.getInstance();
         dataPasser.player1 = player1;
@@ -754,10 +754,16 @@ public class MainPageController {
     }
 
     private void playBackgroundMusic(String musicFilePath) {
-        Media media = new Media(new File(musicFilePath).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Set to repeat indefinitely
-        mediaPlayer.play();
+        try {
+            String resourcePath = getClass().getResource(musicFilePath).toString();
+            Media media = new Media(resourcePath);
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Set to repeat indefinitely
+            mediaPlayer.setVolume(0.5); // Set volume to 50%
+            mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

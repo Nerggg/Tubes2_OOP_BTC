@@ -10,7 +10,7 @@
 
 <AnchorPane styleClass="curved-pane-store" stylesheets="@../Styles/store_page.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.SellConfirmationController">
     <children>
-        <VBox alignment="CENTER" layoutX="20.0" layoutY="14.0" prefHeight="186.0" prefWidth="266.0" spacing="10.0">
+        <VBox alignment="CENTER" layoutX="24.0" layoutY="21.0" prefHeight="178.0" prefWidth="294.0" spacing="10.0">
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>

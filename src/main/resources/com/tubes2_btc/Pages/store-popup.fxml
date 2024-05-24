@@ -11,7 +11,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" styleClass="curved-pane-store" stylesheets="@../Styles/store_page.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.StorePopUpController">
    <children>
       <ImageView fx:id="imageView" fitHeight="71.0" fitWidth="84.0" layoutX="383.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="labelText1" layoutX="-4.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Label" textAlignment="CENTER" wrappingWidth="500.0" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="4.0">
+      <Text fx:id="labelText1" layoutX="-14.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Label" textAlignment="CENTER" wrappingWidth="500.0" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
@@ -35,7 +35,7 @@
       <Button fx:id="minusButton" layoutX="199.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleMinus" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="-" textFill="WHITE" />
       <Label fx:id="quantityLabel" layoutX="245.0" layoutY="104.0" text="0" />
       <Button fx:id="confirmButton" layoutX="219.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #82dd55; -fx-font-weight: 700;" text="buy" textFill="WHITE" />
-      <HBox alignment="CENTER" layoutX="165.0" layoutY="26.0" prefWidth="500.0">
+      <HBox alignment="CENTER" layoutX="-2.0" layoutY="151.0" prefHeight="20.0" prefWidth="204.0">
          <children>
             <Label fx:id="countActiveDeck" text="Gd." textAlignment="CENTER">
                <font>
