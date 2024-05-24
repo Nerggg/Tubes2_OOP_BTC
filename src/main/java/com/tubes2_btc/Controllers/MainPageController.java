@@ -34,6 +34,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -684,6 +685,9 @@ public class MainPageController {
     private Label TimerLabel;
     
     @FXML
+    private Button NextButton;
+
+    @FXML
     public void initialize() {
         // Set player data to DataPasser
         DataPasser dataPasser = DataPasser.getInstance();
@@ -766,7 +770,7 @@ public class MainPageController {
             System.out.println("The bear is out! Watch yo ass!");
             int duration =5;
             int area = rand.nextInt(1,6);
-            
+            NextButton.setDisable(true);
             switch(area){
                 case 6:
                     if(isHorizontal){
@@ -867,6 +871,7 @@ public class MainPageController {
                                 System.out.println("Trap effect activated! Manta Manta Mantap!");
                                 removeBearAttackArea();
                                 removeTimer();
+                                NextButton.setDisable(false);
                                 return;
                             }
                         }
@@ -882,6 +887,7 @@ public class MainPageController {
                                 System.out.println("Trap effect activated! Manta Manta Mantap!");
                                 removeBearAttackArea();
                                 removeTimer();
+                                NextButton.setDisable(false);
                                 return;
                             }
                         }
@@ -919,6 +925,7 @@ public class MainPageController {
                 }
                 removeBearAttackArea();
                 removeTimer();
+                NextButton.setDisable(false);
                 testPrintSlots();
             });
         }
