@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Base" prefHeight="604.0" prefWidth="775.0" stylesheets="@../Styles/store-page.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.MainPageController">
+<AnchorPane fx:id="Base" prefHeight="604.0" prefWidth="775.0" stylesheets="@../Styles/main-page.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.MainPageController">
    <children>
       <ImageView fitHeight="604.0" fitWidth="930.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -35,7 +35,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -45,7 +45,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="1">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="1">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -55,7 +55,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="2">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="2">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -65,7 +65,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="3">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="3">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -75,7 +75,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="4">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="4">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -85,7 +85,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.rowIndex="1">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.rowIndex="1">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -95,7 +95,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -105,7 +105,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -115,7 +115,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -125,7 +125,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -135,7 +135,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.rowIndex="2">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.rowIndex="2">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -145,7 +145,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -155,7 +155,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -165,7 +165,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -175,7 +175,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -185,7 +185,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.rowIndex="3">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.rowIndex="3">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -195,7 +195,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -205,7 +205,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -215,7 +215,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -225,7 +225,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="4" GridPane.rowIndex="3">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-pane" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -273,7 +273,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-deck-pane">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -283,7 +283,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="1">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-deck-pane" GridPane.columnIndex="1">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -293,7 +293,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="2">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-deck-pane" GridPane.columnIndex="2">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -303,7 +303,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="3">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-deck-pane" GridPane.columnIndex="3">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -313,7 +313,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="4">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-deck-pane" GridPane.columnIndex="4">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -323,7 +323,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" GridPane.columnIndex="5">
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="74.0" style="-fx-background-color: #0f5132;" styleClass="card-deck-pane" GridPane.columnIndex="5">
                <children>
                   <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
                   <Label alignment="CENTER" layoutX="4.0" layoutY="76.0" prefHeight="20.0" prefWidth="67.0" text="CardName" textFill="WHITE">
@@ -372,5 +372,10 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <ImageView fitHeight="370.0" fitWidth="190.0" layoutX="713.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/AddOns/timothy.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

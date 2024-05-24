@@ -32,13 +32,14 @@
     -fx-border-radius: 10px; /* Rounded corners */
     -fx-border-width: 4px; /* Border width */
     -fx-padding: 10px; /* Padding inside the pane */
-    -fx-background-radius: 10px; /* Matching background radius */
+    -fx-background-radius: 20px; /* Matching background radius */
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.3, 0, 5); /* Soft drop shadow */
 }
 
 .button:hover {
-    -fx-border-color: #000000;
-    -fx-border-radius: 2px;
-    -fx-border-width: 1px;
+    -fx-background-color: #8888aa; /* Slightly darker background on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 4); /* Add shadow effect */
+    -fx-scale-x: 1.05; /* Slightly enlarge the element */
+    -fx-scale-y: 1.05; /* Slightly enlarge the element */
     -fx-cursor: hand;
 }
