@@ -989,19 +989,19 @@ public class MainPageController {
     
     // Pop Up Button Handler
     @FXML
-    private void nextButtonHandler(ActionEvent event) {
+    private void nextButtonHandler(ActionEvent event) { 
         if (currentTurn + 1 == 21) {
             DataPasser dataPasser = DataPasser.getInstance();
-            dataPasser.player1Gold = String.valueOf(player1.getGuldenCount());
-            dataPasser.player2Gold = String.valueOf(player2.getGuldenCount());
+            dataPasser.player1Gold = player1.getGuldenCount() + " Gulden";
+            dataPasser.player2Gold = player2.getGuldenCount() + " Gulden";
             if (player1.getGuldenCount() > player2.getGuldenCount()) {
-                dataPasser.winLabel = "Pemenangnya adalah player 1!";
+                dataPasser.winLabel = "The Winner is Player 1!";
             }
             else if (player1.getGuldenCount() < player2.getGuldenCount()) {
-                dataPasser.winLabel = ("Pemenangnya adalah player 2!");
+                dataPasser.winLabel = ("The Winner is Player 2");
             }
             else {
-                dataPasser.winLabel = ("Permainan seri karena uang kedua player sama!");
+                dataPasser.winLabel = ("The game ends in a draw:/");
             }
 
             try {
