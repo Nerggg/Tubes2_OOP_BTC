@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.EndgameController">
+   <children>
+      <Label layoutX="228.0" layoutY="83.0" text="Player 1: ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="player1Gold" layoutX="342.0" layoutY="83.0" text="NaN">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="228.0" layoutY="127.0" text="Player 2: ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="player2Gold" layoutX="342.0" layoutY="127.0" text="NaN">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="win" layoutX="286.0" layoutY="247.0" text="Label" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

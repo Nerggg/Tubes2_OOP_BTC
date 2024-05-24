@@ -48,4 +48,9 @@ public class DataPasser {
 
     // Plugin Stuffs
     public File jarFile;
+
+    // Endgame Stuffs
+    public String player1Gold;
+    public String player2Gold;
+    public String winLabel;
 }

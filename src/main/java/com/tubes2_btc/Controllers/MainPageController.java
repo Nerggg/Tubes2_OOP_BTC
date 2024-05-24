@@ -1,4 +1,5 @@
 package com.tubes2_btc.Controllers;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -988,50 +990,89 @@ public class MainPageController {
     // Pop Up Button Handler
     @FXML
     private void nextButtonHandler(ActionEvent event) {
-        try {
-            // Set game state variables
-            currentTurn++;
-            currentPlayer = (currentTurn % 2 == 1) ? 1 : 2;
-            currentFarmView = currentPlayer;
-
-            // Update cards
-            updateFarm();
-            updateActiveDeck();
-
-            // Set data passer
+        if (currentTurn + 1 == 21) {
             DataPasser dataPasser = DataPasser.getInstance();
-            dataPasser.currentPlayer = currentPlayer;
-
-            // Load FXML
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/random-card.fxml"));
-            Parent root = fxmlLoader.load();
-            
-            // Set main page controller in random card controller
-            RandomCardController r = fxmlLoader.getController();
-            r.setMainPageController(this);
-            
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(root));
-
-            // Get the parent stage (assuming the button is within a stage)
-            Stage parentStage;
-            if (event != null) {
-                parentStage = (Stage) ((Parent) event.getSource()).getScene().getWindow();
-            } else {
-                parentStage = (Stage) Base.getScene().getWindow();
+            dataPasser.player1Gold = String.valueOf(player1.getGuldenCount());
+            dataPasser.player2Gold = String.valueOf(player2.getGuldenCount());
+            if (player1.getGuldenCount() > player2.getGuldenCount()) {
+                dataPasser.winLabel = "Pemenangnya adalah player 1!";
+            }
+            else if (player1.getGuldenCount() < player2.getGuldenCount()) {
+                dataPasser.winLabel = ("Pemenangnya adalah player 2!");
+            }
+            else {
+                dataPasser.winLabel = ("Permainan seri karena uang kedua player sama!");
             }
 
-            // Center the new stage in the parent stage
-            stage.setOnShown(e -> {
-                stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
-                stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
-            });
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/endgame-screen.fxml"));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.UNDECORATED);
+                stage.setScene(new Scene(root));
 
-            stage.showAndWait();
-        } catch (Exception e) {
-            e.printStackTrace();
+                // Get the parent stage (assuming the button is within a stage)
+                Stage parentStage = (Stage) ((Parent) event.getSource()).getScene().getWindow();
+
+                // Center the new stage in the parent stage
+                stage.setOnShown(e -> {
+                    stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
+                    stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
+                });
+
+                stage.showAndWait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        else {
+            try {
+                // Set game state variables
+                currentTurn++;
+                currentPlayer = (currentTurn % 2 == 1) ? 1 : 2;
+                currentFarmView = currentPlayer;
+
+                // Update cards
+                updateFarm();
+                updateActiveDeck();
+
+                // Set data passer
+                DataPasser dataPasser = DataPasser.getInstance();
+                dataPasser.currentPlayer = currentPlayer;
+
+                // Load FXML
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/random-card.fxml"));
+                Parent root = fxmlLoader.load();
+
+                // Set main page controller in random card controller
+                RandomCardController r = fxmlLoader.getController();
+                r.setMainPageController(this);
+
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.UNDECORATED);
+                stage.setScene(new Scene(root));
+
+                // Get the parent stage (assuming the button is within a stage)
+                Stage parentStage;
+                if (event != null) {
+                    parentStage = (Stage) ((Parent) event.getSource()).getScene().getWindow();
+                } else {
+                    parentStage = (Stage) Base.getScene().getWindow();
+                }
+
+                // Center the new stage in the parent stage
+                stage.setOnShown(e -> {
+                    stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
+                    stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
+                });
+
+                stage.showAndWait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
