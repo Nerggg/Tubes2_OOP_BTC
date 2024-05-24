@@ -1,4 +1,5 @@
 package com.tubes2_btc.Controllers;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,6 +36,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -417,7 +420,7 @@ public class MainPageController {
                                 stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
                                 stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
                             });
-
+                            dataPasser.stage = stage;
                             stage.showAndWait();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -691,6 +694,9 @@ public class MainPageController {
     private Label TimerLabel;
     
     @FXML
+    private Button NextButton;
+
+    @FXML
     public void initialize() {
         // Set player data to DataPasser
         DataPasser dataPasser = DataPasser.getInstance();
@@ -756,6 +762,10 @@ public class MainPageController {
     }
 
     private void removeBearAttackArea(){
+        DataPasser dataPasser = DataPasser.getInstance();
+        if (dataPasser.stage != null) {
+            dataPasser.stage.close();
+        }
         if(this.BearAttackArea != null){
             this.Base.getChildren().remove(this.BearAttackArea);
         }
@@ -773,7 +783,7 @@ public class MainPageController {
             System.out.println("The bear is out! Watch yo ass!");
             int duration =5;
             int area = rand.nextInt(1,6);
-            
+            NextButton.setDisable(true);
             switch(area){
                 case 6:
                     if(isHorizontal){
@@ -874,6 +884,7 @@ public class MainPageController {
                                 System.out.println("Trap effect activated! Manta Manta Mantap!");
                                 removeBearAttackArea();
                                 removeTimer();
+                                NextButton.setDisable(false);
                                 return;
                             }
                         }
@@ -889,6 +900,7 @@ public class MainPageController {
                                 System.out.println("Trap effect activated! Manta Manta Mantap!");
                                 removeBearAttackArea();
                                 removeTimer();
+                                NextButton.setDisable(false);
                                 return;
                             }
                         }
@@ -926,6 +938,7 @@ public class MainPageController {
                 }
                 removeBearAttackArea();
                 removeTimer();
+                NextButton.setDisable(false);
                 testPrintSlots();
             });
         }
@@ -987,52 +1000,91 @@ public class MainPageController {
     
     // Pop Up Button Handler
     @FXML
-    private void nextButtonHandler(ActionEvent event) {
-        try {
-            // Set game state variables
-            currentTurn++;
-            currentPlayer = (currentTurn % 2 == 1) ? 1 : 2;
-            currentFarmView = currentPlayer;
+    private void nextButtonHandler(ActionEvent event) { 
+        if (currentTurn + 1 == 21) {
+            DataPasser dataPasser = DataPasser.getInstance();
+            dataPasser.player1Gold = player1.getGuldenCount() + " Gulden";
+            dataPasser.player2Gold = player2.getGuldenCount() + " Gulden";
+            if (player1.getGuldenCount() > player2.getGuldenCount()) {
+                dataPasser.winLabel = "The Winner is Player 1!";
+            }
+            else if (player1.getGuldenCount() < player2.getGuldenCount()) {
+                dataPasser.winLabel = ("The Winner is Player 2");
+            }
+            else {
+                dataPasser.winLabel = ("The game ends in a draw:/");
+            }
+
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/endgame-screen.fxml"));
+                Parent root = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.UNDECORATED);
+                stage.setScene(new Scene(root));
+
+                // Get the parent stage (assuming the button is within a stage)
+                Stage parentStage = (Stage) ((Parent) event.getSource()).getScene().getWindow();
+
+                // Center the new stage in the parent stage
+                stage.setOnShown(e -> {
+                    stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
+                    stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
+                });
+
+                stage.showAndWait();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        else {
+            try {
+                // Set game state variables
+                currentTurn++;
+                currentPlayer = (currentTurn % 2 == 1) ? 1 : 2;
+                currentFarmView = currentPlayer;
 
             // Update cards
             updateFarm();
             updateActiveDeck();
             setGameDataGUI();
 
-            // Set data passer
-            DataPasser dataPasser = DataPasser.getInstance();
-            dataPasser.currentPlayer = currentPlayer;
+                // Set data passer
+                DataPasser dataPasser = DataPasser.getInstance();
+                dataPasser.currentPlayer = currentPlayer;
 
-            // Load FXML
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/random-card.fxml"));
-            Parent root = fxmlLoader.load();
-            
-            // Set main page controller in random card controller
-            RandomCardController r = fxmlLoader.getController();
-            r.setMainPageController(this);
-            
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(root));
+                // Load FXML
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/random-card.fxml"));
+                Parent root = fxmlLoader.load();
 
-            // Get the parent stage (assuming the button is within a stage)
-            Stage parentStage;
-            if (event != null) {
-                parentStage = (Stage) ((Parent) event.getSource()).getScene().getWindow();
-            } else {
-                parentStage = (Stage) Base.getScene().getWindow();
+                // Set main page controller in random card controller
+                RandomCardController r = fxmlLoader.getController();
+                r.setMainPageController(this);
+
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initStyle(StageStyle.UNDECORATED);
+                stage.setScene(new Scene(root));
+
+                // Get the parent stage (assuming the button is within a stage)
+                Stage parentStage;
+                if (event != null) {
+                    parentStage = (Stage) ((Parent) event.getSource()).getScene().getWindow();
+                } else {
+                    parentStage = (Stage) Base.getScene().getWindow();
+                }
+
+                // Center the new stage in the parent stage
+                stage.setOnShown(e -> {
+                    stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
+                    stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
+                });
+
+                stage.showAndWait();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-            // Center the new stage in the parent stage
-            stage.setOnShown(e -> {
-                stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
-                stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
-            });
-
-            stage.showAndWait();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

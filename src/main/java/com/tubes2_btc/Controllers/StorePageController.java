@@ -1,6 +1,15 @@
 package com.tubes2_btc.Controllers;
 
-import com.tubes2_btc.Classes.*;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.tubes2_btc.Classes.CardConstants;
+import com.tubes2_btc.Classes.DataPasser;
+import com.tubes2_btc.Classes.Player;
+import com.tubes2_btc.Classes.Product;
+import com.tubes2_btc.Classes.Store;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,22 +18,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.effect.ColorAdjust;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 public class StorePageController {
 
@@ -168,6 +173,9 @@ public class StorePageController {
                                 stage.showAndWait();
                             } catch (Exception e) {
                                 e.printStackTrace();
+                            }finally{
+                                Stage stages = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+                                stages.close();
                             }
 
                         }

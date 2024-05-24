@@ -1,21 +1,31 @@
 package com.tubes2_btc.Controllers;
 
 import com.tubes2_btc.Classes.*;
+import com.tubes2_btc.Interfaces.FormatHandler;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.jar.JarEntry;
+import java.util.jar.JarInputStream;
 
 public class SaveStateController {
 
@@ -36,6 +46,9 @@ public class SaveStateController {
 
     @FXML
     private TitledPane formatTitledPane;
+
+    @FXML
+    private AnchorPane formatAnchorPane;
 
     private static Map<String, String> cardMap = new HashMap<>();
     private String selectedFormat = "";
@@ -267,6 +280,65 @@ public class SaveStateController {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void addFormatButton(FormatHandler handler) {
+        Button newButton = new Button(handler.getFormatExtension());
+        newButton.setLayoutY(txtButton.getLayoutY() + txtButton.getPrefHeight() + 2);
+        newButton.setPrefHeight(26);
+        newButton.setPrefWidth(463);
+        newButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                formatTitledPane.setText(handler.getFormatExtension());
+                selectedFormat = "." + handler.getFormatExtension().toLowerCase();
+                formatTitledPane.setExpanded(false);
+            }
+        });
+        formatAnchorPane.getChildren().add(newButton);
+    }
+
+    public void loadFormatHandlerFromJar(File jarFile) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+        try (JarInputStream jarInputStream = new JarInputStream(new FileInputStream(jarFile))) {
+            JarEntry jarEntry;
+            URL[] urls = { new URL("jar:file:" + jarFile.getAbsolutePath() + "!/") };
+            URLClassLoader classLoader = new URLClassLoader(urls);
+
+            while ((jarEntry = jarInputStream.getNextJarEntry()) != null) {
+                if (jarEntry.getName().endsWith(".class")) {
+                    String className = jarEntry.getName().replace('/', '.').replace(".class", "");
+                    try {
+                        System.out.println("nama kelasnya " + className);
+                        Class<?> loadedClass = classLoader.loadClass(className);
+                        if (FormatHandler.class.isAssignableFrom(loadedClass)) {
+                            try {
+                                Constructor<?> constructor = loadedClass.getDeclaredConstructor();
+                                System.out.println("Constructor found: " + constructor);
+                                FormatHandler handler = (FormatHandler) constructor.newInstance();
+                                addFormatButton(handler);
+                            } catch (NoSuchMethodException e) {
+                                System.out.println("Class " + className + " does not have a default constructor.");
+                            }
+                        }
+                    } catch (ClassNotFoundException e) {
+                        System.out.println("Class " + className + " not found.");
+                    }
+                }
+            }
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    public void initialize() throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+        formatTitledPane.setText("TXT");
+        selectedFormat = ".txt";
+        DataPasser dataPasser = DataPasser.getInstance();
+//        dataPasser.loadState = this;
+        if (dataPasser.jarFile != null) {
+            loadFormatHandlerFromJar(dataPasser.jarFile);
         }
     }
 }

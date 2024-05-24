@@ -249,7 +249,7 @@
       <Circle fill="#0f5132" layoutX="585.0" layoutY="52.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
       <Label layoutX="573.0" layoutY="37.0" style="-fx-font-weight: 700;" text="Turn" textFill="WHITE" />
       <Label fx:id="TurnNumber" layoutX="581.0" layoutY="52.0" style="-fx-font-weight: 700;" text="X" textFill="WHITE" />
-      <Button layoutX="653.0" layoutY="40.0" mnemonicParsing="false" onAction="#nextButtonHandler" prefHeight="36.0" prefWidth="75.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="next" textFill="WHITE">
+      <Button fx:id="NextButton" layoutX="653.0" layoutY="40.0" mnemonicParsing="false" onAction="#nextButtonHandler" prefHeight="36.0" prefWidth="75.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="next" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

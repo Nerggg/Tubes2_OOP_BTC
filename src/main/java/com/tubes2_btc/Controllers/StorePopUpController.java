@@ -1,6 +1,12 @@
 package com.tubes2_btc.Controllers;
 
-import com.tubes2_btc.Classes.*;
+import java.util.Map;
+
+import com.tubes2_btc.Classes.Card;
+import com.tubes2_btc.Classes.DataPasser;
+import com.tubes2_btc.Classes.Player;
+import com.tubes2_btc.Classes.Store;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,8 +20,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import java.util.Map;
 
 public class StorePopUpController {
 
@@ -158,6 +162,9 @@ public class StorePopUpController {
             stage.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally{
+            Stage storeStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            storeStage.close();
         }
     }
 
