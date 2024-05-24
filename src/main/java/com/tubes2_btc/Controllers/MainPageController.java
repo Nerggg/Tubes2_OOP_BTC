@@ -1,4 +1,5 @@
 package com.tubes2_btc.Controllers;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -40,6 +42,10 @@ import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 
 public class MainPageController {
     // Misc. variables
@@ -687,8 +693,12 @@ public class MainPageController {
     @FXML
     private Button NextButton;
 
+    private MediaPlayer mediaPlayer;
+
+
     @FXML
     public void initialize() {
+        playBackgroundMusic("src/main/resources/com/tubes2_btc/Pages/Sound/main.m4a");
         // Set player data to DataPasser
         DataPasser dataPasser = DataPasser.getInstance();
         dataPasser.player1 = player1;
@@ -720,6 +730,14 @@ public class MainPageController {
         // Update game data GUI
         setGameDataGUI();
     }
+
+    private void playBackgroundMusic(String musicFilePath) {
+        Media media = new Media(new File(musicFilePath).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Set to repeat indefinitely
+        mediaPlayer.play();
+    }
+
 
     private void startTimer(int duration,Runnable onFinish) {
         Thread timerThread = new Thread(() -> {
