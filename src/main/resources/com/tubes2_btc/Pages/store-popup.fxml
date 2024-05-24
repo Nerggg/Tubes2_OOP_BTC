@@ -30,11 +30,11 @@
             </font>
          </Label>
       </HBox>
-      <Button fx:id="kembali" layoutX="39.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleClickedKembali" text="Kembali" />
-      <Button fx:id="plusButton" layoutX="277.0" layoutY="100.0" mnemonicParsing="false" onAction="#handlePlus" text="+" />
-      <Button fx:id="minusButton" layoutX="199.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleMinus" text="-" />
+      <Button fx:id="kembali" layoutX="34.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleClickedKembali" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #e23636; -fx-font-weight: 700;" text="back" textFill="WHITE" />
+      <Button fx:id="plusButton" layoutX="277.0" layoutY="100.0" mnemonicParsing="false" onAction="#handlePlus" style="-fx-background-color: #4a90e2; -fx-font-weight: 800;" text="+" textFill="WHITE" />
+      <Button fx:id="minusButton" layoutX="199.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleMinus" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="-" textFill="WHITE" />
       <Label fx:id="quantityLabel" layoutX="245.0" layoutY="104.0" text="0" />
-      <Button fx:id="confirmButton" layoutX="232.0" layoutY="147.0" mnemonicParsing="false" onAction="#handleConfirm" text="Beli" />
+      <Button fx:id="confirmButton" layoutX="219.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #82dd55; -fx-font-weight: 700;" text="buy" textFill="WHITE" />
       <HBox alignment="CENTER" layoutX="165.0" layoutY="26.0" prefWidth="500.0">
          <children>
             <Label fx:id="countActiveDeck" text="Gd." textAlignment="CENTER">

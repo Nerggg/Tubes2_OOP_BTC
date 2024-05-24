@@ -231,25 +231,25 @@
             </Pane>
          </children>
       </GridPane>
-      <Label layoutX="562.0" layoutY="92.0" text="Player 1">
+      <Label layoutX="562.0" layoutY="92.0" style="-fx-font-weight: 700;" text="Player 1">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="562.0" layoutY="119.0" text="Player 2">
+      <Label layoutX="562.0" layoutY="119.0" style="-fx-font-weight: 700;" text="Player 2">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="Player1_Gold" layoutX="677.0" layoutY="92.0" text="0 Gold">
+      <Label fx:id="Player1_Gold" layoutX="677.0" layoutY="92.0" style="-fx-font-weight: 700;" text="0 Gold">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
       <Circle fill="#0f5132" layoutX="585.0" layoutY="52.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label layoutX="573.0" layoutY="37.0" text="Turn" textFill="WHITE" />
-      <Label fx:id="TurnNumber" layoutX="581.0" layoutY="52.0" text="X" textFill="WHITE" />
-      <Button layoutX="653.0" layoutY="40.0" mnemonicParsing="false" onAction="#nextButtonHandler" prefHeight="36.0" prefWidth="75.0" text="Next">
+      <Label layoutX="573.0" layoutY="37.0" style="-fx-font-weight: 700;" text="Turn" textFill="WHITE" />
+      <Label fx:id="TurnNumber" layoutX="581.0" layoutY="52.0" style="-fx-font-weight: 700;" text="X" textFill="WHITE" />
+      <Button layoutX="653.0" layoutY="40.0" mnemonicParsing="false" onAction="#nextButtonHandler" prefHeight="36.0" prefWidth="75.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="next" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -330,12 +330,12 @@
          </children>
       </GridPane>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0f5132" height="74.0" layoutX="645.0" layoutY="491.0" stroke="BLACK" strokeType="INSIDE" width="92.0" />
-      <Label layoutX="671.0" layoutY="500.0" text="Deck" textFill="WHITE">
+      <Label layoutX="671.0" layoutY="500.0" style="-fx-font-weight: 700;" text="Deck" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="667.0" layoutY="528.0" text="XX/40" textFill="WHITE">
+      <Label layoutX="667.0" layoutY="528.0" style="-fx-font-weight: 700;" text="XX/40" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
@@ -353,15 +353,15 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#myFarmHandler" prefHeight="26.0" prefWidth="140.0" text="Ladangku" />
-            <Button mnemonicParsing="false" onAction="#opponentFarmHandler" prefHeight="26.0" prefWidth="140.0" text="Ladang Lawan" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#loadPluginButtonHandler" prefHeight="26.0" prefWidth="140.0" text="Load Plugin" GridPane.rowIndex="5" />
-            <Button mnemonicParsing="false" onAction="#storeButtonHandler" prefHeight="26.0" prefWidth="140.0" text="Toko" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" onAction="#loadStateButtonHandler" prefHeight="26.0" prefWidth="140.0" text="Load State" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#saveStateButtonHandler" prefHeight="26.0" prefWidth="140.0" text="Save State" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" onAction="#myFarmHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="my farm" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#opponentFarmHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="enemy's farm" textFill="WHITE" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#loadPluginButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="load plugin" textFill="WHITE" GridPane.rowIndex="5" />
+            <Button mnemonicParsing="false" onAction="#storeButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="store" textFill="WHITE" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#loadStateButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="load state" textFill="WHITE" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" onAction="#saveStateButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="save state" textFill="WHITE" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label fx:id="Player2_Gold" layoutX="677.0" layoutY="119.0" text="0 Gold">
+      <Label fx:id="Player2_Gold" layoutX="677.0" layoutY="119.0" style="-fx-font-weight: 700;" text="0 Gold">
          <font>
             <Font size="14.0" />
          </font>

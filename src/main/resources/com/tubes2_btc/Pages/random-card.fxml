@@ -11,7 +11,7 @@
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="538.0" VBox.vgrow="ALWAYS">
             <children>
-                <StackPane fx:id="stackPane1" layoutX="100.0" layoutY="37.0" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;" onMouseClicked="#handleStackPaneClick">
+                <StackPane fx:id="stackPane1" layoutX="100.0" layoutY="37.0" onMouseClicked="#handleStackPaneClick" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;">
                     <children>
                         <VBox alignment="CENTER">
                             <ImageView fx:id="imageView1" fitHeight="82.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
@@ -19,7 +19,7 @@
                         </VBox>
                     </children>
                 </StackPane>
-                <StackPane fx:id="stackPane2" layoutX="375.0" layoutY="37.0" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;" onMouseClicked="#handleStackPaneClick">
+                <StackPane fx:id="stackPane2" layoutX="375.0" layoutY="37.0" onMouseClicked="#handleStackPaneClick" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;">
                     <children>
                         <VBox alignment="CENTER">
                             <ImageView fx:id="imageView2" fitHeight="82.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
@@ -27,7 +27,7 @@
                         </VBox>
                     </children>
                 </StackPane>
-                <StackPane fx:id="stackPane3" layoutX="100.0" layoutY="204.0" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;" onMouseClicked="#handleStackPaneClick">
+                <StackPane fx:id="stackPane3" layoutX="100.0" layoutY="204.0" onMouseClicked="#handleStackPaneClick" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;">
                     <children>
                         <VBox alignment="CENTER">
                             <ImageView fx:id="imageView3" fitHeight="82.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
@@ -35,7 +35,7 @@
                         </VBox>
                     </children>
                 </StackPane>
-                <StackPane fx:id="stackPane4" layoutX="375.0" layoutY="204.0" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;" onMouseClicked="#handleStackPaneClick">
+                <StackPane fx:id="stackPane4" layoutX="375.0" layoutY="204.0" onMouseClicked="#handleStackPaneClick" prefHeight="154.0" prefWidth="155.0" style="-fx-background-color: #D9D9D9;">
                     <children>
                         <VBox alignment="CENTER">
                             <ImageView fx:id="imageView4" fitHeight="82.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true" />
@@ -43,8 +43,8 @@
                         </VBox>
                     </children>
                 </StackPane>
-            <Button fx:id="randomizeButton" layoutX="229.0" layoutY="393.0" mnemonicParsing="false" text="Shuffle" />
-            <Button layoutX="345.0" layoutY="393.0" mnemonicParsing="false" text="Confirm" onAction="#handleClicked"/>
+            <Button fx:id="randomizeButton" layoutX="242.0" layoutY="393.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="65.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="shuffle" textFill="WHITE" />
+            <Button layoutX="330.0" layoutY="393.0" mnemonicParsing="false" onAction="#handleClicked" prefHeight="35.0" prefWidth="65.0" style="-fx-background-color: #82dd55; -fx-font-weight: 700;" text="confirm" textFill="WHITE" />
             </children>
         </AnchorPane>
     </children>

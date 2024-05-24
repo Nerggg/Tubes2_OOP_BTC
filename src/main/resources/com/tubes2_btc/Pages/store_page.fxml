@@ -14,8 +14,8 @@
 
 <AnchorPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="curved-pane-store" stylesheets="@../Styles/store_page.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.StorePageController">
    <children>
-      <Button fx:id="kembali" layoutX="28.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleClicked" text="Kembali" />
-      <Text layoutX="258.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOKO">
+      <Button fx:id="kembali" layoutX="28.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleClicked" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #e23636; -fx-font-weight: 700;" text="back" textFill="WHITE" />
+      <Text layoutX="258.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 700;" text="STORE">
          <font>
             <Font size="32.0" />
          </font>
@@ -245,7 +245,7 @@
             </Pane>
          </children>
       </GridPane>
-      <Button fx:id="previousButton" layoutX="236.0" layoutY="355.0" mnemonicParsing="false" onAction="#handlePrevious" text="Previous" />
-      <Button fx:id="nextButton" layoutX="316.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleNext" text="Next" />
+      <Button fx:id="previousButton" layoutX="243.0" layoutY="355.0" mnemonicParsing="false" onAction="#handlePrevious" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="prev" textFill="WHITE" />
+      <Button fx:id="nextButton" layoutX="316.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleNext" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="next" textFill="WHITE" />
    </children>
 </AnchorPane>

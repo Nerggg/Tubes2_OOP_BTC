@@ -7,16 +7,16 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.LoadPluginController">
    <children>
-      <Button fx:id="kembali" layoutX="40.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleClickedKembali" text="Kembali">
+      <Button fx:id="kembali" layoutX="40.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleClickedKembali" style="-fx-background-color: #e23636; -fx-font-weight: 700;" text="back" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Label alignment="CENTER" layoutX="253.0" layoutY="24.0" prefHeight="84.0" prefWidth="94.0" text="Plugin">
+      <Label alignment="CENTER" layoutX="253.0" layoutY="24.0" prefHeight="84.0" prefWidth="94.0" style="-fx-font-weight: 700;" text="Plugin">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="35.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleClickedUpload" prefHeight="30.0" prefWidth="531.0" text="Upload">
+      <Button layoutX="35.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleClickedUpload" prefHeight="30.0" prefWidth="531.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="upload" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

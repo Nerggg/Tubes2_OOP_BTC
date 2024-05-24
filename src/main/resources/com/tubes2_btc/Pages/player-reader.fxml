@@ -4,9 +4,9 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.PlayerReaderController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.tubes2_btc.Controllers.PlayerReaderController">
     <children>
-        <Button fx:id="uploadButton" layoutX="20.0" layoutY="20.0" text="Upload TXT" onAction="#handlePlayerLoadButtonAction"/>
-        <TextArea fx:id="textArea" layoutX="20.0" layoutY="60.0" prefHeight="400.0" prefWidth="600.0"/>
+        <Button fx:id="uploadButton" layoutX="20.0" layoutY="20.0" onAction="#handlePlayerLoadButtonAction" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="upload .txt" textFill="WHITE" />
+        <TextArea fx:id="textArea" layoutX="20.0" layoutY="60.0" prefHeight="400.0" prefWidth="600.0" />
     </children>
 </AnchorPane>

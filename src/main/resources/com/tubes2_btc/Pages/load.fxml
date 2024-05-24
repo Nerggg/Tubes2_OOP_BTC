@@ -9,11 +9,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.LoadStateController">
     <children>
-        <Button fx:id="kembali" layoutX="40.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleClicked" text="Kembali">
+        <Button fx:id="kembali" layoutX="40.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleClicked" style="-fx-background-color: #e23636; -fx-font-weight: 700;" text="back" textFill="WHITE">
             <font>
                 <Font size="14.0" />
             </font></Button>
-        <Label alignment="CENTER" layoutX="253.0" layoutY="24.0" prefHeight="84.0" prefWidth="94.0" text="Load">
+        <Label alignment="CENTER" layoutX="233.0" layoutY="24.0" prefHeight="84.0" prefWidth="135.0" style="-fx-font-weight: 700;" text="Load State">
             <font>
                 <Font size="24.0" />
             </font>
@@ -28,7 +28,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <Button fx:id="loadButton" layoutX="35.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleLoadButton" prefHeight="30.0" prefWidth="531.0" text="Load">
+        <Button fx:id="loadButton" layoutX="35.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleLoadButton" prefHeight="30.0" prefWidth="531.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="load" textFill="WHITE">
             <font>
                 <Font size="14.0" />
             </font>

@@ -22,8 +22,8 @@
             <Label fx:id="productQuantityLabel" text="Quantity" />
             <Label fx:id="changeLabel" text="Change" />
             <HBox alignment="CENTER" spacing="10.0">
-                <Button onAction="#handleConfirmPurchase" text="Ya" />
-                <Button onAction="#handleCancelPurchase" text="Batal" />
+                <Button onAction="#handleConfirmPurchase" style="-fx-background-color: #82dd55; -fx-font-weight: 700;" text="yes" textFill="WHITE" />
+                <Button onAction="#handleCancelPurchase" style="-fx-background-color: #e23636; -fx-font-weight: 700;" text="cancel" textFill="WHITE" />
             </HBox>
         </VBox>
     </children>
