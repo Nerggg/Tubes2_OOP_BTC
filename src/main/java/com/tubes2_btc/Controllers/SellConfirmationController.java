@@ -31,8 +31,8 @@ public class SellConfirmationController {
     private void updateProductInfo() {
         DataPasser dataPasser = DataPasser.getInstance();
         Player player = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
-        productNameLabel.setText(product.getCardName());
-        productPriceLabel.setText("Price: " + product.getSellPrice());
+        productNameLabel.setText("Jual " + product.getCardName() + "?");
+        productPriceLabel.setText("Harga Jual: " + product.getSellPrice());
         changeLabel.setText("Uang anda setelah jual: " + (player.getGuldenCount() + product.getSellPrice()));
     }
 

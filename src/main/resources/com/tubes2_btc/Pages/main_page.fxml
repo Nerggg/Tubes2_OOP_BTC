@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Base" prefHeight="604.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.MainPageController">
+<AnchorPane fx:id="Base" stylesheets="@../Styles/store_page.css" prefHeight="604.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.MainPageController">
    <children>
       <GridPane fx:id="Ladang" alignment="CENTER" layoutX="21.0" layoutY="8.0" prefHeight="461.0" prefWidth="518.0">
         <columnConstraints>
@@ -353,12 +353,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#myFarmHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="my farm" textFill="WHITE" />
-            <Button mnemonicParsing="false" onAction="#opponentFarmHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="enemy's farm" textFill="WHITE" GridPane.rowIndex="1" />
+            <Button fx:id="myFarm" mnemonicParsing="false" onAction="#myFarmHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="my farm" textFill="WHITE" />
+            <Button fx:id="enemyFarm" mnemonicParsing="false" onAction="#opponentFarmHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="enemy's farm" textFill="WHITE" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onAction="#loadPluginButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="load plugin" textFill="WHITE" GridPane.rowIndex="5" />
-            <Button mnemonicParsing="false" onAction="#storeButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="store" textFill="WHITE" GridPane.rowIndex="2" />
+            <Button fx:id="storeButton" mnemonicParsing="false" onAction="#storeButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="store" textFill="WHITE" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" onAction="#loadStateButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="load state" textFill="WHITE" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" onAction="#saveStateButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="save state" textFill="WHITE" GridPane.rowIndex="4" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveStateButtonHandler" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="save state" textFill="WHITE" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <Label fx:id="Player2_Gold" layoutX="677.0" layoutY="119.0" style="-fx-font-weight: 700;" text="0 Gold">
