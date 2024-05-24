@@ -2,6 +2,7 @@ package com.tubes2_btc.Classes;
 
 import com.tubes2_btc.Controllers.*;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.List;
@@ -24,6 +25,8 @@ public class DataPasser {
     // ======== Shared data =========
     // Main page controller
     public MainPageController mainPageController;
+
+    public Stage stage;
 
     // Player data
     public Player player1;

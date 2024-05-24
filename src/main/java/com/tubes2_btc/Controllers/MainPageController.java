@@ -419,7 +419,7 @@ public class MainPageController {
                                 stage.setX(parentStage.getX() + (parentStage.getWidth() / 2) - (stage.getWidth() / 2));
                                 stage.setY(parentStage.getY() + (parentStage.getHeight() / 2) - (stage.getHeight() / 2));
                             });
-
+                            dataPasser.stage = stage;
                             stage.showAndWait();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -755,6 +755,10 @@ public class MainPageController {
     }
 
     private void removeBearAttackArea(){
+        DataPasser dataPasser = DataPasser.getInstance();
+        if (dataPasser.stage != null) {
+            dataPasser.stage.close();
+        }
         if(this.BearAttackArea != null){
             this.Base.getChildren().remove(this.BearAttackArea);
         }
