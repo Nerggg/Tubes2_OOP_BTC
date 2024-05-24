@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="curved-pane-store" stylesheets="@../Styles/store_page.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.StorePageController">
+<AnchorPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="curved-pane-store" stylesheets="@../Styles/store-page.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.StorePageController">
    <children>
       <Button fx:id="kembali" layoutX="28.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleClicked" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #e23636; -fx-font-weight: 700;" text="back" textFill="WHITE" />
       <Text layoutX="258.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 700;" text="STORE">
