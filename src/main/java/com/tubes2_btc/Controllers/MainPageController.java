@@ -1,37 +1,42 @@
 package com.tubes2_btc.Controllers;
-import com.tubes2_btc.Classes.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
+import com.tubes2_btc.Classes.Animal;
+import com.tubes2_btc.Classes.Card;
+import com.tubes2_btc.Classes.CardConstants;
+import com.tubes2_btc.Classes.DataPasser;
+import com.tubes2_btc.Classes.Plant;
+import com.tubes2_btc.Classes.Player;
+import com.tubes2_btc.Classes.Product;
+import com.tubes2_btc.Classes.Store;
+
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.Modality;
-import javafx.stage.StageStyle;
-import javafx.scene.Node;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import javafx.application.Platform;
-
-import org.controlsfx.control.action.Action;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class MainPageController {
     // Misc. variables
@@ -303,9 +308,8 @@ public class MainPageController {
                     p = (currentFarmView == 1) ? player1 : player2;
 
                 }
-
                 draggedCard = (draggedIsFarm) ? p.getFarm().get(draggedCardIndex) : p.getActiveDeck().get(draggedCardIndex);
-
+                
                 // Event handler
                 Dragboard db = child.startDragAndDrop(TransferMode.ANY);
 
@@ -852,9 +856,42 @@ public class MainPageController {
             this.BearAttackArea = addDynamicRectangle(100.0*finalWidth, 118.0*finalHeight, x, y);
             addDynamicTimer();
             startTimer(duration,()->{
-                System.out.println("Deleting card ");
+                // Checking if subgrid is trapped
                 if(isHorizontal){
-                int index = finalX + finalY*5;
+                    int index = finalX + finalY*5;
+                    System.out.println(index);
+                    for(int i =0;i<finalHeight;i++){
+                        for(int j =0;j<finalWidth;j++){
+                            Player p = (currentPlayer == 1) ? player1 : player2;
+                            if(p.getFarm().get(index+j).isTrapped()){
+                                System.out.println("Trap effect activated! Manta Manta Mantap!");
+                                removeBearAttackArea();
+                                removeTimer();
+                                return;
+                            }
+                        }
+                        index += 5;
+                    }
+                }else{
+                    int index = finalX + finalY*5;
+                    System.out.println(index);
+                    for(int i =0;i<finalHeight;i++){
+                        for(int j =0;j<finalWidth;j++){
+                            Player p = (currentPlayer == 1) ? player1 : player2;
+                            if(p.getFarm().get(index+j).isTrapped()){
+                                System.out.println("Trap effect activated! Manta Manta Mantap!");
+                                removeBearAttackArea();
+                                removeTimer();
+                                return;
+                            }
+                        }
+                        index += 5;
+                    }
+                }
+
+                // Deleting all cards within the subgrid
+                if(isHorizontal){
+                    int index = finalX + finalY*5;
                     System.out.println(index);
                     for(int i =0;i<finalHeight;i++){
                         for(int j =0;j<finalWidth;j++){
@@ -865,7 +902,7 @@ public class MainPageController {
                         index += 5;
                     }
                 }else{
-                int index = finalX + finalY*5;
+                    int index = finalX + finalY*5;
                     System.out.println(index);
                     for(int i =0;i<finalHeight;i++){
                         for(int j =0;j<finalWidth;j++){
@@ -884,7 +921,6 @@ public class MainPageController {
                 removeTimer();
                 testPrintSlots();
             });
-        
         }
     }
 
