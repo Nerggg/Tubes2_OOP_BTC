@@ -404,6 +404,9 @@ public class MainPageController {
                     if (p.getFarm().get(i).getClass().getSimpleName().equals("Animal") || p.getFarm().get(i).getClass().getSimpleName().equals("Plant")) {;
                         dataPasser.infoCard = p.getFarm().get(i);
                         dataPasser.indexCard = i;
+
+                        dataPasser.currentPlayer = currentPlayer;
+                        dataPasser.currentFarmView = currentFarmView;
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/card-info.fxml"));
                             Parent root = fxmlLoader.load();
@@ -703,6 +706,7 @@ public class MainPageController {
         dataPasser.player1 = player1;
         dataPasser.player2 = player2;
         dataPasser.currentPlayer = currentPlayer;
+        dataPasser.currentFarmView = currentFarmView;
         dataPasser.mainPageController = this;
 
         // Initialize farm and active deck
@@ -1045,14 +1049,28 @@ public class MainPageController {
                 currentPlayer = (currentTurn % 2 == 1) ? 1 : 2;
                 currentFarmView = currentPlayer;
 
-            // Update cards
-            updateFarm();
-            updateActiveDeck();
-            setGameDataGUI();
+                // Update plant age
+                for (Object card : player1.getFarm().values()) {
+                    if (card instanceof Plant) {
+                        ((Plant) card).incrementAge();
+                    }
+                }
+
+                for (Object card : player2.getFarm().values()) {
+                    if (card instanceof Plant) {
+                        ((Plant) card).incrementAge();
+                    }
+                }
+
+                // Update cards
+                updateFarm();
+                updateActiveDeck();
+                setGameDataGUI();
 
                 // Set data passer
                 DataPasser dataPasser = DataPasser.getInstance();
                 dataPasser.currentPlayer = currentPlayer;
+                dataPasser.currentFarmView = currentFarmView;
 
                 // Load FXML
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/random-card.fxml"));

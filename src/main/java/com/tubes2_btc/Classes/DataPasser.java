@@ -32,6 +32,7 @@ public class DataPasser {
     public Player player1;
     public Player player2;
     public int currentPlayer;
+    public int currentFarmView;
 
     // Random card data
     List<Card> randomCards;

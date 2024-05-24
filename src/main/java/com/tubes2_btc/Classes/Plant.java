@@ -24,6 +24,10 @@ public class Plant extends Card {
         this.age=age;
     }
 
+    public void incrementAge() {
+        this.age++;
+    }
+
     public int getWeightOrAge() {
         return this.age;
     }

@@ -70,11 +70,11 @@ public class CardInfoController {
         key.add(Card.CARD_BERUANG_INDEX);
         value.add(Card.CARD_DAGING_BERUANG_INDEX);
         key.add(Card.CARD_BIJI_JAGUNG_INDEX);
-        value.add(Card.CARD_BIJI_JAGUNG_INDEX);
+        value.add(Card.CARD_JAGUNG_INDEX);
         key.add(Card.CARD_BIJI_LABU_INDEX);
-        value.add(Card.CARD_BIJI_LABU_INDEX);
+        value.add(Card.CARD_LABU_INDEX);
         key.add(Card.CARD_BIJI_STROBERI_INDEX);
-        value.add(Card.CARD_BIJI_STROBERI_INDEX);
+        value.add(Card.CARD_STROBERI_INDEX);
 
 
         DataPasser dataPasser = DataPasser.getInstance();
@@ -96,7 +96,8 @@ public class CardInfoController {
         }
 
         System.out.println(Card.createCard(target).getCardName());
-        player.setFarmAt(indexHasil, Card.createCard(target));
+        player.addToActiveDeck(Card.createCard(target));
+        player.setFarmAt(indexHasil, Card.createCard(Card.CARD_EMPTY_INDEX));
         System.out.println("Tombol 'Panen' ditekan.");
         dataPasser.mainPageController.updateActiveDeck();
         dataPasser.mainPageController.updateFarm();
@@ -106,8 +107,19 @@ public class CardInfoController {
         stage.close();
     }
 
+    public boolean checkCanHarvest() {
+        DataPasser dataPasser = DataPasser.getInstance();
+        System.out.println("Current player: " + dataPasser.currentPlayer);
+        System.out.println("Current farm view: " + dataPasser.currentFarmView);
+        return dataPasser.currentFarmView == dataPasser.currentPlayer;
+    }
 
-
+    public boolean checkPlayerActiveDeckFull() {
+        DataPasser dataPasser = DataPasser.getInstance();
+        Player player = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
+        
+        return player.getActiveDeckFreeSlots() == 0;
+    }
 
     @FXML
     public void initialize() {
@@ -128,7 +140,7 @@ public class CardInfoController {
             Image image = new Image(getClass().getResource(card.getCardPath()).toExternalForm());
             imageView.setImage(image);
             // tombol panen
-            panen.setDisable(card.getWeight() < card.getHarvestWeight());
+            panen.setDisable(card.getWeight() < card.getHarvestWeight() || !checkCanHarvest() || checkPlayerActiveDeckFull());
         }
         if (dataPasser.infoCard.getClass().getSimpleName().equals("Plant")) {
             Plant card = (Plant) dataPasser.infoCard;
@@ -146,7 +158,7 @@ public class CardInfoController {
             Image image = new Image(getClass().getResource(card.getCardPath()).toExternalForm());
             imageView.setImage(image);
             // tombol panen
-            panen.setDisable(card.getAge() < card.getHarvestAge());
+            panen.setDisable(card.getAge() < card.getHarvestAge() || !checkCanHarvest() || checkPlayerActiveDeckFull());
         }
         if (dataPasser.infoCard.getClass().getSimpleName().equals("Product")) {
             Product card = (Product) dataPasser.infoCard;
@@ -164,7 +176,7 @@ public class CardInfoController {
             Image image = new Image(getClass().getResource(card.getCardPath()).toExternalForm());
             imageView.setImage(image);
             // tombol panen
-            panen.setDisable(card.getHarvestAge() < card.getHarvestAge());
+            panen.setDisable(card.getHarvestAge() < card.getHarvestAge() || !checkCanHarvest() || checkPlayerActiveDeckFull());
         }
     }
 }
