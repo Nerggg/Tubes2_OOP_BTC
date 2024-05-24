@@ -9,11 +9,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.SaveStateController">
    <children>
-      <Button fx:id="kembali" layoutX="40.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleClicked" style="-fx-background-color: #e23636; -fx-font-weight: 700;" text="Back" textFill="WHITE">
+      <Button fx:id="kembali" layoutX="40.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleClicked" text="Kembali">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Label alignment="CENTER" layoutX="253.0" layoutY="24.0" prefHeight="84.0" prefWidth="94.0" style="-fx-font-weight: 700;" text="Save">
+      <Label alignment="CENTER" layoutX="253.0" layoutY="24.0" prefHeight="84.0" prefWidth="94.0" text="Save">
          <font>
             <Font size="24.0" />
          </font>
@@ -23,26 +23,25 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="54.0" layoutY="200.0" text="Folder">
+      <Label layoutX="52.0" layoutY="216.0" text="Folder">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TitledPane fx:id="formatTitledPane" animated="false" expanded="false" layoutX="109.0" layoutY="125.0" prefHeight="78.0" prefWidth="463.0" text="-">
+      <TitledPane fx:id="formatTitledPane" animated="false" expanded="false" layoutX="109.0" layoutY="125.0" prefHeight="84.0" prefWidth="463.0" text="-">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="111.0" prefWidth="462.0">
+            <AnchorPane fx:id="formatAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="462.0">
                <children>
                   <Button fx:id="txtButton" layoutY="1.0" mnemonicParsing="false" onAction="#handleTxtButton" prefHeight="26.0" prefWidth="463.0" text="TXT" />
-                  <Button fx:id="jsonButton" layoutY="27.0" mnemonicParsing="false" onAction="#handleJsonButton" prefHeight="26.0" prefWidth="463.0" text="JSON" />
                </children>
             </AnchorPane>
          </content>
       </TitledPane>
-      <Button fx:id="saveButton" layoutX="35.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="30.0" prefWidth="531.0" style="-fx-background-color: #4a90e2; -fx-font-weight: 700;" text="Save" textFill="WHITE">
+      <Button fx:id="saveButton" layoutX="35.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="30.0" prefWidth="531.0" text="Save">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="browseButton" layoutX="109.0" layoutY="198.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="463.0" text="Browse" />
+      <Button fx:id="browseButton" layoutX="107.0" layoutY="214.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="463.0" text="Browse" />
    </children>
 </Pane>
