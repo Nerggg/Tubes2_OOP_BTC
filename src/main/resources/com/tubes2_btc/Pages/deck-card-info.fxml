@@ -35,11 +35,11 @@
          </font>
       </Text>
       <Button fx:id="jual" alignment="CENTER" layoutX="212.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleClickedJual" prefHeight="25.0" prefWidth="84.0" style="-fx-font-weight: 700; -fx-background-color: #82dd55;" text="sell" textAlignment="CENTER" textFill="WHITE" />
-      <Text fx:id="labelText1" layoutX="122.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 700;" text="Label" textAlignment="CENTER" wrappingWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <Text fx:id="labelText1" layoutX="70.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: 700;" text="Label" textAlignment="CENTER" wrappingWidth="339.99999034404755" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="90.00000965595245">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Button fx:id="kembali" layoutX="38.0" layoutY="36.0" mnemonicParsing="false" onAction="#handleClickedKembali" style="-fx-background-color: #e23636; -fx-font-weight: 700;" text="back" textFill="WHITE" />
+      <Button fx:id="kembali" layoutX="28.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleClickedKembali" style="-fx-background-color: #e23636; -fx-font-weight: 700;" text="back" textFill="WHITE" />
    </children>
 </AnchorPane>

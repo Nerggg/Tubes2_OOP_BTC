@@ -630,7 +630,24 @@ public class MainPageController {
     public void updateFarm() {
         // Get player
         Player player = (currentFarmView == 1) ? player1 : player2;
-
+        if (currentTurn > 0){
+            if (currentPlayer == 1 && currentFarmView == 1){
+                myFarm.setStyle("-fx-background-color: #0f5132;");
+                enemyFarm.setStyle("-fx-background-color: #4a90e2;");
+            }
+            if (currentPlayer == 1 && currentFarmView == 2){
+                myFarm.setStyle("-fx-background-color: #4a90e2;");
+                enemyFarm.setStyle("-fx-background-color: #0f5132;");
+            }
+            if (currentPlayer == 2 && currentFarmView == 1){
+                myFarm.setStyle("-fx-background-color: #4a90e2;");
+                enemyFarm.setStyle("-fx-background-color: #0f5132;");
+            }
+            if (currentPlayer == 2 && currentFarmView == 2){
+                myFarm.setStyle("-fx-background-color: #0f5132;");
+                enemyFarm.setStyle("-fx-background-color: #4a90e2;");
+            }
+        }
         // Update farm slots
         for (int i = 0; i < 20; i++) {
             Card card = player.getFarm().get(i);
@@ -723,6 +740,9 @@ public class MainPageController {
         saveButton.setDisable(true);
         NextButton.setText("START!");
         storeButton.setDisable(true);
+        myFarm.setStyle("-fx-background-color: #4a90e2;");
+        enemyFarm.setStyle("-fx-background-color: #4a90e2;");
+
         playBackgroundMusic("/com/tubes2_btc/Pages/Sound/main.m4a");
         // Set player data to DataPasser
         DataPasser dataPasser = DataPasser.getInstance();
@@ -762,7 +782,7 @@ public class MainPageController {
             Media media = new Media(resourcePath);
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Set to repeat indefinitely
-            mediaPlayer.setVolume(0.1); // Set volume to 50%
+            mediaPlayer.setVolume(0.5); // Set volume to 50%
             mediaPlayer.play();
         } catch (Exception e) {
             e.printStackTrace();
@@ -1096,7 +1116,7 @@ public class MainPageController {
         enemyFarm.setDisable(false);
         saveButton.setDisable(false);
         NextButton.setText("NEXT");
-        if (currentTurn + 1 == 1) {
+        if (currentTurn + 1 == 21) {
             DataPasser dataPasser = DataPasser.getInstance();
             dataPasser.player1Gold = player1.getGuldenCount() + " Gulden";
             dataPasser.player2Gold = player2.getGuldenCount() + " Gulden";
