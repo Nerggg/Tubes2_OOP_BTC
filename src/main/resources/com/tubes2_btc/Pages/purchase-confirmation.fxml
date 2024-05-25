@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane styleClass="curved-pane-store" stylesheets="@../Styles/store_page.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.PurchaseConfirmationController">
+<AnchorPane styleClass="curved-pane-store" stylesheets="@../Styles/store-page.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.PurchaseConfirmationController">
     <children>
-        <VBox alignment="CENTER" layoutX="12.0" prefHeight="186.0" prefWidth="266.0" spacing="10.0">
+        <VBox alignment="CENTER" layoutX="32.0" layoutY="32.0" prefHeight="165.0" prefWidth="282.0" spacing="10.0">
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
@@ -20,7 +20,7 @@
             </font></Label>
             <Label fx:id="productPriceLabel" text="Price" />
             <Label fx:id="productQuantityLabel" text="Quantity" />
-            <Label fx:id="changeLabel" text="Change" />
+            <Label fx:id="changeLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="255.0" text="Change" />
             <HBox alignment="CENTER" spacing="10.0">
                 <Button onAction="#handleConfirmPurchase" style="-fx-background-color: #82dd55; -fx-font-weight: 700;" text="yes" textFill="WHITE" />
                 <Button onAction="#handleCancelPurchase" style="-fx-background-color: #e23636; -fx-font-weight: 700;" text="cancel" textFill="WHITE" />

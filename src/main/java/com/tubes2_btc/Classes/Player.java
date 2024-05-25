@@ -7,6 +7,8 @@ import java.util.HashMap;
 
 import java.util.Random;
 
+import static com.tubes2_btc.Classes.CardConstants.CARD_BERUANG_INDEX;
+
 public class Player {
     // Static attributes
     private static int PLAYER_FARM_SLOTS = 20;
@@ -79,7 +81,9 @@ public class Player {
         
         for (int i = 0; i < count; i++) {
             int rand = random.nextInt(1, 25);
-
+            while (rand == CARD_BERUANG_INDEX){
+                rand = random.nextInt(1, 25);
+            }
             Card randomCard = Card.createCard(rand);
             deck.add(randomCard);
         }

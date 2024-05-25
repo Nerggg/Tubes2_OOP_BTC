@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.EndgameController">
+<Pane styleClass="curved-pane" stylesheets="@../Styles/game-end.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"  xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.EndgameController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView styleClass="curved-pane" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/AddOns/batu.jpg" />
          </image>
@@ -33,10 +33,20 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Label fx:id="win" layoutX="265.0" layoutY="247.0" style="-fx-font-weight: 800;" text="Label" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="win" alignment="CENTER" contentDisplay="CENTER" layoutX="110.0" layoutY="216.0" prefHeight="40.0" prefWidth="381.0" style="-fx-font-weight: 800;" text="Label" textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
+      <ImageView fitHeight="144.0" fitWidth="231.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/AddOns/timothy2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="148.0" fitWidth="231.0" layoutX="376.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/AddOns/timothy3.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

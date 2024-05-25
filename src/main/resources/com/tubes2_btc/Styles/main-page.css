@@ -1,0 +1,41 @@
+.button:hover {
+    -fx-background-color: #8888aa; /* Slightly darker background on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 4); /* Add shadow effect */
+    -fx-scale-x: 1.05; /* Slightly enlarge the element */
+    -fx-scale-y: 1.05; /* Slightly enlarge the element */
+    -fx-cursor: hand;
+}
+
+.card-pane {
+    -fx-border-color: #000000;
+    -fx-background-color: #0f5132;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+}
+
+.card-pane:hover {
+    -fx-background-color: #8888aa; /* Slightly darker background on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 4); /* Add shadow effect */
+    -fx-scale-x: 1.05; /* Slightly enlarge the element */
+    -fx-scale-y: 1.05; /* Slightly enlarge the element */
+    -fx-cursor: hand;
+}
+
+.card-deck-pane {
+    -fx-border-color: #000000;
+    -fx-background-color: #0f5132;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+}
+
+.card-deck-pane:hover {
+    -fx-background-color: #8888aa; /* Slightly darker background on hover */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 4); /* Add shadow effect */
+    -fx-scale-x: 1.05; /* Slightly enlarge the element */
+    -fx-scale-y: 1.05; /* Slightly enlarge the element */
+    -fx-cursor: hand;
+}

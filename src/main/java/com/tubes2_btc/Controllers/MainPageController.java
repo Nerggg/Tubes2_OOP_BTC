@@ -1,5 +1,4 @@
 package com.tubes2_btc.Controllers;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,15 +12,19 @@ import com.tubes2_btc.Classes.Player;
 import com.tubes2_btc.Classes.Product;
 import com.tubes2_btc.Classes.Store;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.PathTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,13 +36,20 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import javafx.scene.media.Media;
+import javafx.util.Duration;
+
 
 public class MainPageController {
     // Misc. variables
@@ -147,8 +157,9 @@ public class MainPageController {
         label1.setText(label2.getText());
         label2.setText(tempString);
     }
-
+    
     public void handleDragAndDrop(Card dragged, Card dropped, int draggedIndex, int droppedIndex, boolean draggedIsFarm, boolean droppedIsFarm) {
+        playMcLarenLuWarnaApaBos();
         System.out.println("Dragged: " + dragged.getCardName() + " (" + draggedIndex + ")");
         System.out.println("Dropped: " + dropped.getCardName() + " (" + droppedIndex + ")");
         if (!draggedIsFarm && !droppedIsFarm) {
@@ -185,16 +196,7 @@ public class MainPageController {
             if (currentPlayer == currentFarmView) {
                 // Swap at farm
                 Player p = (currentPlayer == 1) ? player1 : player2;
-
-                p.swapSlots(draggedIndex, droppedIndex, p.getFarm(), p.getFarm());
-
-                // Swap images and names
-                List<Node> farmSlots = (currentPlayer == 1) ? farmSlots_1 : farmSlots_2;
-
-                Node slot_dragged = farmSlots.get(draggedIndex);
-                Node slot_dropped = farmSlots.get(droppedIndex);
-
-                swapNodes(slot_dragged, slot_dropped);
+                manipulateFarm(draggedIndex, droppedIndex, draggedIsFarm, "move", p);
             }
         } else if (!draggedIsFarm && droppedIsFarm) {
             Player player = (currentPlayer == 1) ? player1 : player2;
@@ -340,6 +342,7 @@ public class MainPageController {
         });
 
         child.setOnDragDropped(new EventHandler<DragEvent>() {
+            
             @Override
             public void handle(DragEvent dragEvent) {
                 // Get dropped card number
@@ -648,7 +651,24 @@ public class MainPageController {
     public void updateFarm() {
         // Get player
         Player player = (currentFarmView == 1) ? player1 : player2;
-
+        if (currentTurn > 0){
+            if (currentPlayer == 1 && currentFarmView == 1){
+                myFarm.setStyle("-fx-background-color: #0f5132;");
+                enemyFarm.setStyle("-fx-background-color: #4a90e2;");
+            }
+            if (currentPlayer == 1 && currentFarmView == 2){
+                myFarm.setStyle("-fx-background-color: #4a90e2;");
+                enemyFarm.setStyle("-fx-background-color: #0f5132;");
+            }
+            if (currentPlayer == 2 && currentFarmView == 1){
+                myFarm.setStyle("-fx-background-color: #4a90e2;");
+                enemyFarm.setStyle("-fx-background-color: #0f5132;");
+            }
+            if (currentPlayer == 2 && currentFarmView == 2){
+                myFarm.setStyle("-fx-background-color: #0f5132;");
+                enemyFarm.setStyle("-fx-background-color: #4a90e2;");
+            }
+        }
         // Update farm slots
         for (int i = 0; i < 20; i++) {
             Card card = player.getFarm().get(i);
@@ -661,7 +681,7 @@ public class MainPageController {
     public void updateActiveDeck() {
         // Get player
         Player player = (currentFarmView == 1) ? player1 : player2;
-
+    
         // Update active deck slots
         for (int i = 0; i < 20; i++) {
             Card card = player.getActiveDeck().get(i);
@@ -672,6 +692,12 @@ public class MainPageController {
     }
 
     public void setGameDataGUI() {
+        if (currentTurn == 0){
+            storeButton.setDisable(true);
+        }
+        else{
+            storeButton.setDisable(false);
+        }
         TurnNumber.setText(Integer.toString(currentTurn));
         Player1_Gold.setText(Integer.toString(player1.getGuldenCount()) + " Gold");
         Player2_Gold.setText(Integer.toString(player2.getGuldenCount()) + " Gold");
@@ -702,7 +728,7 @@ public class MainPageController {
     private Label DeckCount;
 
     @FXML
-    private Rectangle BearAttackArea;
+    private Group BearAttackArea;
 
     @FXML
     private Pane TimerPane;
@@ -713,8 +739,32 @@ public class MainPageController {
     @FXML
     private Button NextButton;
 
+    private MediaPlayer mediaPlayer;
+    private MediaPlayer mclarenPlayer;
+
+    @FXML
+    private Button storeButton;
+
+    @FXML
+    private Button myFarm;
+
+    @FXML
+    private Button enemyFarm;
+
+    @FXML
+    private Button saveButton;
+
     @FXML
     public void initialize() {
+        myFarm.setDisable(true);
+        enemyFarm.setDisable(true);
+        saveButton.setDisable(true);
+        NextButton.setText("START!");
+        storeButton.setDisable(true);
+        myFarm.setStyle("-fx-background-color: #4a90e2;");
+        enemyFarm.setStyle("-fx-background-color: #4a90e2;");
+
+        playBackgroundMusic("/com/tubes2_btc/Pages/Sound/main.m4a");
         // Set player data to DataPasser
         DataPasser dataPasser = DataPasser.getInstance();
         dataPasser.player1 = player1;
@@ -748,6 +798,33 @@ public class MainPageController {
         setGameDataGUI();
     }
 
+    private void playBackgroundMusic(String musicFilePath) {
+        try {
+            String resourcePath = getClass().getResource(musicFilePath).toString();
+            Media media = new Media(resourcePath);
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Set to repeat indefinitely
+            mediaPlayer.setVolume(0.5); // Set volume to 50%
+            mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void playMcLarenLuWarnaApaBos() {
+        try {
+            String resourcePath = getClass().getResource("/com/tubes2_btc/Pages/Sound/mclaren.m4a").toString();
+            Media media = new Media(resourcePath);
+            mclarenPlayer = new MediaPlayer(media);
+            mclarenPlayer.setRate(1.1);
+            mclarenPlayer.setVolume(1); 
+            mclarenPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     private void startTimer(int duration,Runnable onFinish) {
         Thread timerThread = new Thread(() -> {
             for (int i = duration * 10; i >= 0; i--) {
@@ -761,8 +838,7 @@ public class MainPageController {
                     e.printStackTrace();
                 }
             }
-        Platform.runLater(onFinish);
-
+            Platform.runLater(onFinish);
         });
         timerThread.setDaemon(true);
         timerThread.start();
@@ -787,19 +863,61 @@ public class MainPageController {
         if(this.BearAttackArea != null){
             this.Base.getChildren().remove(this.BearAttackArea);
         }
+
+        Image image = new Image(getClass().getResource("/com/tubes2_btc/Pages/Images/AddOns/ronald.png").toExternalForm()); // Change the path accordingly
+
+        // Step 2: Create ImageView with the loaded image
+        ImageView imageView = new ImageView(image);
+
+        // Set initial scale to 0 (invisible)
+        imageView.setScaleX(0);
+        imageView.setScaleY(0);
+
+        Base.getChildren().add(imageView);
+
+        // Step 4: Create ScaleTransition to scale the image from 0 to 1 over 1 second
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(1), imageView);
+        scaleTransition.setFromX(0);
+        scaleTransition.setFromY(0);
+        scaleTransition.setToX(1.5);
+        scaleTransition.setToY(1.5);
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), e -> {
+            Base.getChildren().remove(imageView);
+        }));
+        timeline.setCycleCount(1); // Jalankan hanya sekali
+        
+        // Jalankan ScaleTransition
+        scaleTransition.play();
+        
+        // Jalankan Timeline setelah ScaleTransition selesai
+        timeline.play();
+    }
+
+    public synchronized void  manipulateFarm(int draggedIndex, int droppedIndex, boolean draggedIsFarm,String task,Player player){
+        if(task.compareTo("delete") == 0){
+            deleteCard(droppedIndex, draggedIsFarm, player);
+        }
+        else if(task.compareTo("move") == 0){
+            player.swapSlots(draggedIndex, droppedIndex, player.getFarm(), player.getFarm());
+            List<Node> farmSlots = (currentPlayer == 1) ? farmSlots_1 : farmSlots_2;
+            Node slot_dragged = farmSlots.get(draggedIndex);
+            Node slot_dropped = farmSlots.get(droppedIndex);
+            swapNodes(slot_dragged, slot_dropped);
+        }
     }
 
     public void bearAttackHandler(){
         Random rand = new Random();
         // determine whether to let the bear out or no
         // because i use bool, the chance of a bear attack happen is 50%
-        boolean attack = true;
+        boolean attack =  rand.nextBoolean();
         // determine whether the subgrid would be 3x2 or 2x3
         boolean isHorizontal = rand.nextBoolean();
         int width=0,height=0,x=0,y=0;
         if(attack){
             System.out.println("The bear is out! Watch yo ass!");
-            int duration =5;
+            int duration = 30 + rand.nextInt(0,31);
             int area = rand.nextInt(1,6);
             NextButton.setDisable(true);
             switch(area){
@@ -900,6 +1018,9 @@ public class MainPageController {
                             Player p = (currentPlayer == 1) ? player1 : player2;
                             if(p.getFarm().get(index+j).isTrapped()){
                                 System.out.println("Trap effect activated! Manta Manta Mantap!");
+                                Card bearCard = Card.createCard(CardConstants.CARD_BERUANG_INDEX);
+                                p.addToActiveDeck(bearCard);
+                                updateActiveDeck();
                                 removeBearAttackArea();
                                 removeTimer();
                                 NextButton.setDisable(false);
@@ -916,6 +1037,9 @@ public class MainPageController {
                             Player p = (currentPlayer == 1) ? player1 : player2;
                             if(p.getFarm().get(index+j).isTrapped()){
                                 System.out.println("Trap effect activated! Manta Manta Mantap!");
+                                Card bearCard = Card.createCard(CardConstants.CARD_BERUANG_INDEX);
+                                p.addToActiveDeck(bearCard);
+                                updateActiveDeck();
                                 removeBearAttackArea();
                                 removeTimer();
                                 NextButton.setDisable(false);
@@ -934,7 +1058,7 @@ public class MainPageController {
                         for(int j =0;j<finalWidth;j++){
                             System.out.println("Deleting card "+ (index+j));
                             Player p = (currentPlayer == 1) ? player1 : player2;
-                            deleteCard(index+j,true, p);
+                            manipulateFarm(0, index+j, true, "delete",p);
                         }
                         index += 5;
                     }
@@ -948,7 +1072,7 @@ public class MainPageController {
                             if (!p.getFarm().get(index+j).isProtected()) {
                                 System.out.println(p.getFarm().get(index+j).getCardName() + " " + p.getFarm().get(index+j).isProtected());
                                 System.out.println("Deleting card "+ (index+j));
-                                deleteCard(index+j,true, p);
+                                manipulateFarm(0, index+j, true, "delete",p);
                             }
                         }
                         index += 5;
@@ -962,7 +1086,8 @@ public class MainPageController {
         }
     }
 
-    public Rectangle addDynamicRectangle(double width, double height, double x, double y) {
+    public Group addDynamicRectangle(double width, double height, double x, double y) {
+        Group group = new Group();
         Rectangle rectangle = new Rectangle();
         double x_value = x * 105 + 25;
         double y_value = y * 117 + 5;
@@ -978,7 +1103,26 @@ public class MainPageController {
         rectangle.setY(y_value);
         rectangle.setMouseTransparent(true);
         Base.getChildren().add(rectangle);
-        return rectangle;
+
+        Ellipse ellipse = new Ellipse(x_value + width / 2, y_value + height / 2, width / 2, height / 2);
+        ellipse.setFill(Color.TRANSPARENT);
+        ellipse.setStroke(Color.TRANSPARENT);
+
+        Image image = new Image(
+                getClass().getResource("/com/tubes2_btc/Pages/Images/AddOns/mclaren.png").toExternalForm());
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(100);
+        imageView.setFitHeight(100);
+
+        group.getChildren().addAll(rectangle, imageView);
+        Base.getChildren().add(group);
+
+        PathTransition pathTransition = new PathTransition(Duration.seconds(1), ellipse, imageView);
+        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        pathTransition.setCycleCount(PathTransition.INDEFINITE);
+        pathTransition.play();
+
+        return group;
     }
 
     public void addDynamicTimer() {
@@ -1018,7 +1162,11 @@ public class MainPageController {
     
     // Pop Up Button Handler
     @FXML
-    private void nextButtonHandler(ActionEvent event) { 
+    private void nextButtonHandler(ActionEvent event) {
+        myFarm.setDisable(false);
+        enemyFarm.setDisable(false);
+        saveButton.setDisable(false);
+        NextButton.setText("NEXT");
         if (currentTurn + 1 == 21) {
             DataPasser dataPasser = DataPasser.getInstance();
             dataPasser.player1Gold = player1.getGuldenCount() + " Gulden";
@@ -1148,7 +1296,7 @@ public class MainPageController {
             DataPasser dataPasser = DataPasser.getInstance();
             dataPasser.currentPlayer = currentPlayer;
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/store_page.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/tubes2_btc/Pages/store-page.fxml"));
                 Parent root = fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
