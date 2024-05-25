@@ -826,7 +826,7 @@ public class MainPageController {
             Media media = new Media(resourcePath);
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Set to repeat indefinitely
-            mediaPlayer.setVolume(1); // Set volume to 50%
+            mediaPlayer.setVolume(0.5); // Set volume to 50%
             mediaPlayer.play();
         } catch (Exception e) {
             e.printStackTrace();
@@ -846,6 +846,18 @@ public class MainPageController {
         }
     }
 
+    private void playLuMiskin() {
+        try {
+            String resourcePath = getClass().getResource("/com/tubes2_btc/Pages/Sound/soundMisikin.m4a").toString();
+            Media media = new Media(resourcePath);
+            mclarenPlayer = new MediaPlayer(media);
+            mclarenPlayer.setRate(1.3);
+            mclarenPlayer.setVolume(60);
+            mclarenPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void startTimer(int duration,Runnable onFinish) {
         Thread timerThread = new Thread(() -> {
@@ -878,6 +890,7 @@ public class MainPageController {
     }
 
     private void removeBearAttackArea(){
+        playLuMiskin();
         DataPasser dataPasser = DataPasser.getInstance();
         if (dataPasser.stage != null) {
             dataPasser.stage.close();
@@ -904,7 +917,7 @@ public class MainPageController {
         scaleTransition.setToX(1.5);
         scaleTransition.setToY(1.5);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), e -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
             Base.getChildren().remove(imageView);
         }));
         timeline.setCycleCount(1); // Jalankan hanya sekali
