@@ -804,7 +804,7 @@ public class MainPageController {
             Media media = new Media(resourcePath);
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Set to repeat indefinitely
-            mediaPlayer.setVolume(0.5); // Set volume to 50%
+            mediaPlayer.setVolume(0); // Set volume to 50%
             mediaPlayer.play();
         } catch (Exception e) {
             e.printStackTrace();

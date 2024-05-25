@@ -7,15 +7,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.SaveStateController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="curved-pane" stylesheets="@../Styles/save-load.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tubes2_btc.Controllers.SaveStateController">
    <children>
-      <Button fx:id="kembali" layoutX="40.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleClicked" text="Kembali">
+      <Button fx:id="kembali" layoutX="40.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleClicked" style="-fx-background-color: #e23636; -fx-font-weight: 700; -fx-text-fill: white" text="back">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Label alignment="CENTER" layoutX="253.0" layoutY="24.0" prefHeight="84.0" prefWidth="94.0" text="Save">
+      <Label alignment="CENTER" layoutX="254.0" layoutY="24.0" prefHeight="84.0" prefWidth="94.0" text="Save">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
       <Label layoutX="52.0" layoutY="125.0" text="Format">
@@ -37,7 +37,7 @@
             </AnchorPane>
          </content>
       </TitledPane>
-      <Button fx:id="saveButton" layoutX="35.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="30.0" prefWidth="531.0" text="Save">
+      <Button fx:id="saveButton" layoutX="35.0" layoutY="264.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="30.0" prefWidth="531.0" style="-fx-background-color: #82dd55; -fx-font-weight: 700; -fx-text-fill: white" text="Save">
          <font>
             <Font size="14.0" />
          </font>
