@@ -75,7 +75,8 @@ public class MainPageController {
     // Game state variables
     private int currentPlayer = 1;
     private int currentFarmView = 1;
-    private int currentTurn = 0;
+    private int
+            currentTurn = 0;
 
     // Set game state procedure
     public void loadGameState(Player player1, Player player2, int currentTurn, Store store) {
@@ -715,8 +716,8 @@ public class MainPageController {
         }
 
         TurnNumber.setText(Integer.toString(currentTurn));
-        Player1_Gold.setText(Integer.toString(player1.getGuldenCount()) + " Gold");
-        Player2_Gold.setText(Integer.toString(player2.getGuldenCount()) + " Gold");
+        Player1_Gold.setText(Integer.toString(player1.getGuldenCount()) + " BTC");
+        Player2_Gold.setText(Integer.toString(player2.getGuldenCount()) + " BTC");
         
         Player p = (currentPlayer == 1) ? player1 : player2;
         DeckCount.setText(Integer.toString(p.getDeckCount()) + "/40");
@@ -1204,8 +1205,8 @@ public class MainPageController {
         NextButton.setText("NEXT");
         if (currentTurn + 1 == 21) {
             DataPasser dataPasser = DataPasser.getInstance();
-            dataPasser.player1Gold = player1.getGuldenCount() + " Gulden";
-            dataPasser.player2Gold = player2.getGuldenCount() + " Gulden";
+            dataPasser.player1Gold = player1.getGuldenCount() + " BTC";
+            dataPasser.player2Gold = player2.getGuldenCount() + " BTC";
             if (player1.getGuldenCount() > player2.getGuldenCount()) {
                 dataPasser.winLabel = "The Winner is Player 1!";
             }

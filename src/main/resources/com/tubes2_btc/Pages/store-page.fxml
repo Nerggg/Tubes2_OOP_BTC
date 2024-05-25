@@ -20,7 +20,7 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Label fx:id="playerMoneyLabel" layoutX="416.0" layoutY="59.0" text="Gulden: ">
+      <Label fx:id="playerMoneyLabel" layoutX="416.0" layoutY="59.0" text="BTC: ">
          <font>
             <Font name="Harlow Solid Italic" size="16.0" />
          </font></Label>
@@ -50,7 +50,7 @@
                         <VBox fx:id="detailsPane" alignment="CENTER" layoutX="113.0" layoutY="11.0" prefHeight="94.0">
                            <children>
                               <Label text="Harga" />
-                              <Label fx:id="labelHarga" text="Gd." />
+                              <Label fx:id="labelHarga" text="" />
                               <Label text="Jumlah" />
                               <Label fx:id="labelJumlah" text="n" />
                            </children>
@@ -73,7 +73,7 @@
                         <VBox fx:id="detailsPane" alignment="CENTER" layoutX="113.0" layoutY="11.0" prefHeight="94.0">
                            <children>
                               <Label text="Harga" />
-                              <Label fx:id="labelHarga" text="Gd." />
+                              <Label fx:id="labelHarga" text="" />
                               <Label text="Jumlah" />
                               <Label fx:id="labelJumlah" text="n" />
                            </children>
@@ -96,7 +96,7 @@
                         <VBox fx:id="detailsPane" alignment="CENTER" layoutX="113.0" layoutY="11.0" prefHeight="94.0">
                            <children>
                               <Label text="Harga" />
-                              <Label fx:id="labelHarga" text="Gd." />
+                              <Label fx:id="labelHarga" text="" />
                               <Label text="Jumlah" />
                               <Label fx:id="labelJumlah" text="n" />
                            </children>
@@ -119,7 +119,7 @@
                         <VBox fx:id="detailsPane" alignment="CENTER" layoutX="113.0" layoutY="11.0" prefHeight="94.0">
                            <children>
                               <Label text="Harga" />
-                              <Label fx:id="labelHarga" text="Gd." />
+                              <Label fx:id="labelHarga" text="" />
                               <Label text="Jumlah" />
                               <Label fx:id="labelJumlah" text="n" />
                            </children>
@@ -142,7 +142,7 @@
                         <VBox fx:id="detailsPane" alignment="CENTER" layoutX="113.0" layoutY="11.0" prefHeight="94.0">
                            <children>
                               <Label text="Harga" />
-                              <Label fx:id="labelHarga" text="Gd." />
+                              <Label fx:id="labelHarga" text="" />
                               <Label text="Jumlah" />
                               <Label fx:id="labelJumlah" text="n" />
                            </children>
@@ -165,7 +165,7 @@
                         <VBox fx:id="detailsPane" alignment="CENTER" layoutX="113.0" layoutY="11.0" prefHeight="94.0">
                            <children>
                               <Label text="Harga" />
-                              <Label fx:id="labelHarga" text="Gd." />
+                              <Label fx:id="labelHarga" text="" />
                               <Label text="Jumlah" />
                               <Label fx:id="labelJumlah" text="n" />
                            </children>
@@ -188,7 +188,7 @@
                         <VBox fx:id="detailsPane" alignment="CENTER" layoutX="113.0" layoutY="11.0" prefHeight="94.0">
                            <children>
                               <Label text="Harga" />
-                              <Label fx:id="labelHarga" text="Gd." />
+                              <Label fx:id="labelHarga" text="" />
                               <Label text="Jumlah" />
                               <Label fx:id="labelJumlah" text="n" />
                            </children>
@@ -211,7 +211,7 @@
                         <VBox fx:id="detailsPane" alignment="CENTER" layoutX="113.0" layoutY="11.0" prefHeight="94.0">
                            <children>
                               <Label text="Harga" />
-                              <Label fx:id="labelHarga" text="Gd." />
+                              <Label fx:id="labelHarga" text="" />
                               <Label text="Jumlah" />
                               <Label fx:id="labelJumlah" text="n" />
                            </children>
@@ -234,7 +234,7 @@
                         <VBox fx:id="detailsPane" alignment="CENTER" layoutX="113.0" layoutY="11.0" prefHeight="94.0">
                            <children>
                               <Label text="Harga" />
-                              <Label fx:id="labelHarga" text="Gd." />
+                              <Label fx:id="labelHarga" text="" />
                               <Label text="Jumlah" />
                               <Label fx:id="labelJumlah" text="n" />
                            </children>

@@ -17,14 +17,14 @@
          </font>
       </Text>
       <HBox alignment="CENTER" layoutX="0.0" layoutY="55.0" prefWidth="500.0">
-         <Label fx:id="priceLabel" text="Gd." textAlignment="CENTER">
+         <Label fx:id="priceLabel" text="" textAlignment="CENTER">
             <font>
                <Font size="14.0" />
             </font>
          </Label>
       </HBox>
       <HBox alignment="CENTER" layoutX="0.0" layoutY="75.0" prefWidth="500.0">
-         <Label fx:id="descLabel" text="Gd." textAlignment="CENTER">
+         <Label fx:id="descLabel" text="" textAlignment="CENTER">
             <font>
                <Font size="14.0" />
             </font>
@@ -37,7 +37,7 @@
       <Button fx:id="confirmButton" layoutX="219.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #82dd55; -fx-font-weight: 700;" text="buy" textFill="WHITE" />
       <HBox alignment="CENTER" layoutX="-2.0" layoutY="151.0" prefHeight="20.0" prefWidth="204.0">
          <children>
-            <Label fx:id="countActiveDeck" text="Gd." textAlignment="CENTER">
+            <Label fx:id="countActiveDeck" text="" textAlignment="CENTER">
                <font>
                   <Font size="14.0" />
                </font>

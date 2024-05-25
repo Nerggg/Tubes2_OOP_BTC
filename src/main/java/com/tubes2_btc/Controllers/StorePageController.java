@@ -63,7 +63,7 @@ public class StorePageController {
     private void updatePlayerMoneyLabel() {
         DataPasser dataPasser = DataPasser.getInstance();
         Player currentPlayer = (dataPasser.currentPlayer == 1) ? dataPasser.player1 : dataPasser.player2;
-        Platform.runLater(() -> playerMoneyLabel.setText("Gulden: " + String.valueOf(currentPlayer.getGuldenCount())));
+        Platform.runLater(() -> playerMoneyLabel.setText("BTC: " + String.valueOf(currentPlayer.getGuldenCount())));
     }
 
     public static void initializeStore() {
@@ -121,7 +121,7 @@ public class StorePageController {
                         productLabel.setText(product.getCardName());
                     }
                     if (priceLabel != null) {
-                        priceLabel.setText("Gd. " + product.getSellPrice());
+                        priceLabel.setText("" + product.getSellPrice());
                     }
 
                     // Get product count from store

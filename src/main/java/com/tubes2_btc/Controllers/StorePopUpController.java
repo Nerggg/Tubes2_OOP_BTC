@@ -111,7 +111,7 @@ public class StorePopUpController {
 
     private void updatePriceLabel() {
         int totalPrice = productPrice * quantity;
-        priceLabel.setText("Gd. " + totalPrice);
+        priceLabel.setText("" + totalPrice);
     }
 
     private void updateLabelsAndButtons() {
@@ -119,11 +119,11 @@ public class StorePopUpController {
         boolean disableConfirmButton = false;
 
         if (totalPrice > player.getGuldenCount()) {
-            descLabel.setText("Gulden anda tidak cukup!");
+            descLabel.setText("BTC anda tidak cukup!");
             descLabel.setStyle("-fx-text-fill: red;");
             disableConfirmButton = true;
         } else {
-            descLabel.setText("Gulden anda setelah beli: Gd. " + (player.getGuldenCount() - totalPrice));
+            descLabel.setText("BTC anda setelah beli: " + (player.getGuldenCount() - totalPrice));
             descLabel.setStyle("-fx-text-fill: black;");
         }
 
