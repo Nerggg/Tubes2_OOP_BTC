@@ -698,6 +698,22 @@ public class MainPageController {
         else{
             storeButton.setDisable(false);
         }
+
+        if (currentTurn + 1 >= 2){
+            if (currentPlayer == 1){
+                Player1.setStyle("-fx-text-fill:#face6e; -fx-font-weight: bold");
+                Player2.setStyle("-fx-text-fill:#000000; -fx-font-weight: normal");
+                Player1_Gold.setStyle("-fx-text-fill:#face6e; -fx-font-weight: bold");
+                Player2_Gold.setStyle("-fx-text-fill:#000000; -fx-font-weight: normal");
+            }
+            else{
+                Player1.setStyle("-fx-text-fill:#000000; -fx-font-weight: normal");
+                Player2.setStyle("-fx-text-fill:#face6e; -fx-font-weight: bold");
+                Player1_Gold.setStyle("-fx-text-fill:#000000; -fx-font-weight: normal");
+                Player2_Gold.setStyle("-fx-text-fill:#face6e; -fx-font-weight: bold");
+            }
+        }
+
         TurnNumber.setText(Integer.toString(currentTurn));
         Player1_Gold.setText(Integer.toString(player1.getGuldenCount()) + " Gold");
         Player2_Gold.setText(Integer.toString(player2.getGuldenCount()) + " Gold");
@@ -755,6 +771,12 @@ public class MainPageController {
     private Button saveButton;
 
     @FXML
+    private Label Player1;
+
+    @FXML
+    private Label Player2;
+
+    @FXML
     public void initialize() {
         myFarm.setDisable(true);
         enemyFarm.setDisable(true);
@@ -804,7 +826,7 @@ public class MainPageController {
             Media media = new Media(resourcePath);
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Set to repeat indefinitely
-            mediaPlayer.setVolume(0); // Set volume to 50%
+            mediaPlayer.setVolume(1); // Set volume to 50%
             mediaPlayer.play();
         } catch (Exception e) {
             e.printStackTrace();
